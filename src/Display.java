@@ -1,8 +1,16 @@
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
-import java.io.File;
-import java.io.IOException;
+/**
+ * [Display.java]
+ * Contains the algorithm to draw the bracket based on the data structure
+ * @author Katelyn Wang & Dora Su
+ * September 18 2018
+ */
+
+//Swing imports
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+//Graphics imports
+import java.awt.Color;
+import java.awt.Dimension;
 
 public class Display extends JFrame{
     //private Bracket tournament;
