@@ -41,6 +41,8 @@ public class Display extends JFrame{
         }
 
 
-   // public void update(Bracket tournament);
+    public void update(Bracket tournament){
+        
+    }
 
 }
