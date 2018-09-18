@@ -13,7 +13,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 public class Display extends JFrame{
-    //private Bracket tournament;
+    private static final int BORDER_SPACE = 20;
+    private static final int VERTICAL_SPACE = 10; //space between each box vertically
+    private static final int HORIZONTAL_SPACE = 30; //space between each box horizontally
+    private Bracket tournament;
     private int maxX;
     private int maxY;
 
@@ -37,12 +40,15 @@ public class Display extends JFrame{
         blackBackground.setBackground(new Color(1,1,1));
         blackBackground.setLocation(0,0);
 
+        update(tournament);
         this.setVisible(true);
         }
 
 
     public void update(Bracket tournament){
-        
+        int height = (maxY-BORDER_SPACE*2)/tournament.getNumberOfMatchesInRound(0)+VERTICAL_SPACE;
+        int length = (maxX-BORDER_SPACE*2)/tournament.getNumberOfRounds()+HORIZONTAL_SPACE;
+
     }
 
 }
