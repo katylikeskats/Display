@@ -6,5 +6,5 @@ public class Display {
     }
 
     //hi
-    public void update(Bracket tournament);
+    public void update(Bracket tournament);//hi
 }
