@@ -1,6 +1,8 @@
 import javax.swing.JPanel;
 
 import java.awt.Graphics;
+import java.awt.Dimension;
+import java.awt.Color;
 
 public class TournamentPanel extends JPanel {
     private static final int BORDER_SPACE = 20;
@@ -14,6 +16,8 @@ public class TournamentPanel extends JPanel {
         this.tournament = tournament;
         this.maxX = maxX;
         this.maxY = maxY;
+        this.setSize(new Dimension(maxX, maxY));
+        this.setBackground(new Color(1,1,1));
     }
 
     public void paintComponent(Graphics g){

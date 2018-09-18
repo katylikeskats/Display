@@ -32,16 +32,12 @@ public class Display extends JFrame{
 
 
         //Creating a frame for the black background (otherwise would interfere with other layers if each panel had a black background)
-        JPanel blackBackground = new JPanel();
-        blackBackground.setSize(new Dimension(maxX, maxY));
-        blackBackground.setBackground(new Color(1,1,1));
-        blackBackground.setLocation(0,0);
+        JPanel tournamentPanel = new TournamentPanel(tournament, maxX, maxY);
+        tournamentPanel.setLocation(0,0);
 
-        update(tournament);
         this.setVisible(true);
     }
 
-    public void paintComponent(Graphics g)
 
     public void update(Bracket tournament){
 
