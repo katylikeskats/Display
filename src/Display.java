@@ -35,6 +35,7 @@ public class Display extends JFrame{
         tournamentPanel = new TournamentPanel(tournament, maxX, maxY);
         tournamentPanel.setLocation(0,0);
 
+        this.add(tournamentPanel);
         this.setVisible(true);
     }
 

@@ -18,15 +18,16 @@ public class TournamentPanel extends JPanel {
         this.maxX = maxX;
         this.maxY = maxY;
         this.setSize(new Dimension(maxX, maxY));
-        this.setBackground(new Color(1,1,1));
-        
+        this.setBackground(new Color(255, 114, 204));
+
     }
+
 
     public void paintComponent(Graphics g){
         int height = (maxY-BORDER_SPACE*2)/tournament.getNumberOfMatchesInRound(0)+VERTICAL_SPACE; //height of each match box
         int length = (maxX-BORDER_SPACE*2)/tournament.getNumberOfRounds()+HORIZONTAL_SPACE; //length of each match box
-        int workingX = 0; //current x from which it is drawing
-        int workingY = 0; //current y from which it is drawing
+        int workingX = 15; //current x from which it is drawing
+        int workingY = 15; //current y from which it is drawing
         for (int roundNum = 0; roundNum < tournament.getNumberOfRounds(); roundNum++){
             for (int matchNum = 0; matchNum < tournament.getNumberOfMatchesInRound(roundNum); matchNum++){
 
