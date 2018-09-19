@@ -17,10 +17,9 @@ public class Display extends JFrame{
     private int maxX;
     private int maxY;
     private TournamentPanel tournamentPanel;
-    //Display(Bracket tournament){
-    Display(){
+    Display(Bracket tournament){
         super();
-        //this.tournament = tournament;
+        this.tournament = tournament;
 
         maxX = 1530;
         maxY = 1150;

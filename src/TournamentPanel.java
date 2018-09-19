@@ -1,3 +1,5 @@
+import javafx.geometry.HorizontalDirection;
+
 import javax.swing.JPanel;
 
 import java.awt.Graphics;
@@ -27,7 +29,7 @@ public class TournamentPanel extends JPanel {
             //Team Lines: Horizontal, Match Lines: Vertical
             //Round 1
             //Team Lines
-            g.drawLine(50,100, 150, 100);
+           /* g.drawLine(50,100, 150, 100);
             g.drawLine(50,200, 150, 200);
             g.drawLine(50,300, 150, 300);
             g.drawLine(50,400, 150, 400);
@@ -60,19 +62,24 @@ public class TournamentPanel extends JPanel {
 
             //Winner
             g.drawLine(350,450, 550, 450);
-
+*/
         String[][] teams = new String[2][];
-        int height = (maxY-BORDER_SPACE*2)/tournament.getNumberOfMatchesInRound(0)+VERTICAL_SPACE; //height of each match box
-        int length = (maxX-BORDER_SPACE*2)/tournament.getNumberOfRounds()+HORIZONTAL_SPACE; //length of each match box
+        int numRounds = tournament.getNumberOfRounds();
+        int numTeams = tournament.getNumberOfTeams();
+        int height = (maxY-BORDER_SPACE*2-VERTICAL_SPACE*numTeams)/numTeams; //height of each match box
+        int length = (maxX-BORDER_SPACE*2-HORIZONTAL_SPACE*numRounds)/numRounds; //length of each match box
+
         int workingX = 15; //current x from which it is drawing
         int workingY = 15; //current y from which it is drawing
         for (int roundNum = 0; roundNum < tournament.getNumberOfRounds(); roundNum++){
             for (int matchNum = 0; matchNum < tournament.getNumberOfMatchesInRound(roundNum); matchNum++){
                 teams = tournament.getTeamsInMatch(roundNum, matchNum);
-                for (int teamNum = 0; teamNum < teams.length; teamNum++){
-                    g.drawLine(workingX, workingY, workingX + length, workingY + height);
-                    workingY += width + VERTICAL_SPACE; 
-                }
+                g.drawRect(workingX, workingY, length, height);
+                workingY += height + VERTICAL_SPACE;
+                /*for (int teamNum = 0; teamNum < teams.length; teamNum++){
+                    g.drawString(teams[0][teamNum], workingX, workingY);
+                    g.drawString(teams[1][teamNum], workingX + 10, workingY);
+                }*/
             }
             workingX += length + HORIZONTAL_SPACE;
         }
