@@ -7,8 +7,8 @@
 
 public class Bracket {
     private int numberOfTeams;
-    private String[][][] rounds; //THIS IS A 3D ARRAY BC ITS HARD CODED LOL
-    public Bracket(int numberOfTeams, String[][][] rounds){
+    private String[][][][] rounds;
+    public Bracket(int numberOfTeams, String[][][][] rounds){
         this.numberOfTeams = numberOfTeams;
         this.rounds = rounds;
     }
@@ -25,7 +25,7 @@ public class Bracket {
         return this.rounds[round].length;
     }
 
-    public String[] getTeamsInMatch(int round, int matchNumber){
+    public String[][] getTeamsInMatch(int round, int matchNumber){
         return this.rounds[round][matchNumber];
     }
 }
