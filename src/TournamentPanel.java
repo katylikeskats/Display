@@ -7,9 +7,9 @@ import java.awt.Dimension;
 import java.awt.Color;
 
 public class TournamentPanel extends JPanel {
-    private static final int BORDER_SPACE = 20;
-    private static final int VERTICAL_SPACE = 10; //space between each box vertically
-    private static final int HORIZONTAL_SPACE = 30; //space between each box horizontally
+    private static final int BORDER_SPACE = 40;
+    private static final int VERTICAL_SPACE = 30; //space between each box vertically
+    private static final int HORIZONTAL_SPACE = 100; //space between each box horizontally
     private Bracket tournament;
     private boolean reDraw = false;
     private int maxX;
@@ -66,11 +66,11 @@ public class TournamentPanel extends JPanel {
         String[][] teams = new String[2][];
         int numRounds = tournament.getNumberOfRounds();
         int numTeams = tournament.getNumberOfTeams();
-        int height = (maxY-BORDER_SPACE*2-VERTICAL_SPACE*numTeams)/numTeams; //height of each match box
+        int height = (maxY-BORDER_SPACE*2-VERTICAL_SPACE*numTeams)/(numTeams/2); //height of each match box
         int length = (maxX-BORDER_SPACE*2-HORIZONTAL_SPACE*numRounds)/numRounds; //length of each match box
 
-        int workingX = 15; //current x from which it is drawing
-        int workingY = 15; //current y from which it is drawing
+        int workingX = 40; //current x from which it is drawing
+        int workingY = 40; //current y from which it is drawing
         for (int roundNum = 0; roundNum < tournament.getNumberOfRounds(); roundNum++){
             for (int matchNum = 0; matchNum < tournament.getNumberOfMatchesInRound(roundNum); matchNum++){
                 teams = tournament.getTeamsInMatch(roundNum, matchNum);
@@ -81,6 +81,7 @@ public class TournamentPanel extends JPanel {
                     g.drawString(teams[1][teamNum], workingX + 10, workingY);
                 }*/
             }
+            workingY = 40 + height/2;
             workingX += length + HORIZONTAL_SPACE;
         }
     }
