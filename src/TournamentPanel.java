@@ -23,7 +23,7 @@ public class TournamentPanel extends JPanel {
     }
 
 
-    public void paintComponent(Graphics g){
+    /*public void paintComponent(Graphics g){
         int height = (maxY-BORDER_SPACE*2)/tournament.getNumberOfMatchesInRound(0)+VERTICAL_SPACE; //height of each match box
         int length = (maxX-BORDER_SPACE*2)/tournament.getNumberOfRounds()+HORIZONTAL_SPACE; //length of each match box
         int workingX = 15; //current x from which it is drawing
@@ -33,7 +33,7 @@ public class TournamentPanel extends JPanel {
 
             }
         }
-    }
+    }*/
 
     public void setTournament(Bracket tournament) {
         this.tournament = tournament;
