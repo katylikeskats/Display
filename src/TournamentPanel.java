@@ -9,6 +9,7 @@ public class TournamentPanel extends JPanel {
     private static final int VERTICAL_SPACE = 10; //space between each box vertically
     private static final int HORIZONTAL_SPACE = 30; //space between each box horizontally
     private Bracket tournament;
+    private boolean reDraw = false;
     private int maxX;
     private int maxY;
 
@@ -18,6 +19,7 @@ public class TournamentPanel extends JPanel {
         this.maxY = maxY;
         this.setSize(new Dimension(maxX, maxY));
         this.setBackground(new Color(1,1,1));
+        
     }
 
     public void paintComponent(Graphics g){
@@ -30,5 +32,13 @@ public class TournamentPanel extends JPanel {
 
             }
         }
+    }
+
+    public void setTournament(Bracket tournament) {
+        this.tournament = tournament;
+    }
+
+    public void setReDraw(boolean reDraw) {
+        this.reDraw = reDraw;
     }
 }

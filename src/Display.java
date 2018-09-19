@@ -16,7 +16,7 @@ public class Display extends JFrame{
     private Bracket tournament;
     private int maxX;
     private int maxY;
-
+    private TournamentPanel tournamentPanel;
     //Display(Bracket tournament){
     Display(){
         super();
@@ -32,7 +32,7 @@ public class Display extends JFrame{
 
 
         //Creating a frame for the black background (otherwise would interfere with other layers if each panel had a black background)
-        JPanel tournamentPanel = new TournamentPanel(tournament, maxX, maxY);
+        tournamentPanel = new TournamentPanel(tournament, maxX, maxY);
         tournamentPanel.setLocation(0,0);
 
         this.setVisible(true);
@@ -40,7 +40,8 @@ public class Display extends JFrame{
 
 
     public void update(Bracket tournament){
-
+        tournamentPanel.setReDraw(true);
+        tournamentPanel.setTournament(tournament);
     }
 
 }
