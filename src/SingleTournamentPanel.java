@@ -16,6 +16,7 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.FontMetrics;
+import java.awt.BasicStroke;
 
 public class SingleTournamentPanel extends TournamentPanel {
     private static final int BORDER_SPACE = 40;
@@ -95,8 +96,12 @@ public class SingleTournamentPanel extends TournamentPanel {
             g.setColor(colors.getColors().get(colorIndex));
             colorIndex++;
             Graphics2D graphics2 = (Graphics2D) g;
+
+            graphics2.setStroke(new BasicStroke(2));
             RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(workingX, workingY, length, height, 20, 20);
             graphics2.draw(roundedRectangle);
+            //g.fillRoundRect(workingX, workingY, length, height, 20,20);
+            graphics2.setStroke(new BasicStroke(1));
             g.setColor(new Color(86, 87, 87));
             if (roundNum != tournament.getNumberOfRounds()-1){ //If the round is not the last round, draw the lines connecting to the next matchbox
                 g.drawLine(workingX + length, workingY + height / 2, workingX + length + HORIZONTAL_SPACE / 2, workingY + height / 2);
@@ -107,7 +112,6 @@ public class SingleTournamentPanel extends TournamentPanel {
                     g.drawLine(previousPointX, previousPointY+(height+verticalSpace)/2, previousPointX +HORIZONTAL_SPACE/2,  previousPointY+(height+verticalSpace)/2);
                 }
             }
-
             for (int teamNum = 0; teamNum < teams.length; teamNum++) {
                 for (int i = 0; i < teams[teamNum].length; i++) { //add more descript variable later LOL
                     if (teams[teamNum].length == 1) { //checking if the teams playing is already determined
