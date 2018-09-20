@@ -58,29 +58,41 @@ public class TournamentPanel extends JPanel {
     public void drawRound(Graphics g, int workingX, int workingY, int workingTextX, int workingTextY, int verticalSpace, int roundNum){
         String[][] teams;
         Font font1 = new Font("Sans_Serif", Font.BOLD, 20);
+        int previousPointX = 0;
+        int previousPointY = 0;
+
         for (int matchNum = 0; matchNum < tournament.getNumberOfMatchesInRound(roundNum); matchNum++){
             teams = tournament.getTeamsInMatch(roundNum, matchNum);
             g.drawRect(workingX, workingY, length, height);
-            g.drawLine(workingX+length, workingY+height/2, workingX+length+HORIZONTAL_SPACE, workingY+height/2 );
-                for (int teamNum = 0; teamNum < teams.length; teamNum++) {
-                    for (int i = 0; i < teams[teamNum].length; i++) { //add more descript variable later LOL
-                        if (teams[teamNum].length == 1) {
-                            g.drawString(teams[teamNum][i], workingTextX, workingTextY);
-                        } else {
-                            g.drawString("unknown", workingTextX, workingTextY);
-                            break;
-                        }
-                        workingTextX += 10;
-                    }
-                    workingTextX = workingX + length / 2;
-                    workingTextY += height / 2;
+            if (roundNum != tournament.getNumberOfRounds()-1){
+                g.drawLine(workingX + length, workingY + height / 2, workingX + length + HORIZONTAL_SPACE / 2, workingY + height / 2);
+                previousPointX = workingX + length + HORIZONTAL_SPACE/2;
+                previousPointY = workingY + height/2;
+                if (matchNum%2 == 0){
+                    g.drawLine(previousPointX, previousPointY, previousPointX, previousPointY+height+verticalSpace);
+                    g.drawLine(previousPointX, previousPointY+(height+verticalSpace)/2, previousPointX +HORIZONTAL_SPACE/2,  previousPointY+(height+verticalSpace)/2);
                 }
+            }
+
+            for (int teamNum = 0; teamNum < teams.length; teamNum++) {
+                for (int i = 0; i < teams[teamNum].length; i++) { //add more descript variable later LOL
+                    if (teams[teamNum].length == 1) {
+                        g.drawString(teams[teamNum][i], workingTextX, workingTextY);
+                    } else {
+                        g.drawString("unknown", workingTextX, workingTextY);
+                        break;
+                    }
+                    workingTextX += 10;
+                }
+                workingTextX = workingX + length / 2;
+                workingTextY += height / 2;
+            }
             g.drawString("vs.", workingTextX, workingTextY-height/2-height/4);
             workingY += height + verticalSpace;
             workingTextY += verticalSpace;
         }
     }
-    
+
 
     public void setTournament(Bracket tournament) {
         this.tournament = tournament;
