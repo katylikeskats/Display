@@ -6,9 +6,11 @@
  */
 
 import javax.swing.JPanel;
+import java.awt.*;
 
 abstract public class TournamentPanel extends JPanel {
     TournamentPanel(){
+        this.setBackground(Color.BLACK);
     }
 
     abstract public void setTournament(Bracket tournament);
