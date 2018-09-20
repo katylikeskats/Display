@@ -14,6 +14,8 @@ public class TournamentPanel extends JPanel {
     private boolean reDraw = false;
     private int maxX;
     private int maxY;
+    private int height;
+    private int length;
 
     TournamentPanel(Bracket tournament, int maxX, int maxY){
         this.tournament = tournament;
@@ -63,26 +65,38 @@ public class TournamentPanel extends JPanel {
             //Winner
             g.drawLine(350,450, 550, 450);
 */
-        String[][] teams = new String[2][];
         int numRounds = tournament.getNumberOfRounds();
         int numTeams = tournament.getNumberOfTeams();
-        int height = (maxY-BORDER_SPACE*2-VERTICAL_SPACE*numTeams)/(numTeams/2); //height of each match box
-        int length = (maxX-BORDER_SPACE*2-HORIZONTAL_SPACE*numRounds)/numRounds; //length of each match box
+        height = (maxY-BORDER_SPACE*2-VERTICAL_SPACE*numTeams)/(numTeams/2); //height of each match box
+        length = (maxX-BORDER_SPACE*2-HORIZONTAL_SPACE*numRounds)/numRounds; //length of each match box
+        int numMatches = 0;
+        int workingX = BORDER_SPACE; //current x from which it is drawing
+        int workingY = BORDER_SPACE; //current y from which it is drawing
+        int verticalSpace = 0;
+       for (int roundNum = 0; roundNum < tournament.getNumberOfRounds(); roundNum++){
+           numMatches = tournament.getNumberOfMatchesInRound(roundNum);
+           if (numMatches>1) {
+               verticalSpace = (maxY - (workingY * 2) - (height * numMatches))/ (numMatches - 1);
+           } else {
+               verticalSpace = maxY;
+           }
+           drawRound(g, workingX, workingY, verticalSpace, roundNum);
+           workingY = BORDER_SPACE + height/2 + verticalSpace/2;
+           workingX += length + HORIZONTAL_SPACE;
+        }
+    }
 
-        int workingX = 40; //current x from which it is drawing
-        int workingY = 40; //current y from which it is drawing
-        for (int roundNum = 0; roundNum < tournament.getNumberOfRounds(); roundNum++){
-            for (int matchNum = 0; matchNum < tournament.getNumberOfMatchesInRound(roundNum); matchNum++){
-                teams = tournament.getTeamsInMatch(roundNum, matchNum);
-                g.drawRect(workingX, workingY, length, height);
-                workingY += height + VERTICAL_SPACE;
+    public void drawRound(Graphics g, int workingX, int workingY, int verticalSpace, int roundNum){
+        String[][] teams = new String[2][];
+
+        for (int matchNum = 0; matchNum < tournament.getNumberOfMatchesInRound(roundNum); matchNum++){
+            teams = tournament.getTeamsInMatch(roundNum, matchNum);
+            g.drawRect(workingX, workingY, length, height);
+            workingY += height + verticalSpace;
                 /*for (int teamNum = 0; teamNum < teams.length; teamNum++){
                     g.drawString(teams[0][teamNum], workingX, workingY);
                     g.drawString(teams[1][teamNum], workingX + 10, workingY);
                 }*/
-            }
-            workingY = 40 + height/2;
-            workingX += length + HORIZONTAL_SPACE;
         }
     }
 
