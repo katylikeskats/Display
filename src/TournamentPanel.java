@@ -67,12 +67,16 @@ public class TournamentPanel extends JPanel {
 */
         int numRounds = tournament.getNumberOfRounds();
         int numTeams = tournament.getNumberOfTeams();
-        height = (maxY-BORDER_SPACE*2-VERTICAL_SPACE*numTeams)/(numTeams/2); //height of each match box
-        length = (maxX-BORDER_SPACE*2-HORIZONTAL_SPACE*numRounds)/numRounds; //length of each match box
-        int numMatches = 0;
+        int numMatches;
+        
+        int verticalSpace;
+
         int workingX = BORDER_SPACE; //current x from which it is drawing
         int workingY = BORDER_SPACE; //current y from which it is drawing
-        int verticalSpace = 0;
+
+        height = (maxY-BORDER_SPACE*2-VERTICAL_SPACE*numTeams)/(numTeams/2); //height of each match box
+        length = (maxX-BORDER_SPACE*2-HORIZONTAL_SPACE*numRounds)/numRounds; //length of each match box
+
        for (int roundNum = 0; roundNum < tournament.getNumberOfRounds(); roundNum++){
            numMatches = tournament.getNumberOfMatchesInRound(roundNum);
            if (numMatches>1) {
