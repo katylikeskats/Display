@@ -7,7 +7,6 @@
 
 //Swing imports
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 //Graphics imports
 import java.awt.Color;
@@ -36,8 +35,11 @@ public class Display extends JFrame{
     }
 
 
+    /**
+     * Updates the bracket by calling it to be redrawn
+     * @param tournament The updated tournament bracket to be drawn
+     */
     public void update(Bracket tournament){
-        tournamentPanel.setReDraw(true);
         tournamentPanel.setTournament(tournament);
     }
 
