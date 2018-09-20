@@ -8,6 +8,7 @@
 //Swing imports
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 //Graphics imports
 import java.awt.Color;
 import java.awt.Dimension;
@@ -29,11 +30,7 @@ public class Display extends JFrame{
         this.setResizable(false);
         this.setUndecorated(true);
 
-
-        //Creating a frame for the black background (otherwise would interfere with other layers if each panel had a black background)
         tournamentPanel = new TournamentPanel(tournament, maxX, maxY);
-        tournamentPanel.setLocation(0,0);
-
         this.add(tournamentPanel);
         this.setVisible(true);
     }
