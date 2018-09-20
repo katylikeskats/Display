@@ -68,7 +68,7 @@ public class TournamentPanel extends JPanel {
         int numRounds = tournament.getNumberOfRounds();
         int numTeams = tournament.getNumberOfTeams();
         int numMatches;
-        
+
         int verticalSpace;
 
         int workingX = BORDER_SPACE; //current x from which it is drawing
@@ -85,7 +85,7 @@ public class TournamentPanel extends JPanel {
                verticalSpace = maxY;
            }
            drawRound(g, workingX, workingY, verticalSpace, roundNum);
-           workingY = BORDER_SPACE + height/2 + verticalSpace/2;
+           workingY = BORDER_SPACE + height/2 + verticalSpace;
            workingX += length + HORIZONTAL_SPACE;
         }
     }
