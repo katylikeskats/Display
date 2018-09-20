@@ -125,7 +125,7 @@ public class SingleTournamentPanel extends TournamentPanel {
             }
             g.drawString("vs.", workingTextX-fontMetrics.stringWidth("vs.")/2, workingTextY-height/2-height/4); //drawing the "vs." between the teams; had to be outside the loop or else it would be drawn multiple times
             workingY += height + verticalSpace; //adjusting the workingY height
-            workingTextY += verticalSpace; //adjusting the workingTextY height
+            workingTextY = workingY +height/4; //adjusting the workingTextY height
         }
     }
 
