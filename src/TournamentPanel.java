@@ -62,13 +62,15 @@ public class TournamentPanel extends JPanel {
             teams = tournament.getTeamsInMatch(roundNum, matchNum);
             g.drawRect(workingX, workingY, length, height);
                 for (int teamNum = 0; teamNum < teams.length; teamNum++){
-                    for (int i = 0; i < teams[teamNum].length; i++) {
+                    for (int i = 0; i < teams[teamNum].length; i++) { //add more descript variable later LOL
                         g.drawString(teams[teamNum][i], workingTextX, workingTextY);
                         workingTextX += 10;
                     }
                     workingTextX = workingX+length/2;
                     workingTextY+= height/2;
+
                 }
+            g.drawString("vs.", workingTextX, workingTextY-height/2-height/4);
             workingY += height + verticalSpace;
             workingTextY += verticalSpace;
         }
