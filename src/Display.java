@@ -29,7 +29,7 @@ public class Display extends JFrame{
         this.setResizable(false);
         this.setUndecorated(true);
 
-        tournamentPanel = new TournamentPanel(tournament, maxX, maxY);
+        tournamentPanel = new SingleTournamentPanel(tournament, maxX, maxY);
         this.add(tournamentPanel);
         this.setVisible(true);
     }
