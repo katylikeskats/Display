@@ -8,9 +8,9 @@ public class ColourPalette {
     private int changeRed;
     private int changeBlue;
     private int changeGreen;
-    private static final int CHANGE = 60;
+    private static final int CHANGE = 20;
     private static final int UPPER_LIMIT = 255;
-    private static final int LOWER_LIMIT = 0;
+    private static final int LOWER_LIMIT = 60;
     private ArrayList<Color> colors = new ArrayList<>();
 
     ColourPalette(int matches){
