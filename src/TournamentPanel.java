@@ -1,7 +1,14 @@
+/**
+ * [TournamentPanel.java]
+ * The panel which draws the entire bracket
+ * @author Katelyn Wang & Dora Su
+ * September 18 2018
+ */
 
-
+//Swing imports
 import javax.swing.JPanel;
 
+//Graphics imports
 import java.awt.Graphics;
 import java.awt.Dimension;
 import java.awt.Color;
