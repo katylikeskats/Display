@@ -1,6 +1,6 @@
 /**
  * [SingleTournamentPanel.java]
- * The panel which draws the entire bracket
+ * The display panel for single elimination tournaments
  * @author Katelyn Wang & Dora Su
  * September 18 2018
  */

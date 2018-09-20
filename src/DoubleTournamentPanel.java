@@ -1,3 +1,11 @@
+/**
+ * [DoubleTournamentPanel.java]
+ * The display panel for double elimination tournaments
+ * @author Katelyn Wang & Dora Su
+ * September 20 2018
+ */
+
+//Graphic imports
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
