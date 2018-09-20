@@ -27,7 +27,7 @@ public class SingleTournamentPanel extends TournamentPanel {
     private int height;
     private int length;
     private ColourPalette colors;
-    private int colorIndex;
+    private int colorIndex = 0;
 
     SingleTournamentPanel(Bracket tournament, int maxX, int maxY){
         super();
@@ -55,11 +55,11 @@ public class SingleTournamentPanel extends TournamentPanel {
 
         height = (maxY-BORDER_SPACE*2-VERTICAL_SPACE*numTeams)/(numTeams/2); //height of each match box
         length = (maxX-BORDER_SPACE*2-HORIZONTAL_SPACE*numRounds)/numRounds; //length of each match box
+        colors = new ColourPalette(tournament.getNumberOfMatchesInRound(0)*numRounds);
 
        for (int roundNum = 0; roundNum < tournament.getNumberOfRounds(); roundNum++){ //iterates through each round
            numMatches = tournament.getNumberOfMatchesInRound(roundNum); //determines how many matches are in the round
-           colors = new ColourPalette(numMatches);
-           colorIndex = 0;
+
            if (numMatches>1) { //if it is more than one, calculates the space between each matchbox
                verticalSpace = (maxY - (workingY * 2) - (height * numMatches))/ (numMatches - 1);
            } else {
@@ -96,6 +96,7 @@ public class SingleTournamentPanel extends TournamentPanel {
             graphics2.draw(roundedRectangle);
            // g.drawRect(workingX, workingY, length, height); //Draws a rectangle to represent that match
             if (roundNum != tournament.getNumberOfRounds()-1){ //If the round is not the last round, draw the lines connecting to the next matchbox
+                g.setColor(Color.black);
                 g.drawLine(workingX + length, workingY + height / 2, workingX + length + HORIZONTAL_SPACE / 2, workingY + height / 2);
                 previousPointX = workingX + length + HORIZONTAL_SPACE/2; //storing the previous point to draw the vertical line
                 previousPointY = workingY + height/2;
