@@ -27,7 +27,7 @@ public class SingleTournamentPanel extends TournamentPanel {
     private int height;
     private int length;
     private ColourPalette colors;
-    private int colorIndex = 0;
+    private int colorIndex;
 
     SingleTournamentPanel(Bracket tournament, int maxX, int maxY){
         super();
@@ -56,6 +56,7 @@ public class SingleTournamentPanel extends TournamentPanel {
         height = (maxY-BORDER_SPACE*2-VERTICAL_SPACE*numTeams)/(numTeams/2); //height of each match box
         length = (maxX-BORDER_SPACE*2-HORIZONTAL_SPACE*numRounds)/numRounds; //length of each match box
         colors = new ColourPalette(tournament.getNumberOfMatchesInRound(0)*numRounds);
+        colorIndex = 0;
 
        for (int roundNum = 0; roundNum < tournament.getNumberOfRounds(); roundNum++){ //iterates through each round
            numMatches = tournament.getNumberOfMatchesInRound(roundNum); //determines how many matches are in the round
@@ -83,7 +84,9 @@ public class SingleTournamentPanel extends TournamentPanel {
      */
     public void drawRound(Graphics g, int workingX, int workingY, int workingTextX, int workingTextY, int verticalSpace, int roundNum){
         String[][] teams; //stores teams who are playing in a certain match match
-        Font font1 = new Font("Sans_Serif", Font.BOLD, 20);
+        Font font1 = new Font("Sans_Serif", Font.PLAIN, 15);
+        FontMetrics fontMetrics = g.getFontMetrics(font1);
+        g.setFont(font1);
         int previousPointX; // coordinates to store previous points from which to connect the vertical line
         int previousPointY;
 
@@ -94,7 +97,7 @@ public class SingleTournamentPanel extends TournamentPanel {
             Graphics2D graphics2 = (Graphics2D) g;
             RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(workingX, workingY, length, height, 20, 20);
             graphics2.draw(roundedRectangle);
-            g.setColor(Color.WHITE);
+            g.setColor(new Color(86, 87, 87));
             if (roundNum != tournament.getNumberOfRounds()-1){ //If the round is not the last round, draw the lines connecting to the next matchbox
                 g.drawLine(workingX + length, workingY + height / 2, workingX + length + HORIZONTAL_SPACE / 2, workingY + height / 2);
                 previousPointX = workingX + length + HORIZONTAL_SPACE/2; //storing the previous point to draw the vertical line
@@ -108,15 +111,15 @@ public class SingleTournamentPanel extends TournamentPanel {
             for (int teamNum = 0; teamNum < teams.length; teamNum++) {
                 for (int i = 0; i < teams[teamNum].length; i++) { //add more descript variable later LOL
                     if (teams[teamNum].length == 1) { //checking if the teams playing is already determined
-                        g.drawString(teams[teamNum][i], workingTextX, workingTextY); //if so, draws the team names
+                        g.drawString(teams[teamNum][i], workingTextX-fontMetrics.stringWidth(teams[teamNum][i])/2, workingTextY); //if so, draws the team names
                     } else {
-                        g.drawString("unknown", workingTextX, workingTextY); // if not, leaves it unknown
+                        g.drawString("unknown", workingTextX-fontMetrics.stringWidth("unknown")/2, workingTextY); // if not, leaves it unknown
                         break;
                     }
                 }
                 workingTextY += height / 2; //changing where the next text will be drawn
             }
-            g.drawString("vs.", workingTextX, workingTextY-height/2-height/4); //drawing the "vs." between the teams; had to be outside the loop or else it would be drawn multiple times
+            g.drawString("vs.", workingTextX-fontMetrics.stringWidth("vs.")/2, workingTextY-height/2-height/4); //drawing the "vs." between the teams; had to be outside the loop or else it would be drawn multiple times
             workingY += height + verticalSpace; //adjusting the workingY height
             workingTextY += verticalSpace; //adjusting the workingTextY height
         }
