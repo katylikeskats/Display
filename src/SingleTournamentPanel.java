@@ -5,9 +5,6 @@
  * September 18 2018
  */
 
-//Swing imports
-import javax.swing.JPanel;
-
 //Graphics imports
 import java.awt.Graphics;
 import java.awt.Dimension;
@@ -36,7 +33,6 @@ public class SingleTournamentPanel extends TournamentPanel {
         this.maxX = maxX;
         this.maxY = maxY;
         this.setSize(new Dimension(maxX, maxY));
-       // this.setBackground(new Color(255, 114, 204));
     }
 
     /**
@@ -56,7 +52,7 @@ public class SingleTournamentPanel extends TournamentPanel {
 
         height = (maxY-BORDER_SPACE*2-VERTICAL_SPACE*numTeams)/(numTeams/2); //height of each match box
         length = (maxX-BORDER_SPACE*2-HORIZONTAL_SPACE*numRounds)/numRounds; //length of each match box
-        colors = new ColourPalette(tournament.getNumberOfMatchesInRound(0)*numRounds);
+        colors = new RainbowColourPalette(tournament.getNumberOfMatchesInRound(0)*numRounds);
         colorIndex = 0;
 
        for (int roundNum = 0; roundNum < tournament.getNumberOfRounds(); roundNum++){ //iterates through each round
@@ -95,14 +91,17 @@ public class SingleTournamentPanel extends TournamentPanel {
             teams = tournament.getTeamsInMatch(roundNum, matchNum); //stores the teams which play in that match
             g.setColor(colors.getColors().get(colorIndex));
             colorIndex++;
-            Graphics2D graphics2 = (Graphics2D) g;
 
-            graphics2.setStroke(new BasicStroke(2));
+            //drawing the rectangles
+            Graphics2D graphics2 = (Graphics2D) g;
+            graphics2.setStroke(new BasicStroke(2)); //setting thickness to slightly thicker than default
             RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(workingX, workingY, length, height, 20, 20);
             graphics2.draw(roundedRectangle);
-            //g.fillRoundRect(workingX, workingY, length, height, 20,20);
-            graphics2.setStroke(new BasicStroke(1));
+            //g.fillRoundRect(workingX, workingY, length, height, 20,20); option for our clients!
+            graphics2.setStroke(new BasicStroke(1)); // resetting thickness
+
             g.setColor(new Color(86, 87, 87));
+            //drawing the lines
             if (roundNum != tournament.getNumberOfRounds()-1){ //If the round is not the last round, draw the lines connecting to the next matchbox
                 g.drawLine(workingX + length, workingY + height / 2, workingX + length + HORIZONTAL_SPACE / 2, workingY + height / 2);
                 previousPointX = workingX + length + HORIZONTAL_SPACE/2; //storing the previous point to draw the vertical line
@@ -112,6 +111,8 @@ public class SingleTournamentPanel extends TournamentPanel {
                     g.drawLine(previousPointX, previousPointY+(height+verticalSpace)/2, previousPointX +HORIZONTAL_SPACE/2,  previousPointY+(height+verticalSpace)/2);
                 }
             }
+
+            //drawing the team names/text
             for (int teamNum = 0; teamNum < teams.length; teamNum++) {
                 for (int i = 0; i < teams[teamNum].length; i++) { //add more descript variable later LOL
                     if (teams[teamNum].length == 1) { //checking if the teams playing is already determined
@@ -124,6 +125,7 @@ public class SingleTournamentPanel extends TournamentPanel {
                 workingTextY += height / 2; //changing where the next text will be drawn
             }
             g.drawString("vs.", workingTextX-fontMetrics.stringWidth("vs.")/2, workingTextY-height/2-height/4); //drawing the "vs." between the teams; had to be outside the loop or else it would be drawn multiple times
+
             workingY += height + verticalSpace; //adjusting the workingY height
             workingTextY = workingY +height/4; //adjusting the workingTextY height
         }
