@@ -13,6 +13,8 @@ import java.awt.Graphics;
 import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.geom.RoundRectangle2D;
 import java.awt.FontMetrics;
 
 public class SingleTournamentPanel extends TournamentPanel {
@@ -24,6 +26,8 @@ public class SingleTournamentPanel extends TournamentPanel {
     private int maxY;
     private int height;
     private int length;
+    private ColourPalette colors;
+    private int colorIndex;
 
     SingleTournamentPanel(Bracket tournament, int maxX, int maxY){
         super();
@@ -31,8 +35,7 @@ public class SingleTournamentPanel extends TournamentPanel {
         this.maxX = maxX;
         this.maxY = maxY;
         this.setSize(new Dimension(maxX, maxY));
-        //this.setBackground(new Color(255, 114, 204)); //have to figure out colours tomorrow!
-
+       // this.setBackground(new Color(255, 114, 204));
     }
 
     /**
@@ -55,6 +58,8 @@ public class SingleTournamentPanel extends TournamentPanel {
 
        for (int roundNum = 0; roundNum < tournament.getNumberOfRounds(); roundNum++){ //iterates through each round
            numMatches = tournament.getNumberOfMatchesInRound(roundNum); //determines how many matches are in the round
+           colors = new ColourPalette(numMatches);
+           colorIndex = 0;
            if (numMatches>1) { //if it is more than one, calculates the space between each matchbox
                verticalSpace = (maxY - (workingY * 2) - (height * numMatches))/ (numMatches - 1);
            } else {
@@ -84,7 +89,12 @@ public class SingleTournamentPanel extends TournamentPanel {
 
         for (int matchNum = 0; matchNum < tournament.getNumberOfMatchesInRound(roundNum); matchNum++){ //iterates through each match
             teams = tournament.getTeamsInMatch(roundNum, matchNum); //stores the teams which play in that match
-            g.drawRect(workingX, workingY, length, height); //Draws a rectangle to represent that match
+            g.setColor(colors.getColors().get(colorIndex));
+            colorIndex++;
+            Graphics2D graphics2 = (Graphics2D) g;
+            RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(workingX, workingY, length, height, 20, 20);
+            graphics2.draw(roundedRectangle);
+           // g.drawRect(workingX, workingY, length, height); //Draws a rectangle to represent that match
             if (roundNum != tournament.getNumberOfRounds()-1){ //If the round is not the last round, draw the lines connecting to the next matchbox
                 g.drawLine(workingX + length, workingY + height / 2, workingX + length + HORIZONTAL_SPACE / 2, workingY + height / 2);
                 previousPointX = workingX + length + HORIZONTAL_SPACE/2; //storing the previous point to draw the vertical line
