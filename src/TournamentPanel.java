@@ -50,6 +50,7 @@ public class TournamentPanel extends JPanel {
                verticalSpace = maxY;
            }
            drawRound(g, workingX, workingY, workingX+length/2, workingY+height/4, verticalSpace, roundNum);
+           drawLines(g, workingX, workingY);
            workingY = BORDER_SPACE + height/2 + verticalSpace;
            workingX += length + HORIZONTAL_SPACE;
         }
@@ -61,19 +62,27 @@ public class TournamentPanel extends JPanel {
         for (int matchNum = 0; matchNum < tournament.getNumberOfMatchesInRound(roundNum); matchNum++){
             teams = tournament.getTeamsInMatch(roundNum, matchNum);
             g.drawRect(workingX, workingY, length, height);
-                for (int teamNum = 0; teamNum < teams.length; teamNum++){
+                for (int teamNum = 0; teamNum < teams.length; teamNum++) {
                     for (int i = 0; i < teams[teamNum].length; i++) { //add more descript variable later LOL
-                        g.drawString(teams[teamNum][i], workingTextX, workingTextY);
+                        if (teams[teamNum].length == 1) {
+                            g.drawString(teams[teamNum][i], workingTextX, workingTextY);
+                        } else {
+                            g.drawString("unknown", workingTextX, workingTextY);
+                            break;
+                        }
                         workingTextX += 10;
                     }
-                    workingTextX = workingX+length/2;
-                    workingTextY+= height/2;
-
+                    workingTextX = workingX + length / 2;
+                    workingTextY += height / 2;
                 }
             g.drawString("vs.", workingTextX, workingTextY-height/2-height/4);
             workingY += height + verticalSpace;
             workingTextY += verticalSpace;
         }
+    }
+
+    public void drawLines(Graphics g, int workingX, int workingY){
+
     }
 
     public void setTournament(Bracket tournament) {
