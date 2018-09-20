@@ -10,6 +10,8 @@ public class DoubleTournamentPanel extends TournamentPanel {
     private Bracket tournament;
     private int maxX;
     private int maxY;
+    private int winnerHeight;
+    private int loserHeight;
     private int height;
     private int length;
 
@@ -19,6 +21,8 @@ public class DoubleTournamentPanel extends TournamentPanel {
         this.tournament =  tournament;
         this.maxX = maxX;
         this.maxY = maxY;
+        winnerHeight = maxY*(1/3);
+        loserHeight = maxY*(2/3);
         this.setSize(new Dimension(maxX, maxY));
 
     }
@@ -99,7 +103,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
             workingTextY += verticalSpace; //adjusting the workingTextY height
         }
     }
-    
+
 
     /**
      * Updates the tournament bracket display by changing the tournament bracket it is drawing. Repaints the screen once called
