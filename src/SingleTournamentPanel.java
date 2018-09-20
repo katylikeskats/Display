@@ -94,9 +94,8 @@ public class SingleTournamentPanel extends TournamentPanel {
             Graphics2D graphics2 = (Graphics2D) g;
             RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(workingX, workingY, length, height, 20, 20);
             graphics2.draw(roundedRectangle);
-           // g.drawRect(workingX, workingY, length, height); //Draws a rectangle to represent that match
+            g.setColor(Color.WHITE);
             if (roundNum != tournament.getNumberOfRounds()-1){ //If the round is not the last round, draw the lines connecting to the next matchbox
-                g.setColor(Color.black);
                 g.drawLine(workingX + length, workingY + height / 2, workingX + length + HORIZONTAL_SPACE / 2, workingY + height / 2);
                 previousPointX = workingX + length + HORIZONTAL_SPACE/2; //storing the previous point to draw the vertical line
                 previousPointY = workingY + height/2;

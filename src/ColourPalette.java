@@ -39,14 +39,17 @@ public class ColourPalette {
             red += changeRed;
             green += changeGreen;
             blue += changeBlue;
-            if (red > 255){
-                red = 0;
-            }
-            if (blue > 255){
+            if (red > 255 ){
+                red = 255;
                 blue = 0;
             }
-            if (green > 255){
+            if (blue > 255){
+                blue = 255;
                 green = 0;
+            }
+            if (green > 255){
+                green = 255;
+                red = 0;
             }
             colors.add(new Color(red, green, blue));
         }
