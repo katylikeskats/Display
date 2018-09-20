@@ -1,14 +1,16 @@
-import javafx.geometry.HorizontalDirection;
+
 
 import javax.swing.JPanel;
 
 import java.awt.Graphics;
 import java.awt.Dimension;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
 
 public class TournamentPanel extends JPanel {
     private static final int BORDER_SPACE = 40;
-    private static final int VERTICAL_SPACE = 30; //space between each box vertically
+    private static final int VERTICAL_SPACE = 10; //space between each box vertically
     private static final int HORIZONTAL_SPACE = 100; //space between each box horizontally
     private Bracket tournament;
     private boolean reDraw = false;
@@ -28,43 +30,6 @@ public class TournamentPanel extends JPanel {
 
 
     public void paintComponent(Graphics g){
-            //Team Lines: Horizontal, Match Lines: Vertical
-            //Round 1
-            //Team Lines
-           /* g.drawLine(50,100, 150, 100);
-            g.drawLine(50,200, 150, 200);
-            g.drawLine(50,300, 150, 300);
-            g.drawLine(50,400, 150, 400);
-            g.drawLine(50,500, 150, 500);
-            g.drawLine(50,600, 150, 600);
-            g.drawLine(50,700, 150, 700);
-            g.drawLine(50,800, 150, 800);
-            //Match Lines
-            g.drawLine(150,100, 150, 200);
-            g.drawLine(150,300, 150, 400);
-            g.drawLine(150,500, 150, 600);
-            g.drawLine(150,700, 150, 800);
-
-            //Round 2
-            //Team Lines
-            g.drawLine(150,150, 250, 150);
-            g.drawLine(150,350, 250, 350);
-            g.drawLine(150,550, 250, 550);
-            g.drawLine(150,750, 250, 750);
-            //Match Lines
-            g.drawLine(250,150, 250, 350);
-            g.drawLine(250,550, 250, 750);
-
-            //Round 3
-            //Team Lines
-            g.drawLine(250,250, 350, 250);
-            g.drawLine(250,650, 350, 650);
-            //Match Lines
-            g.drawLine(350,250, 350, 650);
-
-            //Winner
-            g.drawLine(350,450, 550, 450);
-*/
         int numRounds = tournament.getNumberOfRounds();
         int numTeams = tournament.getNumberOfTeams();
         int numMatches;
@@ -84,23 +49,28 @@ public class TournamentPanel extends JPanel {
            } else {
                verticalSpace = maxY;
            }
-           drawRound(g, workingX, workingY, verticalSpace, roundNum);
+           drawRound(g, workingX, workingY, workingX+length/2, workingY+height/4, verticalSpace, roundNum);
            workingY = BORDER_SPACE + height/2 + verticalSpace;
            workingX += length + HORIZONTAL_SPACE;
         }
     }
 
-    public void drawRound(Graphics g, int workingX, int workingY, int verticalSpace, int roundNum){
-        String[][] teams = new String[2][];
-
+    public void drawRound(Graphics g, int workingX, int workingY, int workingTextX, int workingTextY, int verticalSpace, int roundNum){
+        String[][] teams;
+        Font font1 = new Font("Sans_Serif", Font.BOLD, 20);
         for (int matchNum = 0; matchNum < tournament.getNumberOfMatchesInRound(roundNum); matchNum++){
             teams = tournament.getTeamsInMatch(roundNum, matchNum);
             g.drawRect(workingX, workingY, length, height);
+                for (int teamNum = 0; teamNum < teams.length; teamNum++){
+                    for (int i = 0; i < teams[teamNum].length; i++) {
+                        g.drawString(teams[teamNum][i], workingTextX, workingTextY);
+                        workingTextX += 10;
+                    }
+                    workingTextX = workingX+length/2;
+                    workingTextY+= height/2;
+                }
             workingY += height + verticalSpace;
-                /*for (int teamNum = 0; teamNum < teams.length; teamNum++){
-                    g.drawString(teams[0][teamNum], workingX, workingY);
-                    g.drawString(teams[1][teamNum], workingX + 10, workingY);
-                }*/
+            workingTextY += verticalSpace;
         }
     }
 
