@@ -27,7 +27,7 @@ public class SingleTournamentPanel extends TournamentPanel {
     private ColourPalette colors;
     private int colorIndex;
 
-    SingleTournamentPanel(Bracket tournament, int maxX, int maxY){
+    public SingleTournamentPanel(Bracket tournament, int maxX, int maxY){
         super();
         this.tournament = tournament;
         this.maxX = maxX;
