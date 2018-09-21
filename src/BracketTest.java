@@ -3,7 +3,7 @@ import java.util.ArrayList;
 class BracketTest {
 
 	public static void main(String[] args) {
-
+		/**
 		ArrayList<Team> teams = new ArrayList<Team>();
 		SingleGenerator generator;
 
@@ -25,7 +25,7 @@ class BracketTest {
 		System.out.println(bracket.getNumberOfMatchesInRounds(2));
 		System.out.println(bracket.getNumberOfMatchesInRounds(3));
 		System.out.println(bracket.getNumberOfMatchesInRounds(4));
-
+		*/
 	}
 
 }
