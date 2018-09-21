@@ -11,6 +11,7 @@ public class TestCase {
 
         generator = new SingleGenerator(teams, true);
 
+        new Display(generator.getBracket());
     }
 
 }
