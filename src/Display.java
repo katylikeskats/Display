@@ -1,6 +1,7 @@
 /**
  * [Display.java]
  * The frame on which the bracket is displayed
+ *
  * @author Katelyn Wang & Dora Su
  * September 18 2018
  */
