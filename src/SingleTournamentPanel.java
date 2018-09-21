@@ -19,7 +19,7 @@ public class SingleTournamentPanel extends TournamentPanel {
     private static final int BORDER_SPACE = 40;
     private static final int VERTICAL_SPACE = 10; //space between each box vertically
     private static final int HORIZONTAL_SPACE = 100; //space between each box horizontally
-    private Bracket tournament;
+    private OurBracket tournament;
     private int maxX;
     private int maxY;
     private int height;
@@ -27,7 +27,7 @@ public class SingleTournamentPanel extends TournamentPanel {
     private ColourPalette colors;
     private int colorIndex;
 
-    public SingleTournamentPanel(Bracket tournament, int maxX, int maxY){
+    public SingleTournamentPanel(OurBracket tournament, int maxX, int maxY){
         super();
         this.tournament = tournament;
         this.maxX = maxX;
@@ -135,7 +135,7 @@ public class SingleTournamentPanel extends TournamentPanel {
      * Updates the tournament bracket display by changing the tournament bracket it is drawing. Repaints the screen once called
      * @param tournament Updated tournament bracket to be displayed
      */
-    public void setTournament(Bracket tournament) {
+    public void setTournament(OurBracket tournament) {
         this.tournament = tournament;
         repaint();
     }

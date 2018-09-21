@@ -8,14 +8,13 @@
 //Graphic imports
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
 
 public class DoubleTournamentPanel extends TournamentPanel {
     private static final int BORDER_SPACE = 40;
     private static final int VERTICAL_SPACE = 10; //space between each box vertically
     private static final int HORIZONTAL_SPACE = 100; //space between each box horizontally
-    private Bracket tournament;
+    private OurBracket tournament;
     private int maxX;
     private int maxY;
     private int winnerHeight;
@@ -24,7 +23,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
     private int length;
 
 
-    public DoubleTournamentPanel(Bracket tournament, int maxX, int maxY){
+    public DoubleTournamentPanel(OurBracket tournament, int maxX, int maxY){
         super();
         this.tournament =  tournament;
         this.maxX = maxX;
@@ -117,7 +116,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
      * Updates the tournament bracket display by changing the tournament bracket it is drawing. Repaints the screen once called
      * @param tournament Updated tournament bracket to be displayed
      */
-    public void setTournament(Bracket tournament) {
+    public void setTournament(OurBracket tournament) {
         this.tournament = tournament;
         repaint();
     }

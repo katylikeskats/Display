@@ -14,7 +14,7 @@ public class Display extends JFrame{
     private int maxY;
     private TournamentPanel tournamentPanel;
 
-    public Display(Bracket tournament){
+    public Display(OurBracket tournament){
         super();
 
         maxX = 1530;
@@ -35,7 +35,7 @@ public class Display extends JFrame{
      * Updates the bracket by calling it to be redrawn
      * @param tournament The updated tournament bracket to be drawn
      */
-    public void update(Bracket tournament){
+    public void update(OurBracket tournament){
         tournamentPanel.setTournament(tournament);
     }
 
