@@ -6,6 +6,8 @@
  */
 
 //Graphics imports
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
+
 import javax.swing.*;
 import java.awt.Graphics;
 import java.awt.Dimension;
@@ -16,7 +18,9 @@ import java.awt.FontMetrics;
 import java.awt.BasicStroke;
 
 //Util imports
+
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class SingleTournamentPanel extends TournamentPanel {
     private static final int BORDER_SPACE = 40;
@@ -45,7 +49,7 @@ public class SingleTournamentPanel extends TournamentPanel {
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         int numRounds = tournament.getNumberOfRounds();
-        ArrayList<MatchBox> boxes = new ArrayList<>();
+        ArrayList<MatchBox[]> boxes = new ArrayList<>();
         int numMatches;
         int verticalSpace; //space between each matchbox of a given round (for an evenly distributed look)
 
@@ -60,13 +64,22 @@ public class SingleTournamentPanel extends TournamentPanel {
        for (int roundNum = 1; roundNum <= tournament.getNumberOfRounds(); roundNum++){ //iterates through each round
            numMatches = tournament.getNumberOfMatchesInRound(roundNum); //determines how many matches are in the round
 
+           if (roundNum == findMostMatches()){
+               workingY = BORDER_SPACE;
+           }
+
            if (numMatches>1) { //if it is more than one, calculates the space between each matchbox
                verticalSpace = (maxY - (workingY * 2) - (height * numMatches))/ (numMatches - 1);
            } else {
                verticalSpace = maxY; //if not, defaults to the full length of the screen
+               workingY = maxY/2 - height/2 ; //adjusts the workingY and workingX coordinates
+
            }
+
            drawRound(g, workingX, workingY, workingX+length/2, workingY+height/4, verticalSpace, roundNum, boxes); //draws the matchboxes
-           workingY = BORDER_SPACE + height/2 + verticalSpace; //adjusts the workingY and workingX coordinates
+           if (roundNum != tournament.getNumberOfRounds()-1) {
+               workingY = BORDER_SPACE + height / 2 + verticalSpace; //adjusts the workingY and workingX coordinates
+           }
            workingX += length + HORIZONTAL_SPACE;
         }
         drawLines(g, boxes);
@@ -82,10 +95,10 @@ public class SingleTournamentPanel extends TournamentPanel {
      * @param verticalSpace The calculated space between each match box
      * @param roundNum The round number it is drawing
      */
-    public void drawRound(Graphics g, int workingX, int workingY, int workingTextX, int workingTextY, int verticalSpace, int roundNum, ArrayList<MatchBox> boxes){
+    public void drawRound(Graphics g, int workingX, int workingY, int workingTextX, int workingTextY, int verticalSpace, int roundNum, ArrayList<MatchBox[]> boxes){
         String[][] teams; //stores teams who are playing in a certain match match
+        MatchBox[] roundBoxes = new MatchBox[tournament.getNumberOfMatchesInRound(roundNum)];
         Graphics2D graphics2 = (Graphics2D) g;
-        int matchIndex = boxes.size()-1;
 
         //Setting up the font
         Font font1 = new Font("Sans_Serif", Font.PLAIN, 15);
@@ -98,32 +111,24 @@ public class SingleTournamentPanel extends TournamentPanel {
             g.setColor(colors.getColors().get(colorIndex));
             colorIndex++;
 
+
             //drawing the rectangles
             graphics2.setStroke(new BasicStroke(2)); //setting thickness to slightly thicker than default
-            matchIndex++;
-            boxes.add(new MatchBox(workingX, workingY, length, height,  20));
-            graphics2.draw(boxes.get(matchIndex).getRect());
+            MatchBox currBox = new MatchBox(workingX, workingY, length, height,  20);
+            roundBoxes[matchNum - 1] = currBox;
+            graphics2.draw(currBox.getRect());
             //g.fillRoundRect(workingX, workingY, length, height, 20,20); option for our clients!
 
 
-          /*
-            if (roundNum != tournament.getNumberOfRounds()){ //If the round is not the last round, draw the lines connecting to the next matchbox
-                g.drawLine(workingX + length, workingY + height / 2, workingX + length + HORIZONTAL_SPACE / 2, workingY + height / 2);
-                 if (matchNum%2 == 0){ //if it is an odd match, draw the vertical line connecting each pair of matches
-                       drawLineBetweenMatch(boxes, workingX + length + HORIZONTAL_SPACE/2, matchIndex, matchIndex-1, g);
-                 }
-            }*/
-
             //drawing the team names/text
+            g.setColor(new Color(86, 87, 87));
             for (int teamNum = 0; teamNum < teams.length; teamNum++) {
-                for (int i = 0; i < teams[teamNum].length; i++) { //add more descript variable later LOL
                     if (teams[teamNum].length == 1) { //checking if the teams playing is already determined
-                        g.drawString(teams[teamNum][i], workingTextX-fontMetrics.stringWidth(teams[teamNum][i])/2, workingTextY); //if so, draws the team names
+                        g.drawString(teams[teamNum][0], workingTextX-fontMetrics.stringWidth(teams[teamNum][0])/2, workingTextY); //if so, draws the team names
                     } else {
                         g.drawString("unknown", workingTextX-fontMetrics.stringWidth("unknown")/2, workingTextY); // if not, leaves it unknown
-                        break;
+                        g.drawLine(currBox.getX(), currBox.getMidY(), currBox.getX()-HORIZONTAL_SPACE/2, currBox.getMidY());
                     }
-                }
                 workingTextY += height / 2; //changing where the next text will be drawn
             }
             g.drawString("vs.", workingTextX-fontMetrics.stringWidth("vs.")/2, workingTextY-height/2-height/4); //drawing the "vs." between the teams; had to be outside the loop or else it would be drawn multiple times
@@ -131,6 +136,7 @@ public class SingleTournamentPanel extends TournamentPanel {
             workingY += height + verticalSpace; //adjusting the workingY height
             workingTextY = workingY +height/4; //adjusting the workingTextY height
         }
+        boxes.add(roundBoxes);
     }
 
     public int findMostMatches(){
@@ -145,41 +151,46 @@ public class SingleTournamentPanel extends TournamentPanel {
         return record;
     }
 
-    public void drawLineBetweenMatch(ArrayList<MatchBox> boxes, int x, int match1, int match2, Graphics g){
-        g.drawLine(x, boxes.get(match1).getMidY(), x, boxes.get(match2).getMidY());
+    public void drawLineBetweenMatch(MatchBox box1, MatchBox box2, Graphics g){
+        g.drawLine(box1.getRightX()+HORIZONTAL_SPACE/2, box1.getMidY(), box1.getRightX()+HORIZONTAL_SPACE/2, box2.getMidY());
     }
 
-    public void drawLines(Graphics g, ArrayList<MatchBox> boxes){
+    public void drawLines(Graphics g, ArrayList<MatchBox[]> boxes){
     //public void drawLines(Graphics g, Graphics2D graphics2, ArrayList<MatchBox> boxes, String[][] teams){
         //graphics2.setStroke(new BasicStroke(1)); // resetting thickness
         int x;
         int y;
         g.setColor(new Color(86, 87, 87));
-        for (int i = 0; i < boxes.size(); i++){
-            x = boxes.get(i).getRightX();
-            y = boxes.get(i).getMidY();
-            g.drawLine(x, y, x + HORIZONTAL_SPACE/2, y);
-           // if (contains(teams[i+1], teams[i][0]){
+        for (int i = 0; i < boxes.size()-1; i++){
+            for (int j = 0; j < boxes.get(i).length; j++) {
+                x = boxes.get(i)[j].getRightX();
+                y = boxes.get(i)[j].getMidY();
+                g.drawLine(x, y, x + HORIZONTAL_SPACE / 2, y);
+                String[][] currTeams = tournament.getTeamsInMatch(i+1,j+1);
+                String[][] nextTeams;
 
-           // }
-        }
-
-        /*
-        //drawing the lines
-        g.setColor(new Color(86, 87, 87));
-        graphics2.setStroke(new BasicStroke(1)); // resetting thickness
-        for (int i = 0; i < tournament.getNumberOfMatchesInRound(); i++){
-            for (int j = 0; j < boxes.size(); j++){
-
+                for (int set = 0; set < 2; set++){
+                    for (int matchNum = 1; matchNum <= boxes.get(i + 1).length; matchNum++) {
+                        nextTeams = tournament.getTeamsInMatch(i + 2, matchNum); //stores the teams which play in that match
+                        for (int teamNum = 0; teamNum < 2; teamNum++) {
+                            if (nextTeams[teamNum].length > 1) { //checking if the teams playing is already determined
+                                if (contains(nextTeams[teamNum], currTeams[set])) {
+                                    drawLineBetweenMatch(boxes.get(i)[j], boxes.get(i + 1)[matchNum-1], g);
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
-        */
     }
 
-    public boolean contains(String[] teams, String team){
+    public boolean contains(String[] teams, String[] teamQuery){
         for (int i = 0; i < teams.length; i++){
-            if (teams[i].equals(team)){
-                return true;
+            for (int j = 0; j < teamQuery.length; j++) {
+                if (teams[i].equals(teamQuery[j])) {
+                    return true;
+                }
             }
         }
         return false;

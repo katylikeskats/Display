@@ -5,7 +5,7 @@ public class TestCase {
         ArrayList<Team> teams = new ArrayList<Team>();
         SingleGenerator generator;
 
-        for (int i = 1; i <= 20; i++) {
+        for (int i = 1; i <=42; i++) {
             teams.add(new Team(Integer.toString(i), i));
         }
 
@@ -13,9 +13,6 @@ public class TestCase {
 
         Bracket bracket = generator.getBracket();
 
-        System.out.println(bracket.getNumberOfRounds());
-        System.out.println(bracket.getNumberOfTeams());
-        System.out.println(bracket.getNumberOfMatchesInRound(1));
         new Display(generator.getBracket());
     }
 

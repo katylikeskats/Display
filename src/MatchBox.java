@@ -23,6 +23,10 @@ public class MatchBox {
         return x+length;
     }
 
+    public int getX(){
+        return x;
+    }
+
     public RoundRectangle2D getRect() {
         return rect;
     }
