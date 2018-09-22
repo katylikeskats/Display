@@ -1,14 +1,14 @@
 /**
- * [OurBracket.java]
+ * [Bracket.java]
  * HARD CODED BRACKET TEST!
  * @author Katelyn Wang & Dora Su
  * September 18 2018
  */
 
-public class OurBracket {
+public class Bracket {
     private int numberOfTeams;
     private String[][][][] rounds;
-    public OurBracket(int numberOfTeams, String[][][][] rounds){
+    public Bracket(int numberOfTeams, String[][][][] rounds){
         this.numberOfTeams = numberOfTeams;
         this.rounds = rounds;
     }

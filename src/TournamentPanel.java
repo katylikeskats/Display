@@ -13,5 +13,7 @@ abstract public class TournamentPanel extends JPanel {
         this.setBackground(new Color(243, 242, 242));
     }
 
-    abstract public void setTournament(OurBracket tournament);
+    abstract public void setTournament(Bracket tournament);
+
+    abstract public void refresh();
 }
