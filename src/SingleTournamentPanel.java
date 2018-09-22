@@ -6,9 +6,6 @@
  */
 
 //Graphics imports
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
-
-import javax.swing.*;
 import java.awt.Graphics;
 import java.awt.Dimension;
 import java.awt.Color;
@@ -18,9 +15,7 @@ import java.awt.FontMetrics;
 import java.awt.BasicStroke;
 
 //Util imports
-
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class SingleTournamentPanel extends TournamentPanel {
     private static final int BORDER_SPACE = 40;
