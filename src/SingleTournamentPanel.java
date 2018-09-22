@@ -28,6 +28,7 @@ public class SingleTournamentPanel extends TournamentPanel {
     private int length;
     private ColourPalette colors;
     private int colorIndex;
+    private int workingNumMatches;
 
     public SingleTournamentPanel(Bracket tournament, int x, int y){
         super();
@@ -43,6 +44,7 @@ public class SingleTournamentPanel extends TournamentPanel {
      */
     public void paintComponent(Graphics g){
         super.paintComponent(g);
+        workingNumMatches = 0;
         int numRounds = tournament.getNumberOfRounds();
         ArrayList<MatchBox[]> boxes = new ArrayList<>();
         int numMatches;
@@ -110,6 +112,7 @@ public class SingleTournamentPanel extends TournamentPanel {
             //drawing the rectangles
             graphics2.setStroke(new BasicStroke(2)); //setting thickness to slightly thicker than default
             MatchBox currBox = new MatchBox(workingX, workingY, length, height,  20);
+            g.drawString(Integer.toString(workingNumMatches+matchNum), workingX + 10, workingY + 20);
             roundBoxes[matchNum - 1] = currBox;
             graphics2.draw(currBox.getRect());
             //g.fillRoundRect(workingX, workingY, length, height, 20,20); option for our clients!
@@ -132,6 +135,7 @@ public class SingleTournamentPanel extends TournamentPanel {
             workingTextY = workingY +height/4; //adjusting the workingTextY height
         }
         boxes.add(roundBoxes);
+        workingNumMatches += tournament.getNumberOfMatchesInRound(roundNum);
     }
 
     public int findMostMatches(){
