@@ -85,8 +85,8 @@
       <file leaf-file-name="SingleTournamentPanel.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/SingleTournamentPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="132" column="129" selection-start-line="132" selection-start-column="129" selection-end-line="132" selection-end-column="129" />
+            <state relative-caret-position="51">
+              <caret line="87" column="45" selection-start-line="87" selection-start-column="45" selection-end-line="87" selection-end-column="45" />
               <folding>
                 <element signature="e#0#9409#0" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -842,8 +842,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/SingleTournamentPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="132" column="129" selection-start-line="132" selection-start-column="129" selection-end-line="132" selection-end-column="129" />
+        <state relative-caret-position="51">
+          <caret line="87" column="45" selection-start-line="87" selection-start-column="45" selection-end-line="87" selection-end-column="45" />
           <folding>
             <element signature="e#0#9409#0" expanded="true" />
             <element signature="imports" expanded="true" />

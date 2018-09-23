@@ -84,8 +84,6 @@ public class SingleTournamentPanel extends TournamentPanel {
            }
            workingX += length + HORIZONTAL_SPACE;
         }
-        Graphics2D graphics2 = (Graphics2D)g;
-        graphics2.setStroke(new BasicStroke(1)); // resetting thickness
         drawLines(g, boxes);
     }
 
@@ -164,6 +162,7 @@ public class SingleTournamentPanel extends TournamentPanel {
 
     public void drawLineBetweenMatch(MatchBox box1, MatchBox box2, Graphics g){
         g.drawLine(box1.getRightX()+HORIZONTAL_SPACE/2, box1.getMidY(), box1.getRightX()+HORIZONTAL_SPACE/2, box2.getMidY());
+        //g.drawLine(box1.getRightX(), box1.getMidY(), box2.getX(), box2.getMidY());
     }
 
     public void drawLines(Graphics g, ArrayList<MatchBox[]> boxes){
