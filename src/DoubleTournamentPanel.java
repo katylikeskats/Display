@@ -19,7 +19,6 @@ import java.util.ArrayList;
 
 public class DoubleTournamentPanel extends TournamentPanel {
     private static final int BORDER_SPACE = 40;
-    private static final int VERTICAL_SPACE = 10; //space between each box vertically
     private static final int HORIZONTAL_SPACE = 100; //space between each box horizontally
     private Bracket tournament;
     private int maxX;
@@ -28,12 +27,15 @@ public class DoubleTournamentPanel extends TournamentPanel {
     private int length;
     private ColourPalette colors;
     private int colorIndex;
+    private int workingNumMatches;
 
-    public DoubleTournamentPanel(Bracket tournament, int x, int y){
+    public DoubleTournamentPanel(Bracket tournament, int x, int y, int height, int length){
         super();
         this.tournament = tournament;
-        this.maxX = x + 600;
-        this.maxY = y + 600;
+        this.maxX = x;
+        this.maxY = y;
+        this.height = height;
+        this.length = length;
         this.setSize(new Dimension(this.maxX, this.maxY));
     }
 
@@ -43,6 +45,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
      */
     public void paintComponent(Graphics g){
         super.paintComponent(g);
+        workingNumMatches = 0;
         int numRounds = tournament.getNumberOfRounds();
         ArrayList<MatchBox[]> boxes = new ArrayList<>();
         int numMatches;
@@ -51,8 +54,6 @@ public class DoubleTournamentPanel extends TournamentPanel {
         int workingX = BORDER_SPACE; //current x from which it is drawing
         int workingY = BORDER_SPACE; //current y from which it is drawing
 
-        height = (maxY-BORDER_SPACE*2-(VERTICAL_SPACE*tournament.getNumberOfMatchesInRound(findMostMatches())))/(tournament.getNumberOfMatchesInRound(findMostMatches())); //height of each match box
-        length = (maxX-BORDER_SPACE*2-HORIZONTAL_SPACE*numRounds)/numRounds; //length of each match box
         colors = new RainbowColourPalette(tournament.getNumberOfTeams()-1);
         colorIndex = 0;
 
@@ -110,6 +111,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
             //drawing the rectangles
             graphics2.setStroke(new BasicStroke(2)); //setting thickness to slightly thicker than default
             MatchBox currBox = new MatchBox(workingX, workingY, length, height,  20);
+            g.drawString(Integer.toString(workingNumMatches+matchNum), workingX + 10, workingY + 20);
             roundBoxes[matchNum - 1] = currBox;
             graphics2.draw(currBox.getRect());
             //g.fillRoundRect(workingX, workingY, length, height, 20,20); option for our clients!
@@ -132,12 +134,13 @@ public class DoubleTournamentPanel extends TournamentPanel {
             workingTextY = workingY +height/4; //adjusting the workingTextY height
         }
         boxes.add(roundBoxes);
+        workingNumMatches += tournament.getNumberOfMatchesInRound(roundNum);
     }
 
     public int findMostMatches(){
         int most = 0;
         int record = 1;
-        for (int i = 0; i < tournament.getNumberOfRounds(); i++){
+        for (int i = 1; i <= tournament.getNumberOfRounds(); i++){
             if (tournament.getNumberOfMatchesInRound(i) >= most){
                 record = i;
                 most = tournament.getNumberOfMatchesInRound(i);
