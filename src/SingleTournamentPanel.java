@@ -13,6 +13,12 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.FontMetrics;
 import java.awt.BasicStroke;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+
+//IO imports
+import java.io.IOException;
+import java.io.File;
 
 //Util imports
 import java.util.ArrayList;
@@ -78,6 +84,8 @@ public class SingleTournamentPanel extends TournamentPanel {
            }
            workingX += length + HORIZONTAL_SPACE;
         }
+        Graphics2D graphics2 = (Graphics2D)g;
+        graphics2.setStroke(new BasicStroke(1)); // resetting thickness
         drawLines(g, boxes);
     }
 
@@ -97,13 +105,16 @@ public class SingleTournamentPanel extends TournamentPanel {
         Graphics2D graphics2 = (Graphics2D) g;
 
         //Setting up the font
-        Font font1 = new Font("Sans_Serif", Font.PLAIN, 15);
+        Font font1 = getFont("assets/Comfortaa-Light.ttf", 15f);
+       // Font font1 = new Font("Helvetica", Font.PLAIN, 15);
         FontMetrics fontMetrics = g.getFontMetrics(font1);
         g.setFont(font1);
 
-
+        g.drawString("Round "+Integer.toString(roundNum), workingX + length/2 - fontMetrics.stringWidth("Round "+Integer.toString(roundNum))/2, 30);
         for (int matchNum = 1; matchNum <= tournament.getNumberOfMatchesInRound(roundNum); matchNum++){ //iterates through each match
             teams = tournament.getTeamsInMatch(roundNum, matchNum); //stores the teams which play in that match
+            g.setColor(new Color(255, 255, 255));
+            g.fillRoundRect(workingX, workingY, length, height, 20,20);
             g.setColor(colors.getColors().get(colorIndex));
             colorIndex++;
 
@@ -114,21 +125,23 @@ public class SingleTournamentPanel extends TournamentPanel {
             g.drawString(Integer.toString(workingNumMatches+matchNum), workingX + 10, workingY + 20);
             roundBoxes[matchNum - 1] = currBox;
             graphics2.draw(currBox.getRect());
-            //g.fillRoundRect(workingX, workingY, length, height, 20,20); option for our clients!
+
 
 
             //drawing the team names/text
             g.setColor(new Color(86, 87, 87));
+            g.drawString("vs.", workingTextX-fontMetrics.stringWidth("vs.")/2, workingTextY+height/4+fontMetrics.getMaxAscent()/4); //drawing the "vs." between the teams; had to be outside the loop or else it would be drawn multiple times
+
             for (int teamNum = 0; teamNum < teams.length; teamNum++) {
                     if (teams[teamNum].length == 1) { //checking if the teams playing is already determined
-                        g.drawString(teams[teamNum][0], workingTextX-fontMetrics.stringWidth(teams[teamNum][0])/2, workingTextY); //if so, draws the team names
+                        g.drawString(teams[teamNum][0], workingTextX-fontMetrics.stringWidth(teams[teamNum][0])/2, workingTextY+fontMetrics.getMaxAscent()/4); //if so, draws the team names
                     } else {
-                        g.drawString("unknown", workingTextX-fontMetrics.stringWidth("unknown")/2, workingTextY); // if not, leaves it unknown
+                        g.drawString("unknown", workingTextX-fontMetrics.stringWidth("unknown")/2, workingTextY+fontMetrics.getMaxAscent()/4); // if not, leaves it unknown
+                        graphics2.setStroke(new BasicStroke(1));
                         g.drawLine(currBox.getX(), currBox.getMidY(), currBox.getX()-HORIZONTAL_SPACE/2, currBox.getMidY());
                     }
                 workingTextY += height / 2; //changing where the next text will be drawn
             }
-            g.drawString("vs.", workingTextX-fontMetrics.stringWidth("vs.")/2, workingTextY-height/2-height/4); //drawing the "vs." between the teams; had to be outside the loop or else it would be drawn multiple times
 
             workingY += height + verticalSpace; //adjusting the workingY height
             workingTextY = workingY +height/4; //adjusting the workingTextY height
@@ -154,8 +167,6 @@ public class SingleTournamentPanel extends TournamentPanel {
     }
 
     public void drawLines(Graphics g, ArrayList<MatchBox[]> boxes){
-    //public void drawLines(Graphics g, Graphics2D graphics2, ArrayList<MatchBox> boxes, String[][] teams){
-        //graphics2.setStroke(new BasicStroke(1)); // resetting thickness
         int x;
         int y;
         g.setColor(new Color(86, 87, 87));
@@ -201,6 +212,18 @@ public class SingleTournamentPanel extends TournamentPanel {
     public void setTournament(Bracket tournament) {
         this.tournament = tournament;
         repaint();
+    }
+
+    public static Font getFont(String fileName, float size){
+        Font font;
+        try {
+            font = Font.createFont(Font.TRUETYPE_FONT, new File(fileName)).deriveFont(size);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Font.createFont(Font.PLAIN,new File(fileName)));
+        } catch (IOException | FontFormatException e){
+            font = new Font(Font.SANS_SERIF, Font.PLAIN, 18);
+        }
+        return font;
     }
 
     public void refresh(){
