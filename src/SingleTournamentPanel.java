@@ -60,15 +60,6 @@ public class SingleTournamentPanel extends TournamentPanel {
         int workingX = BORDER_SPACE; //current x from which it is drawing
         int workingY = BORDER_SPACE; //current y from which it is drawing
 
-        //Setting up the font
-        Font fontTitle = getFont("assets/Comfortaa-Light.ttf", 40f);
-        // Font font1 = new Font("Helvetica", Font.PLAIN, 15);
-        FontMetrics fontMetrics = g.getFontMetrics(fontTitle);
-        g.setFont(fontTitle);
-        g.drawString("Tournament Name", workingX, workingY);
-
-        workingY += fontMetrics.getHeight() ;
-
         colors = new RainbowColourPalette(tournament.getNumberOfTeams()-1);
         colorIndex = 0;
 
@@ -76,14 +67,14 @@ public class SingleTournamentPanel extends TournamentPanel {
            numMatches = tournament.getNumberOfMatchesInRound(roundNum); //determines how many matches are in the round
 
            if (roundNum == findMostMatches()){
-               workingY = BORDER_SPACE + fontMetrics.getHeight();
+               workingY = BORDER_SPACE;
            }
 
            if (numMatches>1) { //if it is more than one, calculates the space between each matchbox
                verticalSpace = (maxY - (workingY * 2) - (height * numMatches))/ (numMatches - 1);
            } else {
                verticalSpace = maxY; //if not, defaults to the full length of the screen
-               workingY = maxY/2 + fontMetrics.getHeight() - height/2 ; //adjusts the workingY and workingX coordinates
+               workingY = maxY/2 - height/2 ; //adjusts the workingY and workingX coordinates
 
            }
 
@@ -117,7 +108,7 @@ public class SingleTournamentPanel extends TournamentPanel {
         FontMetrics fontMetrics = g.getFontMetrics(font1);
         g.setFont(font1);
 
-       // g.drawString("Round "+Integer.toString(roundNum), workingX + length/2 - fontMetrics.stringWidth("Round "+Integer.toString(roundNum))/2, workingY -15);
+        g.drawString("Round "+Integer.toString(roundNum), workingX + length/2 - fontMetrics.stringWidth("Round "+Integer.toString(roundNum))/2, 30);
         for (int matchNum = 1; matchNum <= tournament.getNumberOfMatchesInRound(roundNum); matchNum++){ //iterates through each match
             teams = tournament.getTeamsInMatch(roundNum, matchNum); //stores the teams which play in that match
             g.setColor(new Color(255, 255, 255));
