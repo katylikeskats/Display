@@ -5,7 +5,7 @@ public class TestCase {
         ArrayList<Team> teams = new ArrayList<Team>();
         SingleGenerator generator;
 
-        for (int i = 1; i <= 1000; i++) {
+        for (int i = 1; i <= 10; i++) {
             teams.add(new Team(Integer.toString(i), i));
         }
 
