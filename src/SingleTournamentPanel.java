@@ -60,29 +60,38 @@ public class SingleTournamentPanel extends TournamentPanel {
         int workingX = BORDER_SPACE; //current x from which it is drawing
         int workingY = BORDER_SPACE; //current y from which it is drawing
 
+        //Setting up the font
+        Font fontTitle = getFont("assets/Comfortaa-Light.ttf", 40f);
+        // Font font1 = new Font("Helvetica", Font.PLAIN, 15);
+        FontMetrics fontMetrics = g.getFontMetrics(fontTitle);
+        g.setFont(fontTitle);
+        g.drawString("Tournament Name", workingX, workingY);
+
+        workingY += fontMetrics.getHeight() ;
+
         colors = new RainbowColourPalette(tournament.getNumberOfTeams()-1);
         colorIndex = 0;
 
-       for (int roundNum = 1; roundNum <= tournament.getNumberOfRounds(); roundNum++){ //iterates through each round
-           numMatches = tournament.getNumberOfMatchesInRound(roundNum); //determines how many matches are in the round
+        for (int roundNum = 1; roundNum <= tournament.getNumberOfRounds(); roundNum++){ //iterates through each round
+            numMatches = tournament.getNumberOfMatchesInRound(roundNum); //determines how many matches are in the round
 
-           if (roundNum == findMostMatches()){
-               workingY = BORDER_SPACE;
-           }
+            if (roundNum == findMostMatches()){
+                workingY = BORDER_SPACE + fontMetrics.getHeight();
+            }
 
-           if (numMatches>1) { //if it is more than one, calculates the space between each matchbox
-               verticalSpace = (maxY - (workingY * 2) - (height * numMatches))/ (numMatches - 1);
-           } else {
-               verticalSpace = maxY; //if not, defaults to the full length of the screen
-               workingY = maxY/2 - height/2 ; //adjusts the workingY and workingX coordinates
+            if (numMatches>1) { //if it is more than one, calculates the space between each matchbox
+                verticalSpace = (maxY - (workingY * 2) - (height * numMatches))/ (numMatches - 1);
+            } else {
+                verticalSpace = maxY; //if not, defaults to the full length of the screen
+                workingY = maxY/2 + fontMetrics.getHeight() - height/2 ; //adjusts the workingY and workingX coordinates
 
-           }
+            }
 
-           drawRound(g, workingX, workingY, workingX+length/2, workingY+height/4, verticalSpace, roundNum, boxes); //draws the matchboxes
-           if (roundNum != tournament.getNumberOfRounds()-1) {
-               workingY = BORDER_SPACE + height / 2 + verticalSpace; //adjusts the workingY and workingX coordinates
-           }
-           workingX += length + HORIZONTAL_SPACE;
+            drawRound(g, workingX, workingY, workingX+length/2, workingY+height/4, verticalSpace, roundNum, boxes); //draws the matchboxes
+            if (roundNum != tournament.getNumberOfRounds()-1) {
+                workingY = BORDER_SPACE + height / 2 + verticalSpace; //adjusts the workingY and workingX coordinates
+            }
+            workingX += length + HORIZONTAL_SPACE;
         }
         drawLines(g, boxes);
     }
@@ -104,11 +113,11 @@ public class SingleTournamentPanel extends TournamentPanel {
 
         //Setting up the font
         Font font1 = getFont("assets/Comfortaa-Light.ttf", 15f);
-       // Font font1 = new Font("Helvetica", Font.PLAIN, 15);
+        // Font font1 = new Font("Helvetica", Font.PLAIN, 15);
         FontMetrics fontMetrics = g.getFontMetrics(font1);
         g.setFont(font1);
 
-        g.drawString("Round "+Integer.toString(roundNum), workingX + length/2 - fontMetrics.stringWidth("Round "+Integer.toString(roundNum))/2, 30);
+        // g.drawString("Round "+Integer.toString(roundNum), workingX + length/2 - fontMetrics.stringWidth("Round "+Integer.toString(roundNum))/2, workingY -15);
         for (int matchNum = 1; matchNum <= tournament.getNumberOfMatchesInRound(roundNum); matchNum++){ //iterates through each match
             teams = tournament.getTeamsInMatch(roundNum, matchNum); //stores the teams which play in that match
             g.setColor(new Color(255, 255, 255));
@@ -131,13 +140,13 @@ public class SingleTournamentPanel extends TournamentPanel {
             g.drawString("vs.", workingTextX-fontMetrics.stringWidth("vs.")/2, workingTextY+height/4+fontMetrics.getMaxAscent()/4); //drawing the "vs." between the teams; had to be outside the loop or else it would be drawn multiple times
 
             for (int teamNum = 0; teamNum < teams.length; teamNum++) {
-                    if (teams[teamNum].length == 1) { //checking if the teams playing is already determined
-                        g.drawString(teams[teamNum][0], workingTextX-fontMetrics.stringWidth(teams[teamNum][0])/2, workingTextY+fontMetrics.getMaxAscent()/4); //if so, draws the team names
-                    } else {
-                        g.drawString("unknown", workingTextX-fontMetrics.stringWidth("unknown")/2, workingTextY+fontMetrics.getMaxAscent()/4); // if not, leaves it unknown
-                        graphics2.setStroke(new BasicStroke(1));
-                        g.drawLine(currBox.getX(), currBox.getMidY(), currBox.getX()-HORIZONTAL_SPACE/2, currBox.getMidY());
-                    }
+                if (teams[teamNum].length == 1) { //checking if the teams playing is already determined
+                    g.drawString(teams[teamNum][0], workingTextX-fontMetrics.stringWidth(teams[teamNum][0])/2, workingTextY+fontMetrics.getMaxAscent()/4); //if so, draws the team names
+                } else {
+                    g.drawString("unknown", workingTextX-fontMetrics.stringWidth("unknown")/2, workingTextY+fontMetrics.getMaxAscent()/4); // if not, leaves it unknown
+                    graphics2.setStroke(new BasicStroke(1));
+                    g.drawLine(currBox.getX(), currBox.getMidY(), currBox.getX()-HORIZONTAL_SPACE/2, currBox.getMidY());
+                }
                 workingTextY += height / 2; //changing where the next text will be drawn
             }
 
