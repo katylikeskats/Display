@@ -34,12 +34,12 @@ public class Display extends JFrame{
         if (requiredHeight > Toolkit.getDefaultToolkit().getScreenSize().getHeight()) {
             this.maxY = (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().getHeight());
         } else {
-            this.maxY = findMostMatches()*(BOX_HEIGHT+VERTICAL_SPACE)+40*2;
+            this.maxY = requiredHeight;
         }
         if (requiredLength > Toolkit.getDefaultToolkit().getScreenSize().getWidth()){
             this.maxX = (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().getWidth());
         } else {
-            this.maxX = (tournament.getNumberOfRounds()*BOX_LENGTH)+((tournament.getNumberOfRounds()-1)*HORIZONTAL_SPACE)+40*2;
+            this.maxX = requiredLength;
         }
         this.setSize(maxX, maxY);
         this.setLocationRelativeTo(null); //start the frame in the center of the screen
