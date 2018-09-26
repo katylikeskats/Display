@@ -43,6 +43,7 @@ public class SingleTournamentPanel extends TournamentPanel {
         this.height = height;
         this.length = length;
         this.setSize(new Dimension(this.maxX, this.maxY));
+        this.setPreferredSize(new Dimension(this.maxX, this.maxY));
     }
 
     /**
@@ -52,7 +53,6 @@ public class SingleTournamentPanel extends TournamentPanel {
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         workingNumMatches = 0;
-        int numRounds = tournament.getNumberOfRounds();
         ArrayList<MatchBox[]> boxes = new ArrayList<>();
         int numMatches;
         int verticalSpace; //space between each matchbox of a given round (for an evenly distributed look)
@@ -132,12 +132,12 @@ public class SingleTournamentPanel extends TournamentPanel {
             g.drawString(Integer.toString(workingNumMatches+matchNum), workingX + 10, workingY + 20);
             roundBoxes[matchNum - 1] = currBox;
             graphics2.draw(currBox.getRect());
-
+            g.drawLine(currBox.getX(), currBox.getMidY(), currBox.getRightX(), currBox.getMidY());
 
 
             //drawing the team names/text
             g.setColor(new Color(86, 87, 87));
-            g.drawString("vs.", workingTextX-fontMetrics.stringWidth("vs.")/2, workingTextY+height/4+fontMetrics.getMaxAscent()/4); //drawing the "vs." between the teams; had to be outside the loop or else it would be drawn multiple times
+//            g.drawString("vs.", workingTextX-fontMetrics.stringWidth("vs.")/2, workingTextY+height/4+fontMetrics.getMaxAscent()/4); //drawing the "vs." between the teams; had to be outside the loop or else it would be drawn multiple times
 
             for (int teamNum = 0; teamNum < teams.length; teamNum++) {
                 if (teams[teamNum].length == 1) { //checking if the teams playing is already determined
