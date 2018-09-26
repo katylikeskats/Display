@@ -82,7 +82,7 @@ public class SingleTournamentPanel extends TournamentPanel {
             if (numMatches>1) { //if it is more than one, calculates the space between each matchbox
                 verticalSpace = (maxY - (workingY * 2) - (height * numMatches))/ (numMatches - 1);
             } else {
-                verticalSpace = maxY; //if not, defaults to the full length of the screen
+                verticalSpace = maxY/2; //if not, defaults to the full length of the screen
                 workingY = maxY/2 + fontMetrics.getHeight() - height/2 ; //adjusts the workingY and workingX coordinates
 
             }
