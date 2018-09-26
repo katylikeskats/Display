@@ -18,6 +18,7 @@ public class Display extends JFrame{
     private static final int BOX_LENGTH = 240;
     private static final int VERTICAL_SPACE = 30;
     private static final int HORIZONTAL_SPACE = 100;
+    private static final int BORDER_SPACE = 40;
     private int maxX;
     private int maxY;
     private JFrame frame;
@@ -29,8 +30,8 @@ public class Display extends JFrame{
         this.frame = this;
         this.tournament = tournament;
 
-        int requiredHeight = findMostMatches()*(BOX_HEIGHT+VERTICAL_SPACE)+40*2;
-        int requiredLength = (tournament.getNumberOfRounds()*BOX_LENGTH)+((tournament.getNumberOfRounds()-1)*HORIZONTAL_SPACE)+40*2;
+        int requiredHeight = findMostMatches()*(BOX_HEIGHT+VERTICAL_SPACE)+ BORDER_SPACE*2 + 40;
+        int requiredLength = (tournament.getNumberOfRounds()*BOX_LENGTH)+((tournament.getNumberOfRounds()-1)*HORIZONTAL_SPACE)+(40*2);
         if (requiredHeight > Toolkit.getDefaultToolkit().getScreenSize().getHeight()) {
             this.maxY = (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().getHeight());
         } else {

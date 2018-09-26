@@ -24,7 +24,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class SingleTournamentPanel extends TournamentPanel {
-    private static final int BORDER_SPACE = 40;
+    private static final int BORDER_SPACE = 20;
     private static final int HORIZONTAL_SPACE = 100; //space between each box horizontally
     private Bracket tournament;
     private int maxX;
@@ -55,7 +55,7 @@ public class SingleTournamentPanel extends TournamentPanel {
         workingNumMatches = 0;
         ArrayList<MatchBox[]> boxes = new ArrayList<>();
         int numMatches;
-        int verticalSpace; //space between each matchbox of a given round (for an evenly distributed look)
+        int verticalSpace = 0; //space between each matchbox of a given round (for an evenly distributed look)
 
         int workingX = BORDER_SPACE; //current x from which it is drawing
         int workingY = BORDER_SPACE; //current y from which it is drawing
@@ -65,9 +65,9 @@ public class SingleTournamentPanel extends TournamentPanel {
         // Font font1 = new Font("Helvetica", Font.PLAIN, 15);
         FontMetrics fontMetrics = g.getFontMetrics(fontTitle);
         g.setFont(fontTitle);
-        g.drawString("Tournament Name", workingX, workingY + 5);
+        g.drawString("Tournament Name", workingX, workingY + fontMetrics.getMaxAscent());
 
-        workingY += fontMetrics.getHeight() ;
+        workingY += fontMetrics.getHeight() + 10 ;
 
         colors = new RainbowColourPalette(tournament.getNumberOfTeams()-1);
         colorIndex = 0;
@@ -75,21 +75,21 @@ public class SingleTournamentPanel extends TournamentPanel {
         for (int roundNum = 1; roundNum <= tournament.getNumberOfRounds(); roundNum++){ //iterates through each round
             numMatches = tournament.getNumberOfMatchesInRound(roundNum); //determines how many matches are in the round
 
+            //If the round has the most matches, paints the round beginning at the top of the screen
             if (roundNum == findMostMatches()){
                 workingY = BORDER_SPACE + fontMetrics.getHeight();
             }
 
             if (numMatches>1) { //if it is more than one, calculates the space between each matchbox
-                verticalSpace = (maxY - (workingY * 2) - (height * numMatches))/ (numMatches - 1);
+                verticalSpace = (maxY - (workingY * 2) - (height * numMatches))/ (numMatches - 1); //finds the space that it will use and divides it between the spaces
             } else {
-                verticalSpace = maxY/2; //if not, defaults to the full length of the screen
-                workingY = maxY/2 + fontMetrics.getHeight() - height/2 ; //adjusts the workingY and workingX coordinates
+                workingY = maxY/2 - height/2;
 
             }
 
             drawRound(g, workingX, workingY, workingX+length/2, workingY+height/4, verticalSpace, roundNum, boxes); //draws the matchboxes
-            if (roundNum != tournament.getNumberOfRounds()-1) {
-                workingY = BORDER_SPACE + height / 2 + verticalSpace; //adjusts the workingY and workingX coordinates
+            if (roundNum != tournament.getNumberOfRounds()-1) { //if it is not the last round
+                workingY = BORDER_SPACE + height / 2 + verticalSpace/2; //adjusts the workingY and workingX coordinates
             }
             workingX += length + HORIZONTAL_SPACE;
         }
