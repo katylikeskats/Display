@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="aaa6a86c-e042-4d3b-8972-bf7a37528c0e" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -16,18 +19,17 @@
         <entry file="file://$PROJECT_DIR$/src/TestCase.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
-              <caret line="7" column="30" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
+              <caret line="7" column="33" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SingleTournamentPanel.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SingleTournamentPanel.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/SingleTournamentPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="264" column="76" lean-forward="true" selection-end-line="272" selection-end-column="1" />
+            <state relative-caret-position="484">
+              <caret line="261" column="13" lean-forward="true" selection-start-line="261" selection-start-column="13" selection-end-line="261" selection-end-column="13" />
               <folding>
-                <element signature="e#0#10184#0" expanded="true" />
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
@@ -62,11 +64,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DoubleTournamentPanel.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DoubleTournamentPanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DoubleTournamentPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
-              <caret line="42" column="45" lean-forward="true" selection-start-line="42" selection-start-column="45" selection-end-line="42" selection-end-column="45" />
+            <state relative-caret-position="833">
+              <caret line="49" column="14" selection-start-line="49" selection-start-column="14" selection-end-line="49" selection-end-column="14" />
               <folding>
                 <element signature="e#0#10606#0" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -105,11 +107,11 @@
         <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/MatchBox.java" />
         <option value="$PROJECT_DIR$/src/RandomText.java" />
-        <option value="$PROJECT_DIR$/src/TestCase.java" />
         <option value="$PROJECT_DIR$/src/SingleTournamentPanel.java" />
         <option value="$PROJECT_DIR$/src/TournamentPanel.java" />
         <option value="$PROJECT_DIR$/src/Display.java" />
         <option value="$PROJECT_DIR$/src/DoubleTournamentPanel.java" />
+        <option value="$PROJECT_DIR$/src/TestCase.java" />
       </list>
     </option>
   </component>
@@ -325,9 +327,9 @@
       <window_info anchor="right" id="Palette&#9;" />
       <window_info id="Image Layers" />
       <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="bottom" id="Event Log" sideWeight="0.50716144" side_tool="true" visible="true" weight="0.30085263" />
+      <window_info anchor="bottom" id="Event Log" sideWeight="0.5078125" side_tool="true" weight="0.30085263" />
       <window_info anchor="right" id="Maven Projects" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49283853" visible="true" weight="0.30085263" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4921875" visible="true" weight="0.30085263" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Terminal" />
       <window_info id="Capture Tool" />
@@ -432,7 +434,6 @@
         <state relative-caret-position="3050">
           <caret line="122" column="21" selection-start-line="122" selection-start-column="21" selection-end-line="122" selection-end-column="21" />
           <folding>
-            <element signature="e#0#10184#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
@@ -482,7 +483,6 @@
         <state relative-caret-position="2475">
           <caret line="115" column="21" lean-forward="true" selection-start-line="115" selection-start-column="21" selection-end-line="115" selection-end-column="21" />
           <folding>
-            <element signature="e#0#10184#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
@@ -532,7 +532,6 @@
         <state relative-caret-position="493">
           <caret line="45" column="32" selection-start-line="45" selection-start-column="32" selection-end-line="45" selection-end-column="32" />
           <folding>
-            <element signature="e#0#10184#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
@@ -575,7 +574,6 @@
         <state relative-caret-position="1150">
           <caret line="60" column="50" lean-forward="true" selection-start-line="60" selection-start-column="50" selection-end-line="60" selection-end-column="50" />
           <folding>
-            <element signature="e#0#10184#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
@@ -601,7 +599,6 @@
         <state relative-caret-position="1360">
           <caret line="86" column="75" selection-start-line="86" selection-start-column="75" selection-end-line="86" selection-end-column="75" />
           <folding>
-            <element signature="e#0#10184#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
@@ -627,7 +624,6 @@
         <state relative-caret-position="1224">
           <caret line="72" selection-start-line="72" selection-end-line="72" />
           <folding>
-            <element signature="e#0#10184#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
@@ -652,7 +648,6 @@
         <state relative-caret-position="1003">
           <caret line="63" column="8" lean-forward="true" selection-start-line="63" selection-start-column="8" selection-end-line="63" selection-end-column="8" />
           <folding>
-            <element signature="e#0#10184#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
@@ -750,10 +745,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TestCase.java">
+    <entry file="file://$PROJECT_DIR$/src/Display.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="30" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
+        <state relative-caret-position="1462">
+          <caret line="99" lean-forward="true" selection-start-line="99" selection-end-line="99" />
+          <folding>
+            <element signature="e#0#4933#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DoubleTournamentPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="833">
+          <caret line="49" column="14" selection-start-line="49" selection-start-column="14" selection-end-line="49" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#10606#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -770,34 +780,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Display.java">
+    <entry file="file://$PROJECT_DIR$/src/TestCase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1462">
-          <caret line="99" lean-forward="true" selection-start-line="99" selection-end-line="99" />
-          <folding>
-            <element signature="e#0#4933#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="119">
+          <caret line="7" column="33" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/SingleTournamentPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="264" column="76" lean-forward="true" selection-end-line="272" selection-end-column="1" />
+        <state relative-caret-position="484">
+          <caret line="261" column="13" lean-forward="true" selection-start-line="261" selection-start-column="13" selection-end-line="261" selection-end-column="13" />
           <folding>
-            <element signature="e#0#10184#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/DoubleTournamentPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="42" column="45" lean-forward="true" selection-start-line="42" selection-start-column="45" selection-end-line="42" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#10606#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
