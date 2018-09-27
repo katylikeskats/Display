@@ -65,7 +65,7 @@ public class SingleTournamentPanel extends TournamentPanel {
         // Font font1 = new Font("Helvetica", Font.PLAIN, 15);
         FontMetrics fontMetrics = g.getFontMetrics(fontTitle);
         g.setFont(fontTitle);
-        g.drawString("Tournament Name", workingX, workingY + fontMetrics.getHeight()/2 );
+        g.drawString("Tournament Name", workingX, workingY + fontMetrics.getHeight()/2);
 
         workingY += fontMetrics.getHeight() + 10 ;
 
