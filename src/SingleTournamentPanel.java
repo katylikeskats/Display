@@ -35,13 +35,21 @@ public class SingleTournamentPanel extends TournamentPanel {
     private int colorIndex;
     private int workingNumMatches;
 
-    public SingleTournamentPanel(Bracket tournament, int x, int y, int height, int length){
+    /**
+     * Constructor
+     * @param tournament tournament bracket to be displayed
+     * @param panelLength the length of the panel
+     * @param panelHeight the height of the panel
+     * @param boxHeight the height of the box
+     * @param boxLength the length of the box
+     */
+    public SingleTournamentPanel(Bracket tournament, int panelLength, int panelHeight, int boxHeight, int boxLength){
         super();
         this.tournament = tournament;
-        this.maxX = x;
-        this.maxY = y;
-        this.height = height;
-        this.length = length;
+        this.maxX = panelLength;
+        this.maxY = panelHeight;
+        this.height = boxHeight;
+        this.length = boxLength;
         this.setSize(new Dimension(this.maxX, this.maxY));
         this.setPreferredSize(new Dimension(this.maxX, this.maxY));
     }
@@ -104,6 +112,7 @@ public class SingleTournamentPanel extends TournamentPanel {
      * @param workingTextY The Y which is changed as the teams are drawn
      * @param verticalSpace The calculated space between each match box
      * @param roundNum The round number it is drawing
+     * @param boxes ArrayList of arrays of the boxes in each round
      */
     public void drawRound(Graphics g, int workingX, int workingY, int workingTextX, int workingTextY, int verticalSpace, int roundNum, ArrayList<MatchBox[]> boxes){
         String[][] teams; //stores teams who are playing in a certain match match
@@ -156,6 +165,10 @@ public class SingleTournamentPanel extends TournamentPanel {
         workingNumMatches += tournament.getNumberOfMatchesInRound(roundNum);
     }
 
+    /**
+     * Determines the round with the most number of matches
+     * @return returns the round number with the most number of matches
+     */
     public int findMostMatches(){
         int most = 0;
         int record = 1;
@@ -168,11 +181,22 @@ public class SingleTournamentPanel extends TournamentPanel {
         return record;
     }
 
+    /**
+     * Draws a line between two given match boxes
+     * @param box1 the left box
+     * @param box2 the right box
+     * @param g the graphics object to draw the line
+     */
     public void drawLineBetweenMatch(MatchBox box1, MatchBox box2, Graphics g){
-        g.drawLine(box1.getRightX()+HORIZONTAL_SPACE/2, box1.getMidY(), box1.getRightX()+HORIZONTAL_SPACE/2, box2.getMidY());
+        g.drawLine(box1.getRightX()+HORIZONTAL_SPACE/2, box1.getMidY(), box2.getX()-HORIZONTAL_SPACE/2, box2.getMidY());
         //g.drawLine(box1.getRightX(), box1.getMidY(), box2.getX(), box2.getMidY());
     }
 
+    /**
+     * Given the ArrayList of arrays of match boxes, determines whether the matches feed into each other and correspondingly connects the matches
+     * @param g the graphics object to draw the lines
+     * @param boxes the ArrayList or arrays of match boxes
+     */
     public void drawLines(Graphics g, ArrayList<MatchBox[]> boxes){
         int x;
         int y;
@@ -201,6 +225,12 @@ public class SingleTournamentPanel extends TournamentPanel {
         }
     }
 
+    /**
+     * Checks whether 2 boxes have corresponding teams, indicating that they feed into each other
+     * @param teams array of Strings of the teams of the first box
+     * @param teamQuery array of Strings of the teams of the second (future round) box
+     * @return true if the first box leads to the second, false if not
+     */
     public boolean contains(String[] teams, String[] teamQuery){
         for (int i = 0; i < teams.length; i++){
             for (int j = 0; j < teamQuery.length; j++) {
@@ -221,6 +251,12 @@ public class SingleTournamentPanel extends TournamentPanel {
         repaint();
     }
 
+    /**
+     * Retrieves a font and creates it
+     * @param fileName the name of the font file
+     * @param size the desired size of the font to be made
+     * @return the created Font
+     */
     public static Font getFont(String fileName, float size){
         Font font;
         try {
@@ -233,8 +269,5 @@ public class SingleTournamentPanel extends TournamentPanel {
         return font;
     }
 
-    public void refresh(){
-        repaint();
-    }
 
 }

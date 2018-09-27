@@ -15,5 +15,4 @@ abstract public class TournamentPanel extends JPanel {
 
     abstract public void setTournament(Bracket tournament);
 
-    abstract public void refresh();
 }
