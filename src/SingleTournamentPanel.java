@@ -65,7 +65,7 @@ public class SingleTournamentPanel extends TournamentPanel {
         // Font font1 = new Font("Helvetica", Font.PLAIN, 15);
         FontMetrics fontMetrics = g.getFontMetrics(fontTitle);
         g.setFont(fontTitle);
-        g.drawString("Tournament Name", workingX, workingY + fontMetrics.getMaxAscent());
+        g.drawString("Tournament Name", workingX, workingY + fontMetrics.getHeight()/2 );
 
         workingY += fontMetrics.getHeight() + 10 ;
 
@@ -84,7 +84,6 @@ public class SingleTournamentPanel extends TournamentPanel {
                 verticalSpace = (maxY - (workingY * 2) - (height * numMatches))/ (numMatches - 1); //finds the space that it will use and divides it between the spaces
             } else {
                 workingY = maxY/2 - height/2;
-
             }
 
             drawRound(g, workingX, workingY, workingX+length/2, workingY+height/4, verticalSpace, roundNum, boxes); //draws the matchboxes
