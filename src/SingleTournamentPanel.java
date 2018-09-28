@@ -144,9 +144,7 @@ public class SingleTournamentPanel extends TournamentPanel {
             //drawing the lines which judd out of each box
             g.setColor(new Color(86, 87, 87));
             graphics2.setStroke(new BasicStroke(1));
-            if (roundNum != 1) { //ensuring extra lines won't be drawn
-                g.drawLine(currBox.getX(), currBox.getMidY(), currBox.getX() - HORIZONTAL_SPACE / 2, currBox.getMidY()); // the one that comes out of the left side
-            }
+
             if (roundNum != tournament.getNumberOfRounds()){ //ensuring extra lines won't be drawn
                 g.drawLine(currBox.getRightX(), currBox.getMidY(), currBox.getRightX() + HORIZONTAL_SPACE / 2, currBox.getMidY()); //the one that comes out of the right side
             }
@@ -157,19 +155,27 @@ public class SingleTournamentPanel extends TournamentPanel {
         boxes.add(roundBoxes);
         workingNumMatches += tournament.getNumberOfMatchesInRound(roundNum);
 
+
         //drawing all the team names
         for (int i = 0; i < roundBoxes.length; i++) {
+            boolean connected = false;
             teams = tournament.getTeamsInMatch(roundNum, i+1); //stores the teams which play in that match
             MatchBox currBox = roundBoxes[i];
             if (teams[0].length == 1) { //checking if the teams playing is already determined
                 g.drawString(teams[0][0], currBox.getMidX() - fontMetrics.stringWidth(teams[0][0]) / 2, currBox.getY() + height / 4 + fontMetrics.getMaxAscent()/4); //if so, draws the team names
             } else {
                 g.drawString("unknown", currBox.getMidX() - fontMetrics.stringWidth("unknown") / 2, currBox.getY() + height / 4 + fontMetrics.getMaxAscent()/4); // if not, leaves it unknown
+                connected = true;
             }
             if (teams[1].length == 1){
                 g.drawString(teams[1][0], currBox.getMidX() - fontMetrics.stringWidth(teams[1][0]) / 2, currBox.getY() + (3*height) / 4 + fontMetrics.getMaxAscent()/4); //if so, draws the team names
             } else {
                 g.drawString("unknown", currBox.getMidX() - fontMetrics.stringWidth("unknown") / 2, currBox.getY() + (3*height) / 4 + fontMetrics.getMaxAscent()/4); // if not, leaves it unknown
+                connected = true;
+            }
+
+            if ((roundNum != 1) && (connected)) { //ensuring extra lines won't be drawn
+                g.drawLine(currBox.getX(), currBox.getMidY(), currBox.getX() - HORIZONTAL_SPACE / 2, currBox.getMidY()); // the one that comes out of the left side
             }
         }
     }

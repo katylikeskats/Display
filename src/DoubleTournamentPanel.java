@@ -137,7 +137,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
         String[][] teams; //stores teams who are playing in a certain match match
         MatchBox[] roundBoxes = new MatchBox[tournament.getNumberOfMatchesInRound(roundNum)];
         Graphics2D graphics2 = (Graphics2D) g;
-
+        int workingY = workingWinY;
         // g.drawString("Round "+Integer.toString(roundNum), workingX + length/2 - fontMetrics.stringWidth("Round "+Integer.toString(roundNum))/2, workingWinY -15);
 
         //Setting up the font
@@ -146,22 +146,22 @@ public class DoubleTournamentPanel extends TournamentPanel {
         FontMetrics fontMetrics = g.getFontMetrics(font1);
         g.setFont(font1);
 
-        if (tournament.getMatchBracket(roundNum, 1) == 1){
-            
-        }
-
         for (int matchNum = 1; matchNum <= tournament.getNumberOfMatchesInRound(roundNum); matchNum++){ //iterates through each match
+            if (tournament.getMatchBracket(roundNum, 1) == 1){
+                workingY = workingLoseY;
+            }
+
             g.setColor(new Color(255, 255, 255));
-            g.fillRoundRect(workingX, workingWinY, length, height, 20,20);
+            g.fillRoundRect(workingX, workingY, length, height, 20,20);
             g.setColor(colors.getColors().get(colorIndex));
             colorIndex++;
 
             //drawing the rectangles
-            MatchBox currBox = new MatchBox(workingX, workingWinY, length, height,  20);
+            MatchBox currBox = new MatchBox(workingX, workingY, length, height,  20);
             roundBoxes[matchNum - 1] = currBox;
 
             graphics2.setStroke(new BasicStroke(2)); //setting thickness to slightly thicker than default
-            g.drawString(Integer.toString(workingNumMatches+matchNum), workingX + 10, workingWinY + 20);
+            g.drawString(Integer.toString(workingNumMatches+matchNum), workingX + 10, workingY + 20);
             graphics2.draw(currBox.getRect());
             g.drawLine(currBox.getX(), currBox.getMidY(), currBox.getRightX(), currBox.getMidY()); //draws midline which divides team names
 
