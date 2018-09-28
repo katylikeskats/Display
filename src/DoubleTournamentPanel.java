@@ -87,12 +87,11 @@ public class DoubleTournamentPanel extends TournamentPanel {
 
         winningHeight = Math.round((2/3)*maxY);
         losingHeight = Math.round((1/3)*maxY);
-        workingLoseX = BORDER_SPACE + length + horizontalSpace;
         workingLoseY = BORDER_SPACE + winningHeight;
         //Drawing round 1
         numMatches = tournament.getNumberOfMatchesInRound(1); //determines how many matches are in the round
         verticalWinSpace = (winningHeight - (workingWinY * 2) - (height * numMatches))/ (numMatches - 1); //finds the space that it will use and divides it between the spaces
-        drawRound(g, workingX, workingWinY, verticalWinSpace, 1, boxes); //draws the matchboxes
+        drawRound(g, workingX, workingWinY, workingLoseY, verticalWinSpace, 1, boxes); //draws the matchboxes
 
         workingWinY = BORDER_SPACE + height + verticalWinSpace/2; //adjusts the workingWinY and workingX coordinates
         workingX += length + horizontalSpace;
@@ -117,7 +116,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
 
             }
 
-            drawRound(g, workingX, workingWinY, verticalWinSpace, roundNum, boxes); //draws the matchboxes
+            drawRound(g, workingX, workingWinY, workingLoseY, verticalWinSpace, roundNum, boxes); //draws the matchboxes
 
             if (roundNum != tournament.getNumberOfRounds()-1) { //if it is not the last round
                 workingWinY = BORDER_SPACE + height / 2 + verticalWinSpace/2; //adjusts the workingWinY and workingX coordinates
@@ -132,12 +131,12 @@ public class DoubleTournamentPanel extends TournamentPanel {
      * Draws one column of match boxes, teams playing in the match, and their respective lines
      * @param g Graphics to draw the bracket
      * @param workingX The X which is changed as the bracket is drawn from top to bottom of the screen
-     * @param workingY The Y which is changed as the bracket is drawn from top to bottom of the screen
+     * @param workingWinY The Y which is changed as the bracket is drawn from top to bottom of the screen
      * @param verticalSpace The calculated space between each match box
      * @param roundNum The round number it is drawing
      * @param boxes ArrayList of arrays of the boxes in each round
      */
-    public void drawRound(Graphics g, int workingX, int workingY, int verticalSpace, int roundNum, ArrayList<MatchBox[]> boxes){
+    public void drawRound(Graphics g, int workingX, int workingWinY, int workingLoseY, int verticalSpace, int roundNum, ArrayList<MatchBox[]> boxes){
         String[][] teams; //stores teams who are playing in a certain match match
         MatchBox[] roundBoxes = new MatchBox[tournament.getNumberOfMatchesInRound(roundNum)];
         Graphics2D graphics2 = (Graphics2D) g;
@@ -148,43 +147,51 @@ public class DoubleTournamentPanel extends TournamentPanel {
         FontMetrics fontMetrics = g.getFontMetrics(font1);
         g.setFont(font1);
 
-        // g.drawString("Round "+Integer.toString(roundNum), workingX + length/2 - fontMetrics.stringWidth("Round "+Integer.toString(roundNum))/2, workingY -15);
+        // g.drawString("Round "+Integer.toString(roundNum), workingX + length/2 - fontMetrics.stringWidth("Round "+Integer.toString(roundNum))/2, workingWinY -15);
         for (int matchNum = 1; matchNum <= tournament.getNumberOfMatchesInRound(roundNum); matchNum++){ //iterates through each match
-            teams = tournament.getTeamsInMatch(roundNum, matchNum); //stores the teams which play in that match
             g.setColor(new Color(255, 255, 255));
-            g.fillRoundRect(workingX, workingY, length, height, 20,20);
+            g.fillRoundRect(workingX, workingWinY, length, height, 20,20);
             g.setColor(colors.getColors().get(colorIndex));
             colorIndex++;
 
-
             //drawing the rectangles
-            graphics2.setStroke(new BasicStroke(2)); //setting thickness to slightly thicker than default
-            MatchBox currBox = new MatchBox(workingX, workingY, length, height,  20);
-            g.drawString(Integer.toString(workingNumMatches+matchNum), workingX + 10, workingY + 20);
+            MatchBox currBox = new MatchBox(workingX, workingWinY, length, height,  20);
             roundBoxes[matchNum - 1] = currBox;
+
+            graphics2.setStroke(new BasicStroke(2)); //setting thickness to slightly thicker than default
+            g.drawString(Integer.toString(workingNumMatches+matchNum), workingX + 10, workingWinY + 20);
             graphics2.draw(currBox.getRect());
-            g.drawLine(currBox.getX(), currBox.getMidY(), currBox.getRightX(), currBox.getMidY());
+            g.drawLine(currBox.getX(), currBox.getMidY(), currBox.getRightX(), currBox.getMidY()); //draws midline which divides team names
 
 
-            //drawing the team names/text
+            //drawing the lines
             g.setColor(new Color(86, 87, 87));
-//            g.drawString("vs.", workingTextX-fontMetrics.stringWidth("vs.")/2, workingWinTextY+height/4+fontMetrics.getMaxAscent()/4); //drawing the "vs." between the teams; had to be outside the loop or else it would be drawn multiple times
+            graphics2.setStroke(new BasicStroke(1));
+            if (roundNum != 1) {
+                g.drawLine(currBox.getX(), currBox.getMidY(), currBox.getX() - horizontalSpace / 2, currBox.getMidY());
+            }
+            if (roundNum != tournament.getNumberOfRounds()){
+                g.drawLine(currBox.getRightX(), currBox.getMidY(), currBox.getRightX() + horizontalSpace / 2, currBox.getMidY());
+            }
 
-            workingY += height + verticalSpace; //adjusting the workingY height
+            workingWinY += height + verticalSpace; //adjusting the workingWinY height
+
         }
         boxes.add(roundBoxes);
         workingNumMatches += tournament.getNumberOfMatchesInRound(roundNum);
+
         for (int i = 0; i < roundBoxes.length; i++) {
-            teams = tournament.getTeamsInMatch(roundNum, i); //stores the teams which play in that match
+            teams = tournament.getTeamsInMatch(roundNum, i+1); //stores the teams which play in that match
             MatchBox currBox = roundBoxes[i];
-            for (int teamNum = 0; teamNum < teams.length; teamNum++) {
-                if (teams[teamNum].length == 1) { //checking if the teams playing is already determined
-                    g.drawString(teams[teamNum][0], (currBox.getRightX() - currBox.getX()) / 2 - fontMetrics.stringWidth(teams[teamNum][0]) / 2, currBox.getY() + height / 4 - fontMetrics.getMaxAscent() / 4); //if so, draws the team names
-                } else {
-                    g.drawString("unknown", (currBox.getRightX() - currBox.getX()) / 2 - fontMetrics.stringWidth("unknown") / 2, currBox.getY() + height / 4 - fontMetrics.getMaxAscent() / 4); // if not, leaves it unknown
-                    graphics2.setStroke(new BasicStroke(1));
-                    g.drawLine(currBox.getX(), currBox.getMidY(), currBox.getX() - horizontalSpace / 2, currBox.getMidY());
-                }
+            if (teams[0].length == 1) { //checking if the teams playing is already determined
+                g.drawString(teams[0][0], currBox.getMidX() - fontMetrics.stringWidth(teams[0][0]) / 2, currBox.getY() + height / 4 + fontMetrics.getMaxAscent()/4); //if so, draws the team names
+            } else {
+                g.drawString("unknown", currBox.getMidX() - fontMetrics.stringWidth("unknown") / 2, currBox.getY() + height / 4 + fontMetrics.getMaxAscent()/4); // if not, leaves it unknown
+            }
+            if (teams[1].length == 1){
+                g.drawString(teams[1][0], currBox.getMidX() - fontMetrics.stringWidth(teams[1][0]) / 2, currBox.getY() + (3*height) / 4 + fontMetrics.getMaxAscent()/4); //if so, draws the team names
+            } else {
+                g.drawString("unknown", currBox.getMidX() - fontMetrics.stringWidth("unknown") / 2, currBox.getY() + (3*height) / 4 + fontMetrics.getMaxAscent()/4); // if not, leaves it unknown
             }
         }
     }
