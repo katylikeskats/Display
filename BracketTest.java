@@ -21,10 +21,10 @@ class BracketTest {
 		
 		System.out.println("Round 1, match 1: " + bracket.getTeamsInMatch(2, 1)[0][0] + " " + bracket.getTeamsInMatch(2, 1)[1][0]);
 		
-		System.out.println(bracket.getNumberOfMatchesInRounds(1));
+		/*System.out.println(bracket.getNumberOfMatchesInRounds(1));
 		System.out.println(bracket.getNumberOfMatchesInRounds(2));
 		System.out.println(bracket.getNumberOfMatchesInRounds(3));
-		System.out.println(bracket.getNumberOfMatchesInRounds(4));
+		System.out.println(bracket.getNumberOfMatchesInRounds(4));*/
 	}
 
 }

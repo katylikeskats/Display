@@ -96,7 +96,7 @@ public class SingleTournamentPanel extends TournamentPanel {
 
             drawRound(g, workingX, workingY, workingX+length/2, workingY+height/4, verticalSpace, roundNum, boxes); //draws the matchboxes
             if (roundNum != tournament.getNumberOfRounds()-1) { //if it is not the last round
-                workingY = BORDER_SPACE + height / 2 + verticalSpace/2; //adjusts the workingY and workingX coordinates
+                workingY = BORDER_SPACE + height + verticalSpace/2; //adjusts the workingY and workingX coordinates
             }
             workingX += length + HORIZONTAL_SPACE;
         }

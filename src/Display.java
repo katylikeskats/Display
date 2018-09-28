@@ -34,8 +34,16 @@ public class Display extends JFrame{
         this.frame = this;
         this.tournament = tournament;
 
-        int requiredHeight = findNumMostMatches()*(BOX_HEIGHT+VERTICAL_SPACE)+ BORDER_SPACE*2 + 50;
-        int requiredLength = (tournament.getNumberOfRounds()*BOX_LENGTH)+((tournament.getNumberOfRounds()-1)*HORIZONTAL_SPACE)+(40*2);
+        int requiredHeight;
+        int requiredLength;
+
+        if (tournament.getClass().getSimpleName().equals("SingleBracket")) {
+            requiredHeight = findNumMostMatches() * (BOX_HEIGHT + VERTICAL_SPACE) + BORDER_SPACE * 2 + 50;
+            requiredLength = (tournament.getNumberOfRounds() * BOX_LENGTH) + ((tournament.getNumberOfRounds() - 1) * HORIZONTAL_SPACE) + (40 * 2);
+        } else {
+            requiredHeight = findNumMostMatches() * (BOX_HEIGHT + VERTICAL_SPACE) + BORDER_SPACE * 2 + 50;
+            requiredLength = (tournament.getNumberOfRounds() * BOX_LENGTH) + ((tournament.getNumberOfRounds() - 1) * HORIZONTAL_SPACE*2 + BOX_LENGTH) + (40 * 2);
+        }
         if (requiredHeight > Toolkit.getDefaultToolkit().getScreenSize().getHeight()) {
             this.maxY = (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().getHeight());
         } else {
@@ -46,6 +54,7 @@ public class Display extends JFrame{
         } else {
             this.maxX = requiredLength;
         }
+
         this.setSize(maxX, maxY);
         this.setLocationRelativeTo(null); //start the frame in the center of the screen
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
