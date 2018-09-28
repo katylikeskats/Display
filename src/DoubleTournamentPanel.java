@@ -65,61 +65,66 @@ public class DoubleTournamentPanel extends TournamentPanel {
         workingNumMatches = 0;
         ArrayList<MatchBox[]> boxes = new ArrayList<>();
         int numMatches;
-        int verticalSpace; //space between each matchbox of a given round (for an evenly distributed look)
+        int verticalWinSpace; //space between each matchbox of a given round (for an evenly distributed look)
+        int verticalLoseSpace;
 
-        int workingX = BORDER_SPACE; //current x from which it is drawing
-        int workingY = BORDER_SPACE; //current y from which it is drawing
+        int workingWinX = BORDER_SPACE; //current x from which it is drawing
+        int workingWinY = BORDER_SPACE; //current y from which it is drawing
+        int workingLoseX;
+        int workingLoseY;
 
         //Setting up the font
         Font fontTitle = getFont("assets/Comfortaa-Light.ttf", 40f);
         // Font font1 = new Font("Helvetica", Font.PLAIN, 15);
         FontMetrics fontMetrics = g.getFontMetrics(fontTitle);
         g.setFont(fontTitle);
-        g.drawString("Tournament Name", workingX, workingY + fontMetrics.getHeight()/2);
+        g.drawString("Tournament Name", workingWinX, workingWinY + fontMetrics.getHeight()/2);
 
-        workingY += fontMetrics.getHeight() + 10 ;
+        workingWinY += fontMetrics.getHeight() + 10 ;
 
         colors = new RainbowColourPalette(tournament.getNumberOfTeams()-1);
         colorIndex = 0;
 
-        //Drawing round 1
-
-        numMatches = tournament.getNumberOfMatchesInRound(1); //determines how many matches are in the round
-        verticalSpace = (maxY - (workingY * 2) - (height * numMatches))/ (numMatches - 1); //finds the space that it will use and divides it between the spaces
-        drawRound(g, workingX, workingY, workingX+length/2, workingY+height/4, verticalSpace, 1, boxes); //draws the matchboxes
-
-        workingY = BORDER_SPACE + height / 2 + verticalSpace/2; //adjusts the workingY and workingX coordinates
-        workingX += length + horizontalSpace;
-
-        //winning bracket
         winningHeight = Math.round((2/3)*maxY);
         losingHeight = Math.round((1/3)*maxY);
+        workingLoseX = BORDER_SPACE + length + horizontalSpace;
+        workingLoseY = BORDER_SPACE + winningHeight;
+        //Drawing round 1
+        numMatches = tournament.getNumberOfMatchesInRound(1); //determines how many matches are in the round
+        verticalWinSpace = (winningHeight - (workingWinY * 2) - (height * numMatches))/ (numMatches - 1); //finds the space that it will use and divides it between the spaces
+        drawRound(g, workingWinX, workingWinY, workingWinX+length/2, workingWinY+height/4, verticalWinSpace, 1, boxes); //draws the matchboxes
+
+        workingWinY = BORDER_SPACE + height + verticalWinSpace/2; //adjusts the workingWinY and workingWinX coordinates
+        workingWinX += length + horizontalSpace;
+
         for (int roundNum = 2; roundNum <= tournament.getNumberOfRounds(); roundNum++){ //iterates through each round
             numMatches = tournament.getNumberOfMatchesInRound(roundNum); //determines how many matches are in the round
 
             //If the round has the most matches, paints the round beginning at the top of the screen
-            if (roundNum == findMostMatches()){
-                workingY = BORDER_SPACE + fontMetrics.getHeight();
-            }
-
-            if (numMatches>1) { //if it is more than one, calculates the space between each matchbox
-                verticalSpace = (winningHeight - (workingY * 2) - (height * numMatches))/ (numMatches - 1); //finds the space that it will use and divides it between the spaces
-            } else {
-                workingY = winningHeight/2 - height/2;
-            }
+            /*if (roundNum == findMostMatches()){
+                workingWinY = BORDER_SPACE + fontMetrics.getHeight();
+            }*/
 
             if (roundNum%2 == 0){
-                horizontalSpace = 200+length;
-                drawRound(g, workingX, workingY, workingX+length/2, workingY+height/4, verticalSpace, roundNum, boxes); //draws the matchboxes
+                verticalWinSpace = (winningHeight - (workingWinY * 2) - (height * numMatches))/ (numMatches - 1);
             } else {
-                horizontalSpace = 100;
-                drawRound(g, workingX, workingY, workingX+length/2, workingY+height/4, verticalSpace, roundNum, boxes); //draws the matchboxes
+                verticalWinSpace = ;
+                verticalLoseSpace
             }
 
-            if (roundNum != tournament.getNumberOfRounds()-1) { //if it is not the last round
-                workingY = BORDER_SPACE + height / 2 + verticalSpace/2; //adjusts the workingY and workingX coordinates
+
+            if (numMatches>1) { //if it is more than one, calculates the space between each matchbox
+                verticalWinSpace = (winningHeight - (workingWinY * 2) - (height * numMatches))/ (numMatches - 1); //finds the space that it will use and divides it between the spaces
+            } else {
+                workingWinY = winningHeight/2 - height/2;
             }
-            workingX += length + horizontalSpace;
+
+            drawRound(g, workingWinX, workingWinY, workingWinX+length/2, workingWinY+height/4, verticalWinSpace, roundNum, boxes); //draws the matchboxes
+
+            if (roundNum != tournament.getNumberOfRounds()-1) { //if it is not the last round
+                workingWinY = BORDER_SPACE + height / 2 + verticalWinSpace/2; //adjusts the workingWinY and workingWinX coordinates
+            }
+            workingWinX += length + horizontalSpace;
         }
         drawLines(g, boxes);
     }
