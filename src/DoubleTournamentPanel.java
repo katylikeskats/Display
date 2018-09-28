@@ -70,7 +70,6 @@ public class DoubleTournamentPanel extends TournamentPanel {
 
         int workingX = BORDER_SPACE; //current x from which it is drawing
         int workingWinY = BORDER_SPACE; //current y from which it is drawing
-        int workingLoseX;
         int workingLoseY;
 
         //Setting up the font
@@ -80,13 +79,12 @@ public class DoubleTournamentPanel extends TournamentPanel {
         g.setFont(fontTitle);
         g.drawString("Tournament Name", workingX, workingWinY + fontMetrics.getHeight()/2);
 
-        workingWinY += fontMetrics.getHeight() + 10 ;
-
         colors = new RainbowColourPalette(tournament.getNumberOfTeams()-1);
         colorIndex = 0;
 
         winningHeight = Math.round((2/3)*maxY);
         losingHeight = Math.round((1/3)*maxY);
+        workingWinY += fontMetrics.getHeight() + 10 ;
         workingLoseY = BORDER_SPACE + winningHeight;
         //Drawing round 1
         numMatches = tournament.getNumberOfMatchesInRound(1); //determines how many matches are in the round
@@ -140,16 +138,18 @@ public class DoubleTournamentPanel extends TournamentPanel {
         MatchBox[] roundBoxes = new MatchBox[tournament.getNumberOfMatchesInRound(roundNum)];
         Graphics2D graphics2 = (Graphics2D) g;
 
+        // g.drawString("Round "+Integer.toString(roundNum), workingX + length/2 - fontMetrics.stringWidth("Round "+Integer.toString(roundNum))/2, workingWinY -15);
+
         //Setting up the font
         Font font1 = getFont("assets/Comfortaa-Light.ttf", 15f);
         // Font font1 = new Font("Helvetica", Font.PLAIN, 15);
         FontMetrics fontMetrics = g.getFontMetrics(font1);
         g.setFont(font1);
 
-        //if (tournament.getMatchBracket(roundNum, 1) == 1){
-            //code here for the loser stuff
-        //}
-        // g.drawString("Round "+Integer.toString(roundNum), workingX + length/2 - fontMetrics.stringWidth("Round "+Integer.toString(roundNum))/2, workingWinY -15);
+        if (tournament.getMatchBracket(roundNum, 1) == 1){
+            
+        }
+
         for (int matchNum = 1; matchNum <= tournament.getNumberOfMatchesInRound(roundNum); matchNum++){ //iterates through each match
             g.setColor(new Color(255, 255, 255));
             g.fillRoundRect(workingX, workingWinY, length, height, 20,20);
