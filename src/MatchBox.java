@@ -23,6 +23,14 @@ public class MatchBox {
         return x+length;
     }
 
+    public int getY(){
+        return y;
+    }
+
+    public int getMidX(){
+        return x+length/2;
+    }
+
     public int getX(){
         return x;
     }

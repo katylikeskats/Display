@@ -96,7 +96,7 @@ public class SingleTournamentPanel extends TournamentPanel {
 
             drawRound(g, workingX, workingY, workingX+length/2, workingY+height/4, verticalSpace, roundNum, boxes); //draws the matchboxes
             if (roundNum != tournament.getNumberOfRounds()-1) { //if it is not the last round
-                workingY = BORDER_SPACE + height + verticalSpace/2; //adjusts the workingY and workingX coordinates
+                workingY = BORDER_SPACE + height / 2 + verticalSpace/2; //adjusts the workingY and workingX coordinates
             }
             workingX += length + HORIZONTAL_SPACE;
         }
@@ -146,7 +146,7 @@ public class SingleTournamentPanel extends TournamentPanel {
             //drawing the team names/text
             g.setColor(new Color(86, 87, 87));
 //            g.drawString("vs.", workingTextX-fontMetrics.stringWidth("vs.")/2, workingTextY+height/4+fontMetrics.getMaxAscent()/4); //drawing the "vs." between the teams; had to be outside the loop or else it would be drawn multiple times
-
+/*
             for (int teamNum = 0; teamNum < teams.length; teamNum++) {
                 if (teams[teamNum].length == 1) { //checking if the teams playing is already determined
                     g.drawString(teams[teamNum][0], workingTextX-fontMetrics.stringWidth(teams[teamNum][0])/2, workingTextY+fontMetrics.getMaxAscent()/4); //if so, draws the team names
@@ -157,12 +157,29 @@ public class SingleTournamentPanel extends TournamentPanel {
                 }
                 workingTextY += height / 2; //changing where the next text will be drawn
             }
-
+*/
             workingY += height + verticalSpace; //adjusting the workingY height
             workingTextY = workingY +height/4; //adjusting the workingTextY height
         }
         boxes.add(roundBoxes);
         workingNumMatches += tournament.getNumberOfMatchesInRound(roundNum);
+
+        for (int i = 0; i < roundBoxes.length; i++) {
+            teams = tournament.getTeamsInMatch(roundNum, i+1); //stores the teams which play in that match
+            MatchBox currBox = roundBoxes[i];
+            //for (int teamNum = 0; teamNum < teams.length; teamNum++) {
+                if (teams[0].length == 1) { //checking if the teams playing is already determined
+                    g.drawString(teams[0][0], currBox.getMidX() - fontMetrics.stringWidth(teams[0][0]) / 2, currBox.getY() + height / 4 - fontMetrics.getHeight()/2); //if so, draws the team names
+                } else {
+                    g.drawString("unknown", currBox.getMidX() - fontMetrics.stringWidth("unknown") / 2, currBox.getY() + height / 4 - fontMetrics.getMaxAscent() / 4); // if not, leaves it unknown
+                }
+                if (teams[1].length == 1){
+                    g.drawString(teams[1][0], currBox.getMidX() - fontMetrics.stringWidth(teams[1][0]) / 2, currBox.getY() + (3*height) / 4 - fontMetrics.getMaxAscent() / 4); //if so, draws the team names
+                } else {
+                    g.drawString("unknown", currBox.getMidX() - fontMetrics.stringWidth("unknown") / 2, currBox.getY() + (3*height) / 4 - fontMetrics.getMaxAscent() / 4); // if not, leaves it unknown
+                }
+            //}
+        }
     }
 
     /**
