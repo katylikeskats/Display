@@ -104,16 +104,15 @@ public class DoubleTournamentPanel extends TournamentPanel {
                 workingWinY = BORDER_SPACE + fontMetrics.getHeight();
             }*/
 
-            if (roundNum%2 == 0){
+            if (roundNum%2 == 1){ //even rounds indicate when only loser brackets are displayed
                 if (numMatches > 1) {
-                    verticalWinSpace = (winningHeight - (workingWinY * 2) - (height * numMatches)) / (numMatches - 1);
+                    verticalLoseSpace = (losingHeight - (workingWinY * 2) - (height * numMatches)) / (numMatches - 1);
                 } else {
-                    workingWinY = winningHeight/2 - height/2;
+                    workingLoseY = losingHeight/2 - height/2;
                 }
-            } else {
+            } else { //if even rounds then will have both a winner and loser bracket
                 verticalWinSpace = (winningHeight - (workingWinY * 2) - (height * numMatches)) / (numMatches - 1);
                 verticalLoseSpace = (losingHeight - (workingLoseY * 2) - (height * numMatches)) / (numMatches - 1);
-
             }
 
             drawRound(g, workingX, workingWinY, workingLoseY, verticalWinSpace, roundNum, boxes); //draws the matchboxes
@@ -154,6 +153,8 @@ public class DoubleTournamentPanel extends TournamentPanel {
             g.setColor(colors.getColors().get(colorIndex));
             colorIndex++;
 
+
+            
             //drawing the rectangles
             MatchBox currBox = new MatchBox(workingX, workingWinY, length, height,  20);
             roundBoxes[matchNum - 1] = currBox;

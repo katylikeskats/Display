@@ -119,7 +119,6 @@ public class SingleTournamentPanel extends TournamentPanel {
 
         //Setting up the font
         Font font1 = getFont("assets/Comfortaa-Light.ttf", 15f);
-        // Font font1 = new Font("Helvetica", Font.PLAIN, 15);
         FontMetrics fontMetrics = g.getFontMetrics(font1);
         g.setFont(font1);
 
@@ -134,20 +133,22 @@ public class SingleTournamentPanel extends TournamentPanel {
             MatchBox currBox = new MatchBox(workingX, workingY, length, height,  20);
             roundBoxes[matchNum - 1] = currBox;
 
-            graphics2.setStroke(new BasicStroke(2)); //setting thickness to slightly thicker than default
+            //draws match number
             g.drawString(Integer.toString(workingNumMatches+matchNum), workingX + 10, workingY + 20);
+
+            //makes stroke thicker and then draws matchbox
+            graphics2.setStroke(new BasicStroke(2)); //setting thickness to slightly thicker than default
             graphics2.draw(currBox.getRect());
             g.drawLine(currBox.getX(), currBox.getMidY(), currBox.getRightX(), currBox.getMidY()); //draws midline which divides team names
 
-
-            //drawing the lines
+            //drawing the lines which judd out of each box
             g.setColor(new Color(86, 87, 87));
             graphics2.setStroke(new BasicStroke(1));
-            if (roundNum != 1) {
-                g.drawLine(currBox.getX(), currBox.getMidY(), currBox.getX() - HORIZONTAL_SPACE / 2, currBox.getMidY());
+            if (roundNum != 1) { //ensuring extra lines won't be drawn
+                g.drawLine(currBox.getX(), currBox.getMidY(), currBox.getX() - HORIZONTAL_SPACE / 2, currBox.getMidY()); // the one that comes out of the left side
             }
-            if (roundNum != tournament.getNumberOfRounds()){
-                g.drawLine(currBox.getRightX(), currBox.getMidY(), currBox.getRightX() + HORIZONTAL_SPACE / 2, currBox.getMidY());
+            if (roundNum != tournament.getNumberOfRounds()){ //ensuring extra lines won't be drawn
+                g.drawLine(currBox.getRightX(), currBox.getMidY(), currBox.getRightX() + HORIZONTAL_SPACE / 2, currBox.getMidY()); //the one that comes out of the right side
             }
 
             workingY += height + verticalSpace; //adjusting the workingY height
@@ -156,6 +157,7 @@ public class SingleTournamentPanel extends TournamentPanel {
         boxes.add(roundBoxes);
         workingNumMatches += tournament.getNumberOfMatchesInRound(roundNum);
 
+        //drawing all the team names
         for (int i = 0; i < roundBoxes.length; i++) {
             teams = tournament.getTeamsInMatch(roundNum, i+1); //stores the teams which play in that match
             MatchBox currBox = roundBoxes[i];
