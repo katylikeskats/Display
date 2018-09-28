@@ -108,8 +108,8 @@ public class DoubleTournamentPanel extends TournamentPanel {
             if (roundNum%2 == 0){
                 verticalWinSpace = (winningHeight - (workingWinY * 2) - (height * numMatches))/ (numMatches - 1);
             } else {
-                verticalWinSpace = ;
-                verticalLoseSpace
+                verticalWinSpace = (winningHeight - (workingWinY * 2) - (height * numMatches))/ (numMatches - 1);
+                verticalLoseSpace = (losingHeight - (workingLoseY * 2) - (height * numMatches))/ (numMatches - 1);
             }
 
 
