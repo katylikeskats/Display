@@ -146,6 +146,9 @@ public class DoubleTournamentPanel extends TournamentPanel {
         FontMetrics fontMetrics = g.getFontMetrics(font1);
         g.setFont(font1);
 
+        //if (tournament.getMatchBracket(roundNum, 1) == 1){
+            //code here for the loser stuff
+        //}
         // g.drawString("Round "+Integer.toString(roundNum), workingX + length/2 - fontMetrics.stringWidth("Round "+Integer.toString(roundNum))/2, workingWinY -15);
         for (int matchNum = 1; matchNum <= tournament.getNumberOfMatchesInRound(roundNum); matchNum++){ //iterates through each match
             g.setColor(new Color(255, 255, 255));
@@ -153,8 +156,6 @@ public class DoubleTournamentPanel extends TournamentPanel {
             g.setColor(colors.getColors().get(colorIndex));
             colorIndex++;
 
-
-            
             //drawing the rectangles
             MatchBox currBox = new MatchBox(workingX, workingWinY, length, height,  20);
             roundBoxes[matchNum - 1] = currBox;
