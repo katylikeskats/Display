@@ -1,3 +1,10 @@
+/**
+ * [MatchBox.java]
+ * The box object of each match displayed on the screen
+ * @author Katelyn Wang
+ * September 18 2018
+ */
+
 import java.awt.geom.RoundRectangle2D;
 
 public class MatchBox {
