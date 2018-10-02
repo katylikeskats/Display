@@ -40,9 +40,11 @@ public class Display extends JFrame{
         if (tournament.getClass().getSimpleName().equals("SingleBracket")) {
             requiredHeight = findNumMostMatches() * (BOX_HEIGHT + VERTICAL_SPACE) + BORDER_SPACE * 2 + 50;
             requiredLength = (tournament.getNumberOfRounds() * BOX_LENGTH) + ((tournament.getNumberOfRounds() - 1) * HORIZONTAL_SPACE) + (40 * 2);
+            tournamentPanel = new SingleTournamentPanel(tournament, requiredLength, requiredHeight, BOX_HEIGHT, BOX_LENGTH);
         } else {
-            requiredHeight = findNumMostMatches() * (BOX_HEIGHT + VERTICAL_SPACE) + BORDER_SPACE * 2 + 50;
-            requiredLength = (tournament.getNumberOfRounds() * BOX_LENGTH) + ((tournament.getNumberOfRounds() - 1) * HORIZONTAL_SPACE*2 + BOX_LENGTH) + (40 * 2);
+            requiredHeight = (tournament.getNumberOfTeams()/2+tournament.getNumberOfTeams()/4) * (BOX_HEIGHT + VERTICAL_SPACE) + BORDER_SPACE * 2 + 50;
+            requiredLength = (tournament.getNumberOfRounds() * BOX_LENGTH) + ((tournament.getNumberOfRounds() - 1) * HORIZONTAL_SPACE) + (40 * 2);
+            tournamentPanel = new DoubleTournamentPanel(tournament, requiredLength, requiredHeight, BOX_HEIGHT, BOX_LENGTH);
         }
         if (requiredHeight > Toolkit.getDefaultToolkit().getScreenSize().getHeight()) {
             this.maxY = (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().getHeight());
@@ -60,8 +62,6 @@ public class Display extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setUndecorated(true);
-
-        tournamentPanel = new SingleTournamentPanel(tournament, requiredLength, requiredHeight, BOX_HEIGHT, BOX_LENGTH);
 
         JScrollPane sp = new JScrollPane(tournamentPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED); //initializing scrollpane
         sp.setViewportView(tournamentPanel);
