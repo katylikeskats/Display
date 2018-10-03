@@ -247,7 +247,6 @@ public class DoubleTournamentPanel extends TournamentPanel {
      */
     public void drawLineBetweenMatch(MatchBox box1, MatchBox box2, Graphics g){
         g.drawLine(box1.getRightX() + horizontalSpace / 2, box1.getMidY(), box2.getX() - horizontalSpace / 2, box2.getMidY());
-        //g.drawLine(box1.getRightX(), box1.getMidY(), box2.getX(), box2.getMidY());
     }
 
     /**
@@ -259,19 +258,19 @@ public class DoubleTournamentPanel extends TournamentPanel {
         g.setColor(new Color(86, 87, 87));
         for (int i = 0; i < boxes.size()-2; i++){
             for (int j = 0; j < boxes.get(i).length; j++) {
-                String[][] currTeams = tournament.getTeamsInMatch(i+1,j+1);
-                String[][] nextTeams;
-                int change = 2;
-                if ((tournament.getMatchBracket(i+1, j+1) == 0) && (i+1<tournament.getNumberOfRounds()-2)){
+                String[][] currTeams = tournament.getTeamsInMatch(i+1,j+1); //the teams from the current matchbox
+                String[][] nextTeams; //arbitrary string array for the teams in a match from the next round
+                int change = 2; //the value of how many rounds later it will be checking; if 2, will be checking the immediate next round (for loser bracket matches), if 3, will skip a round and check the second next round (for the winner bracket matches)
+                if ((tournament.getMatchBracket(i+1, j+1) == 0) && (i+1<tournament.getNumberOfRounds()-2)){ //checking if the match is part of the winner bracket and if it is before the double finals matches
                     change = 3;
                 }
-                for (int set = 0; set < 2; set++) {
+                for (int set = 0; set < 2; set++) { //iterates twice through, since there are two arrays to be checked in the current matchbox
                     for (int matchNum = 1; matchNum <= boxes.get(i + change-1).length; matchNum++) {
                         nextTeams = tournament.getTeamsInMatch(i + change, matchNum); //stores the teams which play in that match
-                        for (int teamNum = 0; teamNum < 2; teamNum++) {
+                        for (int teamNum = 0; teamNum < 2; teamNum++) {  //iterates twice through, since there are two arrays to be checked in the next matchbox
                             if (nextTeams[teamNum].length > 1) { //checking if the teams playing is already determined
-                                if (contains(nextTeams[teamNum], currTeams[set])) {
-                                    if (tournament.getMatchBracket(boxes.get(i)[j].getRound(), boxes.get(i)[j].getRoundIndex()) == tournament.getMatchBracket(boxes.get(i+change-1)[matchNum-1].getRound(), boxes.get(i+change-1)[matchNum-1].getRoundIndex())) {
+                                if (contains(nextTeams[teamNum], currTeams[set])) { //checking if they feed into each other
+                                    if (tournament.getMatchBracket(boxes.get(i)[j].getRound(), boxes.get(i)[j].getRoundIndex()) == tournament.getMatchBracket(boxes.get(i+change-1)[matchNum-1].getRound(), boxes.get(i+change-1)[matchNum-1].getRoundIndex())) { //checking that the two matches are from the same bracket
                                         drawLineBetweenMatch(boxes.get(i)[j], boxes.get(i + change - 1)[matchNum - 1], g);
                                     }
                                 }
@@ -282,29 +281,29 @@ public class DoubleTournamentPanel extends TournamentPanel {
             }
         }
 
-        drawLineBetweenMatch(boxes.get(tournament.getNumberOfRounds()-3)[1], boxes.get(tournament.getNumberOfRounds()-2)[0], g);
+        drawLineBetweenMatch(boxes.get(tournament.getNumberOfRounds()-3)[1], boxes.get(tournament.getNumberOfRounds()-2)[0], g); //connects the last loser bracket match to the winner bracket (since winner of loser bracket plays the winner of the winner bracket)
     }
 
     /**
-     *
-     * @param boxes
-     * @param box
-     * @param teams
-     * @return
+     * Finds the index of the previous match which the indicated matchbox feeds from
+     * @param boxes the array of matchboxes
+     * @param box the indicated matchbox
+     * @param teams the teams from the matchbox
+     * @return index of the previous match which feeds into indicated matchbox
      */
     public int findPreviousMatch (ArrayList<MatchBox[]> boxes, MatchBox box, String[] teams){
-        String team1;
+        String team1; //previous match should have certain players already
         String team2;
         for (int i = 1; i <= tournament.getNumberOfMatchesInRound(box.getRound()-1); i++){
             if (tournament.getTeamsInMatch(box.getRound()-1, i)[0].length == 1){
-                team1 = tournament.getTeamsInMatch(box.getRound()-1, i)[0][0];
+                team1 = tournament.getTeamsInMatch(box.getRound()-1, i)[0][0]; //storing the previous match's teams
                 team2 = tournament.getTeamsInMatch(box.getRound()-1, i)[1][0];
-                if ((teams[0].equals(team1) && teams[1].equals(team2)) || ((teams[0].equals(team2) && teams[1].equals(team1)))){
+                if ((teams[0].equals(team1) && teams[1].equals(team2)) || ((teams[0].equals(team2) && teams[1].equals(team1)))){ //determining if the teams match
                     return boxes.get(box.getRound()-2)[i-1].getIndex();
                 }
             }
         }
-        return -1;
+        return -1; //if cannot find the index, will return -1
     }
 
     /**

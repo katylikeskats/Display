@@ -5,6 +5,7 @@
  * September 18 2018
  */
 
+//geometric imports
 import java.awt.geom.RoundRectangle2D;
 
 public class MatchBox {
@@ -17,6 +18,14 @@ public class MatchBox {
     private int roundIndex;
     private int round;
 
+    /**
+     * Constructor - Single Tournament Panel
+     * @param x the top left x value
+     * @param y the top left y value
+     * @param length the length of the box
+     * @param height the height of the box
+     * @param arch the arch of the box (for the rounded corners)
+     */
     public MatchBox(int x, int y, int length, int height, int arch){
         this.rect = new RoundRectangle2D.Float(x,y, length, height, arch, arch);
         this.x = x;
@@ -25,6 +34,17 @@ public class MatchBox {
         this.height = height;
     }
 
+    /**
+     * Constructor - Double Tournament Panel
+     * @param index the index within the entire tournament
+     * @param roundIndex the index within its own round
+     * @param round the round the match is within
+     * @param x the top left x value
+     * @param y the top left y value
+     * @param length the length of the box
+     * @param height the height of the box
+     * @param arch the arch of the box (for the rounded corners)
+     */
     public MatchBox(int index, int roundIndex, int round, int x, int y, int length, int height, int arch){
         this.rect = new RoundRectangle2D.Float(x,y, length, height, arch, arch);
         this.x = x;
@@ -36,38 +56,67 @@ public class MatchBox {
         this.roundIndex = roundIndex;
     }
 
+    /**
+     * Returns the middle point on the y axis of the box
+     * @return the middle Y value
+     */
     public int getMidY(){
         return y + height/2;
     }
 
+    /**
+     * @return the top right x value
+     */
     public int getRightX(){
         return x+length;
     }
 
+    /**
+     * @return the top left y  value
+     */
     public int getY(){
         return y;
     }
 
+    /**
+     * Returns the middle point on the x axis of the box
+     * @return the middle X value
+     */
     public int getMidX(){
         return x+length/2;
     }
 
+    /**
+     * @return the overall index of the match
+     */
     public int getIndex(){
         return index;
     }
 
+    /**
+     * @return the index of the match within its own round
+     */
     public int getRound(){
         return round;
     }
 
+    /**
+     * @return the index of the round it is within
+     */
     public int getRoundIndex(){
         return roundIndex;
     }
 
+    /**
+     * @return the top right x value
+     */
     public int getX(){
         return x;
     }
 
+    /**
+     * @return the rectangle object which represents the match
+     */
     public RoundRectangle2D getRect() {
         return rect;
     }
