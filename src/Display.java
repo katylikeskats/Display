@@ -1,8 +1,7 @@
 /**
  * [Display.java]
  * The frame on which the bracket is displayed
- *
- * @author Katelyn Wang & Dora Su
+ * @author Katelyn Wang
  * September 18 2018
  */
 
@@ -29,29 +28,36 @@ public class Display extends JFrame{
     private TournamentPanel tournamentPanel;
     private Bracket tournament;
 
+    /**
+     * Constructor
+     * @param tournament tournament bracket
+     */
     public Display(Bracket tournament){
         super();
         this.frame = this;
         this.tournament = tournament;
 
-        int requiredHeight;
-        int requiredLength;
+        int requiredHeight; //the calculated height required
+        int requiredLength; //the calculated length required
 
-        if (tournament.getClass().getSimpleName().equals("SingleBracket")) {
-            requiredHeight = findNumMostMatches() * (BOX_HEIGHT + VERTICAL_SPACE) + BORDER_SPACE * 2 + 50;
+        //creates tournament panel accordingly
+        if (tournament.getClass().getSimpleName().equals("SingleBracket")) { //checks if it is a single or double bracket
+            requiredHeight = findNumMostMatches() * (BOX_HEIGHT + VERTICAL_SPACE) + BORDER_SPACE * 2 + 50; //if single, finds the height by using the round with the highest number of matches
             requiredLength = (tournament.getNumberOfRounds() * BOX_LENGTH) + ((tournament.getNumberOfRounds() - 1) * HORIZONTAL_SPACE) + (40 * 2);
             tournamentPanel = new SingleTournamentPanel(tournament, requiredLength, requiredHeight, BOX_HEIGHT, BOX_LENGTH);
         } else {
-            requiredHeight = (int) (findMostTypeMatches(1)+findMostTypeMatches(0)) * (BOX_HEIGHT + VERTICAL_SPACE) + BORDER_SPACE * 2 + 50;
+            requiredHeight = (int) (findMostTypeMatches(1)+findMostTypeMatches(0)) * (BOX_HEIGHT + VERTICAL_SPACE) + BORDER_SPACE * 2 + 50; // if double, finds the height using the highest number of winner matches and highest number of loser matches
             requiredLength = (tournament.getNumberOfRounds() * BOX_LENGTH) + ((tournament.getNumberOfRounds() - 1) * HORIZONTAL_SPACE) + (40 * 2);
             tournamentPanel = new DoubleTournamentPanel(tournament, requiredLength, requiredHeight, BOX_HEIGHT, BOX_LENGTH, findMostTypeMatches(0)/(findMostTypeMatches(0)+findMostTypeMatches(1)));
         }
-        if (requiredHeight > Toolkit.getDefaultToolkit().getScreenSize().getHeight()) {
+
+        //sets the limits for the JFrame
+        if (requiredHeight > Toolkit.getDefaultToolkit().getScreenSize().getHeight()) { //checks if the required size is greater than the screen size; if so, will set the height to the screen's height, if not, will set it to whatever the required height is
             this.maxY = (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().getHeight());
         } else {
             this.maxY = requiredHeight;
         }
-        if (requiredLength > Toolkit.getDefaultToolkit().getScreenSize().getWidth()){
+        if (requiredLength > Toolkit.getDefaultToolkit().getScreenSize().getWidth()){ //same thing as above with length
             this.maxX = (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().getWidth());
         } else {
             this.maxX = requiredLength;
@@ -67,7 +73,7 @@ public class Display extends JFrame{
         sp.setViewportView(tournamentPanel);
         this.add(sp);
 
-        MyKeyListener keyListener = new MyKeyListener();
+        MyKeyListener keyListener = new MyKeyListener(); //adding key listener
         this.addKeyListener(keyListener);
 
         this.setVisible(true);
@@ -87,6 +93,12 @@ public class Display extends JFrame{
         return most;
     }
 
+    /**
+     * Finds the number of a certain type of matches within a round (0 for winner bracket matches, 1 for loser bracket matches)
+     * @param roundNum the round number
+     * @param type the type of matches (0 for winner bracket matches, 1 for loser bracket matches)
+     * @return the total number of the given type of matches within the specified round
+     */
     public int findNumMatches(int roundNum, int type){
         int sum = 0;
         for (int i = 1; i <= tournament.getNumberOfMatchesInRound(roundNum); i++ ){
@@ -97,6 +109,11 @@ public class Display extends JFrame{
         return sum;
     }
 
+    /**
+     * Finds the most number of a certain type of matches within the entire bracket
+     * @param type the type of matches (0 for winner bracket matches, 1 for loser bracket matches)
+     * @return the most number of the specified type or matches within the tournament bracket (returns as double to maintain precision to calculate ratio required for winner bracket to loser bracket)
+     */
     public double findMostTypeMatches(int type){
         double most = 0;
         for (int i = 1; i <= tournament.getNumberOfRounds(); i++){
