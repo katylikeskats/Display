@@ -186,13 +186,6 @@ public class DoubleTournamentPanel extends TournamentPanel {
             g.setColor(new Color(86, 87, 87));
             graphics2.setStroke(new BasicStroke(1));
 
-            if (roundNum != 1) {
-                g.drawLine(currBox.getX(), currBox.getMidY(), currBox.getX() - horizontalSpace / 2, currBox.getMidY());
-            }
-            if (roundNum != tournament.getNumberOfRounds()){
-                g.drawLine(currBox.getRightX(), currBox.getMidY(), currBox.getRightX() + horizontalSpace / 2, currBox.getMidY());
-            }
-
             workingY += height + verticalSpace; //adjusting the workingWinY height
 
         }
@@ -203,6 +196,12 @@ public class DoubleTournamentPanel extends TournamentPanel {
         for (int i = 0; i < roundBoxes.length; i++) {
             teams = tournament.getTeamsInMatch(roundNum, i+1); //stores the teams which play in that match
             MatchBox currBox = roundBoxes[i];
+            if (((tournament.getMatchBracket(currBox.getRound(), currBox.getRoundIndex()) == 0) && ((teams[0].length > 1) || (teams[1].length > 1)) || ((tournament.getMatchBracket(currBox.getRound(), currBox.getRoundIndex()) == 1) && (teams[0].length > 2) && (teams[1].length > 2)))) {
+                g.drawLine(currBox.getX(), currBox.getMidY(), currBox.getX() - horizontalSpace / 2, currBox.getMidY());
+            }
+            if (roundNum != tournament.getNumberOfRounds()){
+                g.drawLine(currBox.getRightX(), currBox.getMidY(), currBox.getRightX() + horizontalSpace / 2, currBox.getMidY());
+            }
             if (teams[0].length == 1) { //checking if the teams playing is already determined
                 g.drawString(teams[0][0], currBox.getMidX() - fontMetrics.stringWidth(teams[0][0]) / 2, currBox.getY() + height / 4 + fontMetrics.getMaxAscent()/4); //if so, draws the team names
             } else if ((teams[0].length == 2) && (teams[1].length == 2)&& (tournament.getMatchBracket(roundNum, i+1) == 1)){
@@ -240,9 +239,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
      * @param g the graphics object to draw the line
      */
     public void drawLineBetweenMatch(MatchBox box1, MatchBox box2, Graphics g){
-        if (tournament.getMatchBracket(box1.getRound(), box1.getRoundIndex()) == tournament.getMatchBracket(box2.getRound(), box2.getRoundIndex())) {
-            g.drawLine(box1.getRightX() + horizontalSpace / 2, box1.getMidY(), box2.getX() - horizontalSpace / 2, box2.getMidY());
-        }
+        g.drawLine(box1.getRightX() + horizontalSpace / 2, box1.getMidY(), box2.getX() - horizontalSpace / 2, box2.getMidY());
         //g.drawLine(box1.getRightX(), box1.getMidY(), box2.getX(), box2.getMidY());
     }
 
@@ -258,20 +255,27 @@ public class DoubleTournamentPanel extends TournamentPanel {
                 String[][] currTeams = tournament.getTeamsInMatch(i+1,j+1);
                 String[][] nextTeams;
                 int change = 2;
-                    for (int set = 0; set < 2; set++) {
-                        for (int matchNum = 1; matchNum <= boxes.get(i + change-1).length; matchNum++) {
-                            nextTeams = tournament.getTeamsInMatch(i + change, matchNum); //stores the teams which play in that match
-                            for (int teamNum = 0; teamNum < 2; teamNum++) {
-                                if (nextTeams[teamNum].length > 1) { //checking if the teams playing is already determined
-                                    if (contains(nextTeams[teamNum], currTeams[set])) {
-                                        drawLineBetweenMatch(boxes.get(i)[j], boxes.get(i + 1)[matchNum - 1], g);
+                if ((tournament.getMatchBracket(i+1, j+1) == 0) && (i+1<tournament.getNumberOfRounds()-2)){
+                    change = 3;
+                }
+                for (int set = 0; set < 2; set++) {
+                    for (int matchNum = 1; matchNum <= boxes.get(i + change-1).length; matchNum++) {
+                        nextTeams = tournament.getTeamsInMatch(i + change, matchNum); //stores the teams which play in that match
+                        for (int teamNum = 0; teamNum < 2; teamNum++) {
+                            if (nextTeams[teamNum].length > 1) { //checking if the teams playing is already determined
+                                if (contains(nextTeams[teamNum], currTeams[set])) {
+                                    if (tournament.getMatchBracket(boxes.get(i)[j].getRound(), boxes.get(i)[j].getRoundIndex()) == tournament.getMatchBracket(boxes.get(i+change-1)[matchNum-1].getRound(), boxes.get(i+change-1)[matchNum-1].getRoundIndex())) {
+                                        drawLineBetweenMatch(boxes.get(i)[j], boxes.get(i + change - 1)[matchNum - 1], g);
                                     }
                                 }
                             }
                         }
                     }
+                }
             }
         }
+
+        drawLineBetweenMatch(boxes.get(tournament.getNumberOfRounds()-3)[1], boxes.get(tournament.getNumberOfRounds()-2)[0], g);
     }
 
     /**
