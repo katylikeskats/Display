@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AnalysisUIOptions">
-    <option name="SCOPE_TYPE" value="3" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="aaa6a86c-e042-4d3b-8972-bf7a37528c0e" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -15,13 +12,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TestCase.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/TestCase.java">
+      <file leaf-file-name="ColourPalette.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ColourPalette.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
+            <state relative-caret-position="289">
+              <caret line="17" column="32" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
               <folding>
-                <element signature="e#142#148#0" expanded="true" />
+                <element signature="e#0#319#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RainbowColourPalette.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/RainbowColourPalette.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" column="14" lean-forward="true" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
+              <folding>
+                <element signature="e#0#2134#0" expanded="true" />
+                <element signature="e#2079#2080#0" expanded="true" />
+                <element signature="e#2108#2109#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -143,8 +155,6 @@
         <option value="$PROJECT_DIR$/src/MouseListener.java" />
         <option value="$PROJECT_DIR$/src/Bracket.java" />
         <option value="$PROJECT_DIR$/src/ColorPanelTest.java" />
-        <option value="$PROJECT_DIR$/src/RainbowColourPalette.java" />
-        <option value="$PROJECT_DIR$/src/ColourPalette.java" />
         <option value="$PROJECT_DIR$/src/ColorTest.java" />
         <option value="$PROJECT_DIR$/src/RandomText.java" />
         <option value="$PROJECT_DIR$/src/BracketTest.java" />
@@ -155,6 +165,8 @@
         <option value="$PROJECT_DIR$/src/DoubleTournamentPanel.java" />
         <option value="$PROJECT_DIR$/src/MatchBox.java" />
         <option value="$PROJECT_DIR$/src/TournamentPanel.java" />
+        <option value="$PROJECT_DIR$/src/ColourPalette.java" />
+        <option value="$PROJECT_DIR$/src/RainbowColourPalette.java" />
       </list>
     </option>
   </component>
@@ -422,16 +434,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/ColorTest.java</url>
-          <line>3</line>
-          <properties class="ColorTest" method="main">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="26" />
     </breakpoint-manager>
   </component>
@@ -607,27 +609,6 @@
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_152/src.zip!/javax/swing/RepaintManager.java" />
     <entry file="file://$PROJECT_DIR$/src/Test.java" />
-    <entry file="file://$PROJECT_DIR$/src/ColorTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="69" selection-start-line="2" selection-start-column="69" selection-end-line="2" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/RainbowColourPalette.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-170">
-          <caret line="20" column="23" lean-forward="true" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ColourPalette.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="3" selection-start-column="3" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/SingleBracket2.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -825,6 +806,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/ColorTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="69" selection-start-line="2" selection-start-column="69" selection-end-line="2" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ColourPalette.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="32" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#319#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RainbowColourPalette.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="14" lean-forward="true" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#2134#0" expanded="true" />
+            <element signature="e#2079#2080#0" expanded="true" />
+            <element signature="e#2108#2109#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
   <component name="masterDetails">
     <states>
@@ -890,6 +901,18 @@
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
           <last-edited>lib</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <last-edited>Project</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
