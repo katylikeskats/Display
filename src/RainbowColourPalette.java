@@ -5,7 +5,10 @@
  * September 19 2018
  */
 
+//graphics imports
 import java.awt.Color;
+
+//util imports
 import java.util.ArrayList;
 
 public class RainbowColourPalette extends ColourPalette{
@@ -20,6 +23,10 @@ public class RainbowColourPalette extends ColourPalette{
     private static final int LOWER_LIMIT = 0;
     private ArrayList<Color> colors = new ArrayList<>();
 
+    /**
+     * Constructor
+     * @param matches number of matches (number of colours required)
+     */
     public RainbowColourPalette(int matches){
         super();
         for (int i = 0; i < matches; i++){
@@ -67,6 +74,10 @@ public class RainbowColourPalette extends ColourPalette{
         }
     }
 
+    /**
+     * Returns the color palette
+     * @return the ArrayList of generated colors
+     */
     public ArrayList<Color> getColors() {
         return colors;
     }
