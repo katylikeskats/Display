@@ -1,7 +1,7 @@
 /**
  * [SingleTournamentPanel.java]
  * The display panel for single elimination tournaments
- * @author Katelyn Wang & Dora Su
+ * @author Dora Su
  * September 18 2018
  */
 
