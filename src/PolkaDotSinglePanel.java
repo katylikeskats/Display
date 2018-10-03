@@ -23,7 +23,7 @@ import java.io.File;
 //Util imports
 import java.util.ArrayList;
 
-public class PolkaDotSinglePanel extends TournamentPanel {
+public class PolkaDotSinglePanel extends PolkaDotPanel {
     private static final int BORDER_SPACE = 20;
     private static final int HORIZONTAL_SPACE = 100; //space between each box horizontally
     private Bracket tournament;
@@ -52,7 +52,6 @@ public class PolkaDotSinglePanel extends TournamentPanel {
         this.length = boxLength;
         this.setSize(new Dimension(this.maxX, this.maxY));
         this.setPreferredSize(new Dimension(this.maxX, this.maxY));
-        this.setBackground(new Color(255,249,253));
     }
 
     /**
