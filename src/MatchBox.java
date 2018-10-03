@@ -13,6 +13,9 @@ public class MatchBox {
     private int y;
     private int length;
     private int height;
+    private int index;
+    private int roundIndex;
+    private int round;
 
     public MatchBox(int x, int y, int length, int height, int arch){
         this.rect = new RoundRectangle2D.Float(x,y, length, height, arch, arch);
@@ -20,6 +23,17 @@ public class MatchBox {
         this.y = y;
         this.length = length;
         this.height = height;
+    }
+
+    public MatchBox(int index, int roundIndex, int round, int x, int y, int length, int height, int arch){
+        this.rect = new RoundRectangle2D.Float(x,y, length, height, arch, arch);
+        this.x = x;
+        this.y = y;
+        this.length = length;
+        this.height = height;
+        this.index = index;
+        this.round = round;
+        this.roundIndex = roundIndex;
     }
 
     public int getMidY(){
@@ -36,6 +50,18 @@ public class MatchBox {
 
     public int getMidX(){
         return x+length/2;
+    }
+
+    public int getIndex(){
+        return index;
+    }
+
+    public int getRound(){
+        return round;
+    }
+
+    public int getRoundIndex(){
+        return roundIndex;
     }
 
     public int getX(){

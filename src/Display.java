@@ -42,9 +42,9 @@ public class Display extends JFrame{
             requiredLength = (tournament.getNumberOfRounds() * BOX_LENGTH) + ((tournament.getNumberOfRounds() - 1) * HORIZONTAL_SPACE) + (40 * 2);
             tournamentPanel = new SingleTournamentPanel(tournament, requiredLength, requiredHeight, BOX_HEIGHT, BOX_LENGTH);
         } else {
-            requiredHeight = (tournament.getNumberOfTeams()/2+tournament.getNumberOfTeams()/4) * (BOX_HEIGHT + VERTICAL_SPACE) + BORDER_SPACE * 2 + 50;
+            requiredHeight = (int) (findMostTypeMatches(1)+findMostTypeMatches(0)) * (BOX_HEIGHT + VERTICAL_SPACE) + BORDER_SPACE * 2 + 50;
             requiredLength = (tournament.getNumberOfRounds() * BOX_LENGTH) + ((tournament.getNumberOfRounds() - 1) * HORIZONTAL_SPACE) + (40 * 2);
-            tournamentPanel = new DoubleTournamentPanel(tournament, requiredLength, requiredHeight, BOX_HEIGHT, BOX_LENGTH);
+            tournamentPanel = new DoubleTournamentPanel(tournament, requiredLength, requiredHeight, BOX_HEIGHT, BOX_LENGTH, findMostTypeMatches(0)/(findMostTypeMatches(0)+findMostTypeMatches(1)));
         }
         if (requiredHeight > Toolkit.getDefaultToolkit().getScreenSize().getHeight()) {
             this.maxY = (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().getHeight());
@@ -82,6 +82,26 @@ public class Display extends JFrame{
         for (int i = 1; i <= tournament.getNumberOfRounds(); i++){
             if (tournament.getNumberOfMatchesInRound(i) >= most){
                 most = tournament.getNumberOfMatchesInRound(i);
+            }
+        }
+        return most;
+    }
+
+    public int findNumMatches(int roundNum, int type){
+        int sum = 0;
+        for (int i = 1; i <= tournament.getNumberOfMatchesInRound(roundNum); i++ ){
+            if (tournament.getMatchBracket(roundNum, i) == type){
+                sum++;
+            }
+        }
+        return sum;
+    }
+
+    public double findMostTypeMatches(int type){
+        double most = 0;
+        for (int i = 1; i <= tournament.getNumberOfRounds(); i++){
+            if (findNumMatches(i,type) >= most){
+                most = findNumMatches(i, type);
             }
         }
         return most;

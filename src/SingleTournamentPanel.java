@@ -213,8 +213,6 @@ public class SingleTournamentPanel extends TournamentPanel {
      * @param boxes the ArrayList or arrays of match boxes
      */
     public void drawLines(Graphics g, ArrayList<MatchBox[]> boxes){
-        int x;
-        int y;
         g.setColor(new Color(86, 87, 87));
         for (int i = 0; i < boxes.size()-1; i++){
             for (int j = 0; j < boxes.get(i).length; j++) {
