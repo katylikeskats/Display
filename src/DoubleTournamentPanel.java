@@ -167,7 +167,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
 
     /**
      * Determines if the bracket contains byes
-     * @return true if it has byes, false if it does not 
+     * @return true if it has byes, false if it does not
      */
     public boolean hasByes(){
         if (Math.log(tournament.getNumberOfTeams())%1.00 != 1){

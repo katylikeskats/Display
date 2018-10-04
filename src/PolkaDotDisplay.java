@@ -16,7 +16,7 @@ import java.awt.Toolkit;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 
-public class Display extends JFrame{
+public class PolkaDotDisplay extends JFrame{
     private static final int BOX_HEIGHT = 100;
     private static final int BOX_LENGTH = 240;
     private static final int VERTICAL_SPACE = 30;
@@ -32,7 +32,7 @@ public class Display extends JFrame{
      * Constructor
      * @param tournament tournament bracket
      */
-    public Display(Bracket tournament){
+    public PolkaDotDisplay(Bracket tournament){
         super();
         this.frame = this;
         this.tournament = tournament;
