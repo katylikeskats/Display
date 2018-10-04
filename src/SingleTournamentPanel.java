@@ -161,13 +161,25 @@ public class SingleTournamentPanel extends TournamentPanel {
             boolean connected = false;
             teams = tournament.getTeamsInMatch(roundNum, i+1); //stores the teams which play in that match
             MatchBox currBox = roundBoxes[i];
+            g.setFont(font1);
+            fontMetrics = g.getFontMetrics(font1);
             if (teams[0].length == 1) { //checking if the teams playing is already determined
+                /*if (tournament.getMatchWinner(roundNum, i+1) == teams[0][0]){
+                    Font boldFont = getFont("assets/Comfortaa-Bold.ttf", 15f);
+                    fontMetrics = g.getFontMetrics(font1);
+                    g.setFont(boldFont);
+                }*/
                 g.drawString(teams[0][0], currBox.getMidX() - fontMetrics.stringWidth(teams[0][0]) / 2, currBox.getY() + boxHeight / 4 + fontMetrics.getMaxAscent()/4); //if so, draws the team names
             } else {
                 g.drawString("unknown", currBox.getMidX() - fontMetrics.stringWidth("unknown") / 2, currBox.getY() + boxHeight / 4 + fontMetrics.getMaxAscent()/4); // if not, leaves it unknown
                 connected = true;
             }
             if (teams[1].length == 1){
+                /*if (tournament.getMatchWinner(roundNum, i+1) == teams[0][0]){
+                    Font boldFont = getFont("assets/Comfortaa-Bold.ttf", 15f);
+                    fontMetrics = g.getFontMetrics(font1);
+                    g.setFont(boldFont);
+                }*/
                 g.drawString(teams[1][0], currBox.getMidX() - fontMetrics.stringWidth(teams[1][0]) / 2, currBox.getY() + (3* boxHeight) / 4 + fontMetrics.getMaxAscent()/4); //if so, draws the team names
             } else {
                 g.drawString("unknown", currBox.getMidX() - fontMetrics.stringWidth("unknown") / 2, currBox.getY() + (3* boxHeight) / 4 + fontMetrics.getMaxAscent()/4); // if not, leaves it unknown
