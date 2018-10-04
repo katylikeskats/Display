@@ -23,7 +23,7 @@ import java.io.File;
 //Util imports
 import java.util.ArrayList;
 
-public class PolkaDotSinglePanel extends TournamentPanel {
+public class PolkaDotSinglePanel extends PolkaDotPanel {
     private static final int BORDER_SPACE = 20;
     private static final int HORIZONTAL_SPACE = 100; //space between each box horizontally
     private Bracket tournament;
@@ -76,11 +76,9 @@ public class PolkaDotSinglePanel extends TournamentPanel {
         // Font font1 = new Font("Helvetica", Font.PLAIN, 15);
         FontMetrics fontMetrics = g.getFontMetrics(fontTitle);
         g.setFont(fontTitle);
+        g.setColor(new Color(222, 150, 171));
         g.drawString("Tournament Name", workingX, workingY + fontMetrics.getHeight()/2);
         workingY += fontMetrics.getHeight() + 10 ;
-
-        colors = new RainbowColourPalette(tournament.getNumberOfTeams()-1);
-        colorIndex = 0;
 
         for (int roundNum = 1; roundNum <= tournament.getNumberOfRounds(); roundNum++){ //iterates through each round
             numMatches = tournament.getNumberOfMatchesInRound(roundNum); //determines how many matches are in the round
@@ -125,11 +123,9 @@ public class PolkaDotSinglePanel extends TournamentPanel {
 
         // g.drawString("Round "+Integer.toString(roundNum), workingX + length/2 - fontMetrics.stringWidth("Round "+Integer.toString(roundNum))/2, workingY -15);
         for (int matchNum = 1; matchNum <= tournament.getNumberOfMatchesInRound(roundNum); matchNum++){ //iterates through each match
-            g.setColor(new Color(245, 245, 245));
+            g.setColor(new Color(255, 255, 255));
             g.fillRoundRect(workingX, workingY, length, height, 20,20);
-            g.setColor(colors.getColors().get(colorIndex));
-            colorIndex++;
-
+            g.setColor(new Color(245, 192, 220));
             //drawing the rectangles
             MatchBox currBox = new MatchBox(workingX, workingY, length, height,  20);
             roundBoxes[matchNum - 1] = currBox;
@@ -143,7 +139,7 @@ public class PolkaDotSinglePanel extends TournamentPanel {
             g.drawLine(currBox.getX(), currBox.getMidY(), currBox.getRightX(), currBox.getMidY()); //draws midline which divides team names
 
             //drawing the lines which judd out of each box
-            g.setColor(new Color(86, 87, 87));
+            g.setColor(new Color(225, 172, 200));
             graphics2.setStroke(new BasicStroke(1));
 
             if (roundNum != tournament.getNumberOfRounds()){ //ensuring extra lines won't be drawn
@@ -216,7 +212,7 @@ public class PolkaDotSinglePanel extends TournamentPanel {
     public void drawLines(Graphics g, ArrayList<MatchBox[]> boxes){
         int x;
         int y;
-        g.setColor(new Color(86, 87, 87));
+        g.setColor(new Color(225, 172, 200));
         for (int i = 0; i < boxes.size()-1; i++){
             for (int j = 0; j < boxes.get(i).length; j++) {
                 String[][] currTeams = tournament.getTeamsInMatch(i+1,j+1);
@@ -243,7 +239,7 @@ public class PolkaDotSinglePanel extends TournamentPanel {
      * @param g the graphics object to draw the lines
      */
     public void drawPolkaDots(Graphics g){
-        g.setColor(new Color(255, 207, 231));
+        g.setColor(new Color(255, 226, 240));
         int xx=0; //Counter for alternating lines
         int x = 0, y = 0; //Drawing coordinates
         while(y<maxY){
