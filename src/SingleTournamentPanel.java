@@ -168,14 +168,14 @@ public class SingleTournamentPanel extends TournamentPanel {
                     g.setFont(boldFont);
                 }
                 g.drawString(teams[0][0], currBox.getMidX() - fontMetrics.stringWidth(teams[0][0]) / 2, currBox.getY() + boxHeight / 4 + fontMetrics.getMaxAscent()/4); //if so, draws the team names
-                    fontMetrics = g.getFontMetrics(font1);
-                    g.setFont(font1);
+                fontMetrics = g.getFontMetrics(font1);
+                g.setFont(font1);
             } else {
                 g.drawString("unknown", currBox.getMidX() - fontMetrics.stringWidth("unknown") / 2, currBox.getY() + boxHeight / 4 + fontMetrics.getMaxAscent()/4); // if not, leaves it unknown
                 connected = true;
             }
             if (teams[1].length == 1){
-                if (((SingleBracket)tournament).getMatchWinner(roundNum, i+1) == teams[0][0]){
+                if (((SingleBracket)tournament).getMatchWinner(roundNum, i+1) == teams[1][0]){
                     fontMetrics = g.getFontMetrics(boldFont);
                     g.setFont(boldFont);
                 }
@@ -234,10 +234,8 @@ public class SingleTournamentPanel extends TournamentPanel {
                     for (int matchNum = 1; matchNum <= boxes.get(i + 1).length; matchNum++) {
                         nextTeams = tournament.getTeamsInMatch(i + 2, matchNum); //stores the teams which play in that match
                         for (int teamNum = 0; teamNum < 2; teamNum++) {  //iterates twice through, since there are two arrays to be checked in the next matchbox
-                            if (nextTeams[teamNum].length > 1) { //checking if the teams playing is already determined
-                                if (contains(nextTeams[teamNum], currTeams[set])) { //if they feed into each other, draw a line between them
-                                    drawLineBetweenMatch(boxes.get(i)[j], boxes.get(i + 1)[matchNum-1], g);
-                                }
+                            if (contains(nextTeams[teamNum], currTeams[set])) { //if they feed into each other, draw a line between them
+                                drawLineBetweenMatch(boxes.get(i)[j], boxes.get(i + 1)[matchNum-1], g);
                             }
                         }
                     }
