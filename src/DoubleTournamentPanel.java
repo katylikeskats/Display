@@ -310,10 +310,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
                                     (contains(nextTeams[teamNum], currTeams[set])) &&//checking if they feed into each other
                                     (tournament.getMatchBracket(boxes.get(i)[j].getRound(), boxes.get(i)[j].getRoundIndex()) == tournament.getMatchBracket(boxes.get(i+change-1)[matchNum-1].getRound(), boxes.get(i+change-1)[matchNum-1].getRoundIndex()))) { //checking that the two matches are from the same bracket
                                         drawLineBetweenMatch(boxes.get(i)[j], boxes.get(i + change - 1)[matchNum - 1], g);
-                                        //draws the left line
-                                        //if (((tournament.getMatchBracket(currBox.getRound(), currBox.getRoundIndex()) == 0) && ((teams[0].length > 1) || (teams[1].length > 1)))) {
-                                            g.drawLine(boxes.get(i + change-1)[matchNum -1 ].getX(), boxes.get(i + change-1)[matchNum -1 ].getMidY(), boxes.get(i + change-1)[matchNum -1 ].getX() - horizontalSpace / 2, boxes.get(i + change-1)[matchNum -1 ].getMidY());
-                                        //}
+                                        g.drawLine(boxes.get(i + change-1)[matchNum -1 ].getX(), boxes.get(i + change-1)[matchNum -1 ].getMidY(), boxes.get(i + change-1)[matchNum -1 ].getX() - horizontalSpace / 2, boxes.get(i + change-1)[matchNum -1 ].getMidY());
                                     }
                                 }
                             }
