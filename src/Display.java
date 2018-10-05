@@ -55,12 +55,12 @@ public class Display extends JFrame{
         if (requiredHeight > Toolkit.getDefaultToolkit().getScreenSize().getHeight()) { //checks if the required size is greater than the screen size; if so, will set the height to the screen's height, if not, will set it to whatever the required height is
             this.maxY = (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().getHeight());
         } else {
-            this.maxY = requiredHeight;
+            this.maxY = requiredHeight + 10;
         }
         if (requiredLength > Toolkit.getDefaultToolkit().getScreenSize().getWidth()){ //same thing as above with length
             this.maxX = (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().getWidth());
         } else {
-            this.maxX = requiredLength;
+            this.maxX = requiredLength + 10;
         }
 
         this.setSize(maxX, maxY);
