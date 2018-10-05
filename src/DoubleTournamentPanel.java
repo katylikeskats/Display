@@ -214,11 +214,11 @@ public class DoubleTournamentPanel extends TournamentPanel {
             colorIndex++;
 
             //drawing the rectangles
-            MatchBox currBox = new MatchBox(workingNumMatches + matchNum, matchNum, roundNum, workingX, workingY, boxLength, boxHeight,  20);
+            MatchBox currBox = new MatchBox(matchNum, roundNum, workingX, workingY, boxLength, boxHeight,  20);
             roundBoxes[matchNum - 1] = currBox; //stores the object into an array for later reference
 
             graphics2.setStroke(new BasicStroke(2)); //setting thickness to slightly thicker than default
-            g.drawString(Integer.toString(currBox.getIndex()), workingX + 10, workingY + 20);
+            g.drawString(roundNum+"."+matchNum, workingX + 10, workingY + 20);
             graphics2.draw(currBox.getRect());
             g.drawLine(currBox.getX(), currBox.getMidY(), currBox.getRightX(), currBox.getMidY()); //draws midline which divides team names
 
@@ -245,7 +245,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
                 g.drawString(teams[0][0], currBox.getMidX() - fontMetrics.stringWidth(teams[0][0]) / 2, currBox.getY() + boxHeight / 4 + fontMetrics.getMaxAscent()/4); //if so, draws the team names
             } else if ((teams[0].length == 2) && (teams[1].length == 2)&& (tournament.getMatchBracket(roundNum, i+1) == 1)){
                 int num = findPreviousMatch(boxes, currBox, teams[0]);
-                g.drawString("Loser Of Round #" + Integer.toString(num), currBox.getMidX() - fontMetrics.stringWidth("Loser Of Round #" + Integer.toString(num)) / 2, currBox.getY() + boxHeight / 4 + fontMetrics.getMaxAscent()/4);
+                g.drawString("Loser Of Round #" + (roundNum-1) + "." + num, currBox.getMidX() - fontMetrics.stringWidth("Loser Of Round #" + (roundNum-1) + "." + num) / 2, currBox.getY() + boxHeight / 4 + fontMetrics.getMaxAscent()/4);
             } else {
                 g.drawString("unknown", currBox.getMidX() - fontMetrics.stringWidth("unknown") / 2, currBox.getY() + boxHeight / 4 + fontMetrics.getMaxAscent()/4); // if not, leaves it unknown
             }
@@ -253,7 +253,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
                 g.drawString(teams[1][0], currBox.getMidX() - fontMetrics.stringWidth(teams[1][0]) / 2, currBox.getY() + (3* boxHeight) / 4 + fontMetrics.getMaxAscent()/4); //if so, draws the team names
             } else if ((teams[1].length == 2) && (teams[1].length == 2) && (tournament.getMatchBracket( roundNum, i + 1) == 1)){
                 int num = findPreviousMatch(boxes, currBox, teams[1]);
-                g.drawString("Loser Of Round #" + Integer.toString(num), currBox.getMidX() - fontMetrics.stringWidth("Loser Of Round #" + Integer.toString(num)) / 2,currBox.getY() + (3* boxHeight) / 4 + fontMetrics.getMaxAscent()/4);
+                g.drawString("Loser Of Round #" + (roundNum-1) + "." + num, currBox.getMidX() - fontMetrics.stringWidth("Loser Of Round #" + (roundNum-1) + "." + num) / 2,currBox.getY() + (3* boxHeight) / 4 + fontMetrics.getMaxAscent()/4);
             } else {
                 g.drawString("unknown", currBox.getMidX() - fontMetrics.stringWidth("unknown") / 2, currBox.getY() + (3* boxHeight) / 4 + fontMetrics.getMaxAscent()/4); // if not, leaves it unknown
             }
@@ -336,7 +336,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
                 team1 = tournament.getTeamsInMatch(box.getRound()-1, i)[0][0]; //storing the previous match's teams
                 team2 = tournament.getTeamsInMatch(box.getRound()-1, i)[1][0];
                 if ((teams[0].equals(team1) && teams[1].equals(team2)) || ((teams[0].equals(team2) && teams[1].equals(team1)))){ //determining if the teams match
-                    return boxes.get(box.getRound()-2)[i-1].getIndex();
+                    return boxes.get(box.getRound()-2)[i-1].getRoundIndex();
                 }
             }
         }

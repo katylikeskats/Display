@@ -14,7 +14,6 @@ public class MatchBox {
     private int y;
     private int length;
     private int height;
-    private int index;
     private int roundIndex;
     private int round;
 
@@ -36,7 +35,6 @@ public class MatchBox {
 
     /**
      * Constructor - Double Tournament Panel
-     * @param index the index within the entire tournament
      * @param roundIndex the index within its own round
      * @param round the round the match is within
      * @param x the top left x value
@@ -45,13 +43,12 @@ public class MatchBox {
      * @param height the height of the box
      * @param arch the arch of the box (for the rounded corners)
      */
-    public MatchBox(int index, int roundIndex, int round, int x, int y, int length, int height, int arch){
+    public MatchBox(int roundIndex, int round, int x, int y, int length, int height, int arch){
         this.rect = new RoundRectangle2D.Float(x,y, length, height, arch, arch);
         this.x = x;
         this.y = y;
         this.length = length;
         this.height = height;
-        this.index = index;
         this.round = round;
         this.roundIndex = roundIndex;
     }
@@ -84,13 +81,6 @@ public class MatchBox {
      */
     public int getMidX(){
         return x+length/2;
-    }
-
-    /**
-     * @return the overall index of the match
-     */
-    public int getIndex(){
-        return index;
     }
 
     /**

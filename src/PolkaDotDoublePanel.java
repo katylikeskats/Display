@@ -171,11 +171,11 @@ public class PolkaDotDoublePanel extends PolkaDotPanel {
             g.setColor(new Color(245, 192, 220)); //sets the colour for outline
 
             //drawing the rectangles
-            MatchBox currBox = new MatchBox(workingNumMatches + matchNum, matchNum, roundNum, workingX, workingY, boxLength, boxHeight,  20);
+            MatchBox currBox = new MatchBox(matchNum, roundNum, workingX, workingY, boxLength, boxHeight,  20);
             roundBoxes[matchNum - 1] = currBox; //stores the object into an array for later reference
 
             graphics2.setStroke(new BasicStroke(2)); //setting thickness to slightly thicker than default
-            g.drawString(Integer.toString(currBox.getIndex()), workingX + 10, workingY + 20);
+            g.drawString(roundNum+"."+matchNum, workingX + 10, workingY + 20);
             graphics2.draw(currBox.getRect());
             g.drawLine(currBox.getX(), currBox.getMidY(), currBox.getRightX(), currBox.getMidY()); //draws midline which divides team names
 
@@ -321,7 +321,7 @@ public class PolkaDotDoublePanel extends PolkaDotPanel {
                 team1 = tournament.getTeamsInMatch(box.getRound()-1, i)[0][0]; //storing the previous match's teams
                 team2 = tournament.getTeamsInMatch(box.getRound()-1, i)[1][0];
                 if ((teams[0].equals(team1) && teams[1].equals(team2)) || ((teams[0].equals(team2) && teams[1].equals(team1)))){ //determining if the teams match
-                    return boxes.get(box.getRound()-2)[i-1].getIndex();
+                    return boxes.get(box.getRound()-2)[i-1].getRoundIndex();
                 }
             }
         }

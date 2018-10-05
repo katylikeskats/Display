@@ -134,7 +134,7 @@ public class SingleTournamentPanel extends TournamentPanel {
             roundBoxes[matchNum - 1] = currBox;
 
             //draws match number
-            g.drawString(Integer.toString(workingNumMatches+matchNum), workingX + 10, workingY + 20);
+            g.drawString(roundNum+"."+matchNum,  workingX + 10, workingY + 20);
 
             //makes stroke thicker and then draws matchbox
             graphics2.setStroke(new BasicStroke(2)); //setting thickness to slightly thicker than default
