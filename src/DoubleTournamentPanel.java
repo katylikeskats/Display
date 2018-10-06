@@ -91,13 +91,13 @@ public class DoubleTournamentPanel extends TournamentPanel {
         losingHeight = (int) Math.round(losePercentPage *maxY); //calculates the height allotted to the winner bracket using the required percentage
         winningHeight = maxY - losingHeight; //calculates the height allotted to the loser bracket by subtracting the winner height from the total height
 
-        workingWinY = fontMetrics.getHeight() + 10 ; //lowers workingWinY to account for the title space
+        workingWinY = BORDER_SPACE + fontMetrics.getHeight() + 10 ; //lowers workingWinY to account for the title space
         workingLoseY = BORDER_SPACE + winningHeight; //sets working y for the loser bracket to just below the winning height threshold
 
         //Drawing round 1
         numMatches = tournament.getNumberOfMatchesInRound(1); //determines how many matches are in the round
         if (numMatches > 1) {
-            verticalWinSpace = (winningHeight - (workingWinY * 2) - (boxHeight * numMatches)) / (numMatches - 1); //finds the space that it will use and divides it between the spaces
+            verticalWinSpace = (winningHeight - (workingWinY * 2 - fontMetrics.getHeight()) - (boxHeight * numMatches)) / (numMatches - 1); //finds the space that it will use and divides it between the spaces
         } else {
             workingWinY = winningHeight/2 - boxHeight /2 + 10;
         }
@@ -121,6 +121,8 @@ public class DoubleTournamentPanel extends TournamentPanel {
             }
             if (numLossMatches < findNumMatches(roundNum-1, 1)){
                 workingLoseY += boxHeight/2 + verticalLoseSpace/2; //adjusts the workingLoseY int
+            } else if (numLossMatches>findNumMatches(roundNum-1, 1)){
+                workingLoseY = BORDER_SPACE + winningHeight;
             }
 
             //If there is more than one match, calculates the space between each match for an evenly distributed look
@@ -130,9 +132,9 @@ public class DoubleTournamentPanel extends TournamentPanel {
                 workingLoseY = winningHeight + losingHeight/2 - boxHeight /2;
             }
             if (numWinMatches > 1){
-                verticalWinSpace = (winningHeight - (workingWinY * 2) - (boxHeight * numWinMatches)) / (numWinMatches - 1);
+                verticalWinSpace = (winningHeight - (workingWinY * 2 - fontMetrics.getHeight()) - (boxHeight * numWinMatches)) / (numWinMatches - 1);
             } else {
-                workingWinY = winningHeight/2 - boxHeight /2 + 10 ;
+                workingWinY = winningHeight/2 - boxHeight /2 + 10 ; //check
             }
 
             drawRound(g, workingX, workingWinY, workingLoseY, verticalWinSpace, verticalLoseSpace, roundNum, boxes); //draws the matchboxes

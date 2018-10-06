@@ -7,7 +7,7 @@ public class TestCase {
         ArrayList<Team> teams = new ArrayList<Team>();
         SingleGenerator generator;
 
-        for (int i = 1; i <= 3; i++) {
+        for (int i = 1; i <= 25; i++) {
             teams.add(new Team(Integer.toString(i), i));
         }
 
@@ -17,9 +17,9 @@ public class TestCase {
 
         //new ManagementSystem();
         Display display = new Display(generator.getBracket());
-        bracket.setMatchWinner("1", 1, 1);
-        bracket.setMatchWinner("2", 1, 3);
-        display.update(bracket);
+        //bracket.setMatchWinner("1", 1, 1);
+        //bracket.setMatchWinner("2", 1, 3);
+       // display.update(bracket);
     }
 
 }

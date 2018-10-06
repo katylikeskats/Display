@@ -69,6 +69,9 @@ public class SingleTournamentPanel extends TournamentPanel {
         int workingX = BORDER_SPACE; //current x from which it is drawing
         int workingY = BORDER_SPACE; //current y from which it is drawing
 
+        colors = new RainbowColourPalette(tournament.getNumberOfTeams()-1); //creating the color palette
+        colorIndex = 0;
+
         //Setting up the font
         Font fontTitle = getFont("assets/Comfortaa-Light.ttf", 40f);
         // Font font1 = new Font("Helvetica", Font.PLAIN, 15);
@@ -78,26 +81,24 @@ public class SingleTournamentPanel extends TournamentPanel {
 
         workingY += fontMetrics.getHeight() + 10 ; //setting up where the drawing will begin
 
-        colors = new RainbowColourPalette(tournament.getNumberOfTeams()-1); //creating the color palette
-        colorIndex = 0;
 
         for (int roundNum = 1; roundNum <= tournament.getNumberOfRounds(); roundNum++){ //iterates through each round
             numMatches = tournament.getNumberOfMatchesInRound(roundNum); //determines how many matches are in the round
 
             //If the round has the most matches, paints the round beginning at the top of the screen
             if (roundNum == findIndexMostMatches()){
-                workingY = BORDER_SPACE + fontMetrics.getHeight();
+                workingY = BORDER_SPACE + fontMetrics.getHeight() + 10;
             }
 
             if (numMatches>1) { //if it is more than one, calculates the space between each matchbox
-                verticalSpace = (maxY - (workingY * 2) - (boxHeight * numMatches))/ (numMatches - 1); //finds the space that it will use and divides it between the spaces
+                verticalSpace = (maxY - (workingY*2 - fontMetrics.getHeight()) - (boxHeight * numMatches))/ (numMatches - 1); //finds the space that it will use and divides it between the spaces
             } else {
                 workingY = maxY/2 - boxHeight /2; //if there is only 1 match, sets the workingY to the middle to centre the finals match
             }
 
             drawRound(g, workingX, workingY, verticalSpace, roundNum, boxes); //draws the matchboxes
 
-            workingY = BORDER_SPACE + boxHeight / 2 + verticalSpace/2; //adjusts the workingY int
+            workingY = BORDER_SPACE + fontMetrics.getHeight() + boxHeight / 2 + verticalSpace/2; //adjusts the workingY int
             workingX += boxLength + HORIZONTAL_SPACE; //adjusts the workingX int
         }
         drawLines(g, boxes); //draws lines between the matches which feed into each other

@@ -8,6 +8,7 @@
 //Swing imports
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
+import javax.swing.ImageIcon;
 
 //Graphics imports
 import java.awt.Toolkit;
@@ -21,7 +22,7 @@ public class Display extends JFrame{
     private static final int BOX_LENGTH = 240;
     private static final int VERTICAL_SPACE = 30;
     private static final int HORIZONTAL_SPACE = 100;
-    private static final int BORDER_SPACE = 40;
+    private static final int BORDER_SPACE = 20;
     private int maxX;
     private int maxY;
     private JFrame frame;
@@ -33,7 +34,7 @@ public class Display extends JFrame{
      * @param tournament tournament bracket
      */
     public Display(Bracket tournament){
-        super();
+        super("Kraft Dinner Display ©");
         this.frame = this;
         this.tournament = tournament;
 
@@ -42,12 +43,12 @@ public class Display extends JFrame{
 
         //creates tournament panel accordingly
         if (tournament.getClass().getSimpleName().equals("SingleBracket")) { //checks if it is a single or double bracket
-            requiredHeight = findNumMostMatches() * (BOX_HEIGHT + VERTICAL_SPACE) + BORDER_SPACE * 2 + 50; //if single, finds the height by using the round with the highest number of matches
-            requiredLength = (tournament.getNumberOfRounds() * BOX_LENGTH) + ((tournament.getNumberOfRounds() - 1) * HORIZONTAL_SPACE) + (40 * 2) + 20;
+            requiredHeight = findNumMostMatches() * (BOX_HEIGHT + VERTICAL_SPACE) + BORDER_SPACE * 2 + 30; //if single, finds the height by using the round with the highest number of matches
+            requiredLength = (tournament.getNumberOfRounds() * BOX_LENGTH) + ((tournament.getNumberOfRounds() - 1) * HORIZONTAL_SPACE) + BORDER_SPACE*2 ;
             tournamentPanel = new SingleTournamentPanel(tournament, requiredLength, requiredHeight, BOX_HEIGHT, BOX_LENGTH);
         } else {
-            requiredHeight = (int) (findMostTypeMatches(1)+findMostTypeMatches(0)) * (BOX_HEIGHT + VERTICAL_SPACE) + BORDER_SPACE * 2 + 50; // if double, finds the height using the highest number of winner matches and highest number of loser matches
-            requiredLength = (tournament.getNumberOfRounds() * BOX_LENGTH) + ((tournament.getNumberOfRounds() - 1) * HORIZONTAL_SPACE) + (40 * 2) + 20;
+            requiredHeight = (int) (findMostTypeMatches(1)+findMostTypeMatches(0)) * (BOX_HEIGHT + VERTICAL_SPACE) + BORDER_SPACE * 2 + 30; // if double, finds the height using the highest number of winner matches and highest number of loser matches
+            requiredLength = (tournament.getNumberOfRounds() * BOX_LENGTH) + ((tournament.getNumberOfRounds() - 1) * HORIZONTAL_SPACE) + BORDER_SPACE*2 + 50;
             tournamentPanel = new DoubleTournamentPanel(tournament, requiredLength, requiredHeight, BOX_HEIGHT, BOX_LENGTH, findMostTypeMatches(1)/(findMostTypeMatches(0)+findMostTypeMatches(1)));
         }
 
@@ -55,19 +56,21 @@ public class Display extends JFrame{
         if (requiredHeight > Toolkit.getDefaultToolkit().getScreenSize().getHeight()) { //checks if the required size is greater than the screen size; if so, will set the height to the screen's height, if not, will set it to whatever the required height is
             this.maxY = (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().getHeight());
         } else {
-            this.maxY = requiredHeight + 10;
+            this.maxY = requiredHeight + 60;
         }
         if (requiredLength > Toolkit.getDefaultToolkit().getScreenSize().getWidth()){ //same thing as above with length
             this.maxX = (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().getWidth());
         } else {
-            this.maxX = requiredLength + 10;
+            this.maxX = requiredLength + 40;
         }
 
+        ImageIcon icon = new ImageIcon("assets/Icon.png");
+        this.setIconImage(icon.getImage());
         this.setSize(maxX, maxY);
         this.setLocationRelativeTo(null); //start the frame in the center of the screen
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
-        this.setUndecorated(true);
+        this.setUndecorated(false);
 
         JScrollPane sp = new JScrollPane(tournamentPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED); //initializing scrollpane
         sp.setViewportView(tournamentPanel);
