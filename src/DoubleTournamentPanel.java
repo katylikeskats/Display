@@ -91,7 +91,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
         losingHeight = (int) Math.round(losePercentPage *maxY); //calculates the height allotted to the winner bracket using the required percentage
         winningHeight = maxY - losingHeight; //calculates the height allotted to the loser bracket by subtracting the winner height from the total height
 
-        workingWinY = BORDER_SPACE + fontMetrics.getHeight() + 10 ; //lowers workingWinY to account for the title space
+        workingWinY = BORDER_SPACE + fontMetrics.getHeight(); //lowers workingWinY to account for the title space
         workingLoseY = BORDER_SPACE + winningHeight; //sets working y for the loser bracket to just below the winning height threshold
 
         //Drawing round 1
@@ -99,24 +99,20 @@ public class DoubleTournamentPanel extends TournamentPanel {
         if (numMatches > 1) {
             verticalWinSpace = (winningHeight - (workingWinY * 2 - fontMetrics.getHeight()) - (boxHeight * numMatches)) / (numMatches - 1); //finds the space that it will use and divides it between the spaces
         } else {
-            workingWinY = winningHeight/2 - boxHeight /2 + 10;
+            workingWinY = winningHeight/2 - boxHeight /2 ;
         }
         drawRound(g, workingX, workingWinY, workingLoseY, verticalWinSpace, 0, 1, boxes); //draws the matchboxes
 
-        workingWinY = BORDER_SPACE + boxHeight + verticalWinSpace/2; //adjusts the workingWinY and workingX coordinates
         workingX += boxLength + horizontalSpace;
-
         g.drawLine(0, winningHeight, maxX, winningHeight); //remove later, divdes winner and lsoer bracket
 
         for (int roundNum = 2; roundNum <= tournament.getNumberOfRounds(); roundNum++){ //iterates through each round
             numLossMatches = findNumMatches(roundNum, 1); //determines the number of loser bracket matches
             numWinMatches = findNumMatches(roundNum, 0); //determines the number of winner bracket matches
 
-            //If the round has more matches than or equal matches to the previous round, paints it at the same height
-            if (((roundNum == 3) &&
-                    (findNumMatches(1, 0) <= numWinMatches) && (hasByes())) ||
-                    (roundNum == 2) &&
-                            (findNumMatches(1, 0) <= numWinMatches)){
+            if ((roundNum % 2 == 1) && (numWinMatches < findNumMatches(roundNum-2, 0))){
+                workingWinY += boxHeight/2 + verticalWinSpace/2; //adjusts the workingLoseY int
+            } else if (((roundNum % 2 == 1) && (numWinMatches > findNumMatches(roundNum - 2, 0))) || ((roundNum == 2) && (numWinMatches > findNumMatches(1, 0)))){
                 workingWinY = BORDER_SPACE + fontMetrics.getHeight();
             }
             if (numLossMatches < findNumMatches(roundNum-1, 1)){
@@ -131,18 +127,28 @@ public class DoubleTournamentPanel extends TournamentPanel {
             } else { //if there is only one match, sets the working Y to center the single match
                 workingLoseY = winningHeight + losingHeight/2 - boxHeight /2;
             }
-            if (numWinMatches > 1){
+            if ((numWinMatches > 1)){
                 verticalWinSpace = (winningHeight - (workingWinY * 2 - fontMetrics.getHeight()) - (boxHeight * numWinMatches)) / (numWinMatches - 1);
-            } else {
-                workingWinY = winningHeight/2 - boxHeight /2 + 10 ; //check
+            } else if (numWinMatches == 1){
+                workingWinY = winningHeight/2 - boxHeight /2 + 10;
             }
 
             drawRound(g, workingX, workingWinY, workingLoseY, verticalWinSpace, verticalLoseSpace, roundNum, boxes); //draws the matchboxes
 
-            workingWinY = BORDER_SPACE + boxHeight/2 + verticalWinSpace/2; //adjusts the workingWinY int
             workingX += boxLength + horizontalSpace; //adjusts the workingX int
         }
         drawLines(g, boxes); //draws the lines between matches which feed into each other
+
+        int x1 = workingX - horizontalSpace + 10;
+        int x2 = workingX - horizontalSpace + boxLength - 10;
+        g.drawLine(x1, winningHeight/2 + 10, x2, winningHeight/2 + 10);
+
+        Font font1 = getFont("assets/Comfortaa-Light.ttf", 15f);
+        fontMetrics = g.getFontMetrics(font1);
+        if (tournament.getTournamentWinner()!=null) {
+            g.drawString(tournament.getTournamentWinner(), x1 + (x2-x1)/2 - fontMetrics.stringWidth(tournament.getTournamentWinner())/2, winningHeight / 2 - 10);
+        }
+        g.drawString("Winner of Tournament", x1 + (x2-x1)/2 - fontMetrics.stringWidth("Winner of Tournament")/2, winningHeight/2 + 30);
 
 
         Graphics2D g2 = (Graphics2D) g;

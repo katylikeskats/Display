@@ -98,10 +98,21 @@ public class SingleTournamentPanel extends TournamentPanel {
 
             drawRound(g, workingX, workingY, verticalSpace, roundNum, boxes); //draws the matchboxes
 
-            workingY = BORDER_SPACE + fontMetrics.getHeight() + boxHeight / 2 + verticalSpace/2; //adjusts the workingY int
+            workingY += boxHeight; //adjusts the workingY int
             workingX += boxLength + HORIZONTAL_SPACE; //adjusts the workingX int
         }
         drawLines(g, boxes); //draws lines between the matches which feed into each other
+
+        int x1 = workingX - HORIZONTAL_SPACE + 10;
+        int x2 = workingX - HORIZONTAL_SPACE + boxLength - 10;
+        g.drawLine(x1, maxY/2, x2, maxY/2);
+        Font font1 = getFont("assets/Comfortaa-Light.ttf", 15f);
+        fontMetrics = g.getFontMetrics(font1);
+        if (tournament.getTournamentWinner()!=null) {
+            g.drawString(tournament.getTournamentWinner(), x1 + (x2-x1)/2 - fontMetrics.stringWidth(tournament.getTournamentWinner())/2, maxY / 2 - 10);
+        }
+        g.drawString("Winner of Tournament", x1 + (x2-x1)/2 - fontMetrics.stringWidth("Winner of Tournament")/2, maxY/2 + 30);
+
     }
 
     /**
@@ -117,6 +128,7 @@ public class SingleTournamentPanel extends TournamentPanel {
         String[][] teams; //stores teams who are playing in a certain match match
         MatchBox[] roundBoxes = new MatchBox[tournament.getNumberOfMatchesInRound(roundNum)]; //sets up a MatchBox array for as many matches there are in the round
         Graphics2D graphics2 = (Graphics2D) g;
+        int tempWorkingY = workingY;
 
         //Setting up the font
         Font font1 = getFont("assets/Comfortaa-Light.ttf", 15f);
@@ -126,16 +138,16 @@ public class SingleTournamentPanel extends TournamentPanel {
         //g.drawString("Round "+Integer.toString(roundNum), workingX + boxLength/2 - fontMetrics.stringWidth("Round "+Integer.toString(roundNum))/2, workingY -15);
         for (int matchNum = 1; matchNum <= tournament.getNumberOfMatchesInRound(roundNum); matchNum++){ //iterates through each match
             g.setColor(new Color(255, 255, 255));
-            g.fillRoundRect(workingX, workingY, boxLength, boxHeight, 20,20); //drawing the solid rounded rectangle
+            g.fillRoundRect(workingX, tempWorkingY, boxLength, boxHeight, 20,20); //drawing the solid rounded rectangle
             g.setColor(colors.getColors().get(colorIndex)); //setting the next colour
             colorIndex++; //increasing the colour index
 
             //drawing the rectangles
-            MatchBox currBox = new MatchBox(workingX, workingY, boxLength, boxHeight,  20);
+            MatchBox currBox = new MatchBox(workingX, tempWorkingY, boxLength, boxHeight,  20);
             roundBoxes[matchNum - 1] = currBox;
 
             //draws match number
-            g.drawString(roundNum+"."+matchNum,  workingX + 10, workingY + 20);
+            g.drawString(roundNum+"."+matchNum,  workingX + 10, tempWorkingY + 20);
 
             //makes stroke thicker and then draws matchbox
             graphics2.setStroke(new BasicStroke(2)); //setting thickness to slightly thicker than default
@@ -150,7 +162,7 @@ public class SingleTournamentPanel extends TournamentPanel {
                 g.drawLine(currBox.getRightX(), currBox.getMidY(), currBox.getRightX() + HORIZONTAL_SPACE / 2, currBox.getMidY()); //the one that comes out of the right side
             }
 
-            workingY += boxHeight + verticalSpace; //adjusting the workingY boxHeight
+            tempWorkingY += boxHeight + verticalSpace; //adjusting the workingY boxHeight
 
         }
         boxes.add(roundBoxes);

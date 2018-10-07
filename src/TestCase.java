@@ -1,17 +1,16 @@
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader;
-
+//util imports
 import java.util.ArrayList;
 
 public class TestCase {
     public static void main(String[] args){
         ArrayList<Team> teams = new ArrayList<Team>();
-        SingleGenerator generator;
+        DoubleGenerator generator;
 
-        for (int i = 1; i <= 25; i++) {
+        for (int i = 1; i <= 9; i++) {
             teams.add(new Team(Integer.toString(i), i));
         }
 
-        generator = new SingleGenerator(teams, true);
+        generator = new DoubleGenerator(teams);
 
         Bracket bracket = generator.getBracket();
 
