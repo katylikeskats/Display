@@ -33,7 +33,6 @@ public class SingleTournamentPanel extends TournamentPanel {
     private int boxLength; //length of box
     private ColourPalette colors; // colors to draw with
     private int colorIndex;
-    private int workingNumMatches; //the previous number of matches created (to add onto current match number to get total match number)
 
     /**
      * Constructor
@@ -60,8 +59,6 @@ public class SingleTournamentPanel extends TournamentPanel {
      */
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-
-        workingNumMatches = 0; //initializes number of matches to 0
         ArrayList<MatchBox[]> boxes = new ArrayList<>();
         int numMatches;
         int verticalSpace = 0; //space between each matchbox of a given round (for an evenly distributed look)
@@ -69,38 +66,43 @@ public class SingleTournamentPanel extends TournamentPanel {
         int workingX = BORDER_SPACE; //current x from which it is drawing
         int workingY = BORDER_SPACE; //current y from which it is drawing
 
-        //Setting up the font
-        Font fontTitle = getFont("assets/Comfortaa-Light.ttf", 40f);
-        // Font font1 = new Font("Helvetica", Font.PLAIN, 15);
-        FontMetrics fontMetrics = g.getFontMetrics(fontTitle);
-        g.setFont(fontTitle);
-        g.drawString("Tournament Name", workingX, workingY + fontMetrics.getHeight()/2);
-
-        workingY += fontMetrics.getHeight() + 10 ; //setting up where the drawing will begin
-
         colors = new RainbowColourPalette(tournament.getNumberOfTeams()-1); //creating the color palette
         colorIndex = 0;
+
 
         for (int roundNum = 1; roundNum <= tournament.getNumberOfRounds(); roundNum++){ //iterates through each round
             numMatches = tournament.getNumberOfMatchesInRound(roundNum); //determines how many matches are in the round
 
             //If the round has the most matches, paints the round beginning at the top of the screen
             if (roundNum == findIndexMostMatches()){
-                workingY = BORDER_SPACE + fontMetrics.getHeight();
+                workingY = BORDER_SPACE;
             }
 
             if (numMatches>1) { //if it is more than one, calculates the space between each matchbox
-                verticalSpace = (maxY - (workingY * 2) - (boxHeight * numMatches))/ (numMatches - 1); //finds the space that it will use and divides it between the spaces
+                verticalSpace = (maxY + 10 - (workingY*2) - (boxHeight * numMatches))/(numMatches - 1); //finds the amount of unused space and divides it
             } else {
                 workingY = maxY/2 - boxHeight /2; //if there is only 1 match, sets the workingY to the middle to centre the finals match
             }
 
             drawRound(g, workingX, workingY, verticalSpace, roundNum, boxes); //draws the matchboxes
 
-            workingY = BORDER_SPACE + boxHeight / 2 + verticalSpace/2; //adjusts the workingY int
+            workingY += boxHeight/2 + verticalSpace/2; //adjusts the workingY int
             workingX += boxLength + HORIZONTAL_SPACE; //adjusts the workingX int
         }
         drawLines(g, boxes); //draws lines between the matches which feed into each other
+
+        int x1 = workingX - HORIZONTAL_SPACE + 10; //Winner line left x coordinate
+        int x2 = maxX - 10; //Winner line right x coordinate
+        g.drawLine(x1, maxY/2, x2, maxY/2); //draws the winner line to the right of the finals match
+
+        Font font1 = getFont("assets/Comfortaa-Light.ttf", 15f); //sets up the font
+        FontMetrics fontMetrics = g.getFontMetrics(font1);
+
+        if (tournament.getTournamentWinner()!=null) { //checks if the winner has been determined
+            g.drawString(tournament.getTournamentWinner(), x1 + (x2-x1)/2 - fontMetrics.stringWidth(tournament.getTournamentWinner())/2, maxY / 2 - 10);
+        }
+        g.drawString("Winner of Tournament", x1 + (x2-x1)/2 - fontMetrics.stringWidth("Winner of Tournament")/2, maxY/2 + 30);
+
     }
 
     /**
@@ -112,7 +114,7 @@ public class SingleTournamentPanel extends TournamentPanel {
      * @param roundNum The round number it is drawing
      * @param boxes ArrayList of arrays of the boxes in each round
      */
-    public void drawRound(Graphics g, int workingX, int workingY, int verticalSpace, int roundNum, ArrayList<MatchBox[]> boxes){
+    private void drawRound(Graphics g, int workingX, int workingY, int verticalSpace, int roundNum, ArrayList<MatchBox[]> boxes){
         String[][] teams; //stores teams who are playing in a certain match match
         MatchBox[] roundBoxes = new MatchBox[tournament.getNumberOfMatchesInRound(roundNum)]; //sets up a MatchBox array for as many matches there are in the round
         Graphics2D graphics2 = (Graphics2D) g;
@@ -152,41 +154,42 @@ public class SingleTournamentPanel extends TournamentPanel {
             workingY += boxHeight + verticalSpace; //adjusting the workingY boxHeight
 
         }
-        boxes.add(roundBoxes);
-        workingNumMatches += tournament.getNumberOfMatchesInRound(roundNum);
+        boxes.add(roundBoxes); //adds the current rounds boxes to the ArrayList of boxes
 
-        Font boldFont = getFont("assets/Comfortaa-Bold.ttf", 15f);
+        Font boldFont = getFont("assets/Comfortaa-Bold.ttf", 15f); //getting the bold font for winners
+
         //drawing all the team names
         for (int i = 0; i < roundBoxes.length; i++) {
             boolean connected = false;
             teams = tournament.getTeamsInMatch(roundNum, i+1); //stores the teams which play in that match
             MatchBox currBox = roundBoxes[i];
 
-            if (teams[0].length == 1) { //checking if the teams playing is already determined
-                if (((SingleBracket)tournament).getMatchWinner(roundNum, i+1) == teams[0][0]) {
+            if (teams[0].length == 1) { //checking if the team playing is already determined
+                if (((SingleBracket)tournament).getMatchWinner(roundNum, i+1) == teams[0][0]) { //if it is the winner, bolds the team name
                     fontMetrics = g.getFontMetrics(boldFont);
                     g.setFont(boldFont);
                 }
                 g.drawString(teams[0][0], currBox.getMidX() - fontMetrics.stringWidth(teams[0][0]) / 2, currBox.getY() + boxHeight / 4 + fontMetrics.getMaxAscent()/4); //if so, draws the team names
+                g.setFont(font1); //resets font
                 fontMetrics = g.getFontMetrics(font1);
-                g.setFont(font1);
             } else {
                 g.drawString("unknown", currBox.getMidX() - fontMetrics.stringWidth("unknown") / 2, currBox.getY() + boxHeight / 4 + fontMetrics.getMaxAscent()/4); // if not, leaves it unknown
                 connected = true;
             }
-            if (teams[1].length == 1){
-                if (((SingleBracket)tournament).getMatchWinner(roundNum, i+1) == teams[1][0]){
+            if (teams[1].length == 1){ //checking if the team playing is already determined
+                if (((SingleBracket)tournament).getMatchWinner(roundNum, i+1) == teams[1][0]){ //if they're the winner, bolds the team name
                     fontMetrics = g.getFontMetrics(boldFont);
                     g.setFont(boldFont);
                 }
                 g.drawString(teams[1][0], currBox.getMidX() - fontMetrics.stringWidth(teams[1][0]) / 2, currBox.getY() + (3* boxHeight) / 4 + fontMetrics.getMaxAscent()/4); //if so, draws the team names
-                g.setFont(font1);
+                g.setFont(font1); //resets font
                 fontMetrics = g.getFontMetrics(font1);
             } else {
                 g.drawString("unknown", currBox.getMidX() - fontMetrics.stringWidth("unknown") / 2, currBox.getY() + (3* boxHeight) / 4 + fontMetrics.getMaxAscent()/4); // if not, leaves it unknown
                 connected = true;
             }
-            if ((roundNum != 1) && (connected)) { //ensuring extra lines won't be drawn
+
+            if ((roundNum != 1) && (connected)) { //ensuring extra lines won't be drawn, checks if it needs the left line (if it was connected to a previous match)
                 g.drawLine(currBox.getX(), currBox.getMidY(), currBox.getX() - HORIZONTAL_SPACE / 2, currBox.getMidY()); // the one that comes out of the left side
             }
         }
@@ -196,7 +199,7 @@ public class SingleTournamentPanel extends TournamentPanel {
      * Determines the round with the most number of matches
      * @return returns the round number with the most number of matches
      */
-    public int findIndexMostMatches(){
+    private int findIndexMostMatches(){
         int mostRounds = 0; //the highest number of matches
         int recordIndex = 1; // the index of the round with the highest number of matches
         for (int i = 1; i <= tournament.getNumberOfRounds(); i++){
@@ -214,7 +217,7 @@ public class SingleTournamentPanel extends TournamentPanel {
      * @param box2 the right box
      * @param g the graphics object to draw the line
      */
-    public void drawLineBetweenMatch(MatchBox box1, MatchBox box2, Graphics g){
+    private void drawLineBetweenMatch(MatchBox box1, MatchBox box2, Graphics g){
         g.drawLine(box1.getRightX()+HORIZONTAL_SPACE/2, box1.getMidY(), box2.getX()-HORIZONTAL_SPACE/2, box2.getMidY());
     }
 
@@ -223,7 +226,7 @@ public class SingleTournamentPanel extends TournamentPanel {
      * @param g the graphics object to draw the lines
      * @param boxes the ArrayList or arrays of match boxes
      */
-    public void drawLines(Graphics g, ArrayList<MatchBox[]> boxes){
+    private void drawLines(Graphics g, ArrayList<MatchBox[]> boxes){
         g.setColor(new Color(86, 87, 87));
         for (int i = 0; i < boxes.size()-1; i++){
             for (int j = 0; j < boxes.get(i).length; j++) {
@@ -250,7 +253,7 @@ public class SingleTournamentPanel extends TournamentPanel {
      * @param teamQuery array of Strings of the teams of the second (future round) box
      * @return true if the first box leads to the second, false if not
      */
-    public boolean contains(String[] teams, String[] teamQuery){
+    private boolean contains(String[] teams, String[] teamQuery){
         for (int i = 0; i < teams.length; i++){
             for (int j = 0; j < teamQuery.length; j++) {
                 if (teams[i].equals(teamQuery[j])) {
@@ -276,7 +279,7 @@ public class SingleTournamentPanel extends TournamentPanel {
      * @param size the desired size of the font to be made
      * @return the created Font
      */
-    public static Font getFont(String fileName, float size){
+    private static Font getFont(String fileName, float size){
         Font font;
         try {
             font = Font.createFont(Font.TRUETYPE_FONT, new File(fileName)).deriveFont(size);
