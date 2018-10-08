@@ -23,8 +23,8 @@ public class Display extends JFrame{
     private static final int VERTICAL_SPACE = 30;
     private static final int HORIZONTAL_SPACE = 100;
     private static final int BORDER_SPACE = 20;
-    private int maxX;
-    private int maxY;
+    private int maxX; //frame length
+    private int maxY; //frame height
     private JFrame frame;
     private TournamentPanel tournamentPanel;
     private Bracket tournament;
@@ -47,7 +47,7 @@ public class Display extends JFrame{
             requiredLength = (tournament.getNumberOfRounds() * BOX_LENGTH) + ((tournament.getNumberOfRounds() - 1) * HORIZONTAL_SPACE) + BORDER_SPACE*2 + 200;
             tournamentPanel = new SingleTournamentPanel(tournament, requiredLength, requiredHeight, BOX_HEIGHT, BOX_LENGTH);
         } else {
-            requiredHeight = (int) (findMostTypeMatches(1)+findMostTypeMatches(0)) * (BOX_HEIGHT + VERTICAL_SPACE) + BORDER_SPACE * 2 + 120; // ifdouble, finds the height using the highest number of winner matches and highest number of loser matches
+            requiredHeight = (int) (findMostTypeMatches(1)+findMostTypeMatches(0)) * (BOX_HEIGHT + VERTICAL_SPACE) + BORDER_SPACE * 2 + 100; // if double, finds the height using the highest number of winner matches and highest number of loser matches
             requiredLength = (tournament.getNumberOfRounds() * BOX_LENGTH) + ((tournament.getNumberOfRounds() - 1) * HORIZONTAL_SPACE) + BORDER_SPACE*2 + 250;
             tournamentPanel = new DoubleTournamentPanel(tournament, requiredLength, requiredHeight, BOX_HEIGHT, BOX_LENGTH, findMostTypeMatches(1)/(findMostTypeMatches(0)+findMostTypeMatches(1)));
         }
