@@ -70,7 +70,7 @@ public class RainbowColourPalette extends ColourPalette{
                 green = UPPER_LIMIT;
                 red = LOWER_LIMIT;
             }
-            colors.add(new Color(red, green, blue));
+            colors.add(new Color(red, green, blue, 150));
         }
     }
 
