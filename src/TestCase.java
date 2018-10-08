@@ -6,7 +6,7 @@ public class TestCase {
         ArrayList<Team> teams = new ArrayList<Team>();
         SingleGenerator generator;
 
-        for (int i = 1; i <= 78; i++) {
+        for (int i = 1; i <= 7; i++) {
             teams.add(new Team(Integer.toString(i), i));
         }
 

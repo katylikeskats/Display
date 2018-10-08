@@ -79,7 +79,7 @@ public class SingleTournamentPanel extends TournamentPanel {
             }
 
             if (numMatches>1) { //if it is more than one, calculates the space between each matchbox
-                verticalSpace = (maxY - (workingY*2) - (boxHeight * numMatches))/(numMatches - 1); //finds the amount of unused space and divides it
+                verticalSpace = (maxY + 10 - (workingY*2) - (boxHeight * numMatches))/(numMatches - 1); //finds the amount of unused space and divides it
             } else {
                 workingY = maxY/2 - boxHeight /2; //if there is only 1 match, sets the workingY to the middle to centre the finals match
             }
