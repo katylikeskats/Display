@@ -23,8 +23,6 @@ public class Display extends JFrame{
     private static final int VERTICAL_SPACE = 30;
     private static final int HORIZONTAL_SPACE = 100;
     private static final int BORDER_SPACE = 20;
-    private int maxX; //frame length
-    private int maxY; //frame height
     private JFrame frame;
     private TournamentPanel tournamentPanel;
     private Bracket tournament;
@@ -38,6 +36,8 @@ public class Display extends JFrame{
         this.frame = this;
         this.tournament = tournament;
 
+        int maxX; //frame length
+        int maxY; //frame height
         int requiredHeight; //the calculated height required
         int requiredLength; //the calculated length required
 
@@ -54,14 +54,14 @@ public class Display extends JFrame{
 
         //sets the limits for the JFrame
         if (requiredHeight > Toolkit.getDefaultToolkit().getScreenSize().getHeight()) { //checks if the required size is greater than the screen size; if so, will set the height to the screen's height, if not, will set it to whatever the required height is
-            this.maxY = (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().getHeight());
+            maxY = (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().getHeight());
         } else {
-            this.maxY = requiredHeight + 60;
+            maxY = requiredHeight + 60;
         }
         if (requiredLength > Toolkit.getDefaultToolkit().getScreenSize().getWidth()){ //same thing as above with length
-            this.maxX = (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().getWidth());
+            maxX = (int) Math.round(Toolkit.getDefaultToolkit().getScreenSize().getWidth());
         } else {
-            this.maxX = requiredLength + 40;
+            maxX = requiredLength + 40;
         }
 
         ImageIcon icon = new ImageIcon("assets/Icon.png");
@@ -86,7 +86,7 @@ public class Display extends JFrame{
      * Determines how many matches are in the round with the most matches
      * @return the number of matches in the round with the most matches
      */
-    public int findNumMostMatches(){
+    private int findNumMostMatches(){
         int most = 0;
         for (int i = 1; i <= tournament.getNumberOfRounds(); i++){
             if (tournament.getNumberOfMatchesInRound(i) >= most){
@@ -102,7 +102,7 @@ public class Display extends JFrame{
      * @param type the type of matches (0 for winner bracket matches, 1 for loser bracket matches)
      * @return the total number of the given type of matches within the specified round
      */
-    public int findNumMatches(int roundNum, int type){
+    private int findNumMatches(int roundNum, int type){
         int sum = 0;
         for (int i = 1; i <= tournament.getNumberOfMatchesInRound(roundNum); i++ ){
             if (tournament.getMatchBracket(roundNum, i) == type){
@@ -117,7 +117,7 @@ public class Display extends JFrame{
      * @param type the type of matches (0 for winner bracket matches, 1 for loser bracket matches)
      * @return the most number of the specified type or matches within the tournament bracket (returns as double to maintain precision to calculate ratio required for winner bracket to loser bracket)
      */
-    public double findMostTypeMatches(int type){
+    private double findMostTypeMatches(int type){
         double most = 0;
         for (int i = 1; i <= tournament.getNumberOfRounds(); i++){
             if (findNumMatches(i,type) >= most){

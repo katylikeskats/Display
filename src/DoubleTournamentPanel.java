@@ -154,7 +154,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
      * @param angle Angle of the rotation
      * @param text String to be displayed
      */
-    public static void drawRotate(Graphics2D g2d, double x, double y, int angle, String text) {
+    private static void drawRotate(Graphics2D g2d, double x, double y, int angle, String text) {
         g2d.translate((float)x,(float)y); //translates the 2D graphics to spot where the string will be drawn
         g2d.rotate(Math.toRadians(angle)); //rotates the 2D graphics
         g2d.drawString(text,0,0); //draws the string
@@ -169,7 +169,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
      * @param x2 Second x coordinate
      * @param y Y coordinate
      */
-    public static void drawDashedLine(Graphics g, int x1, int x2, int y){
+    private static void drawDashedLine(Graphics g, int x1, int x2, int y){
         for (int i = x1; i < x2; i = i+20){
             g.drawLine(i, y, i+10, y);
         }
@@ -184,7 +184,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
      * @param roundNum The round number it is drawing
      * @param boxes ArrayList of arrays of the boxes in each round
      */
-    public void drawRound(Graphics g, int workingX, int workingWinY, int workingLoseY, int verticalWinSpace, int verticalLoseSpace, int roundNum, ArrayList<MatchBox[]> boxes){
+    private void drawRound(Graphics g, int workingX, int workingWinY, int workingLoseY, int verticalWinSpace, int verticalLoseSpace, int roundNum, ArrayList<MatchBox[]> boxes){
         String[][] teams; //stores teams who are playing in a certain match match
         MatchBox[] roundBoxes = new MatchBox[tournament.getNumberOfMatchesInRound(roundNum)];
         Graphics2D graphics2 = (Graphics2D) g;
@@ -277,7 +277,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
      * @param type the type of matches (0 for winner bracket matches, 1 for loser bracket matches)
      * @return the total number of the given type of matches within the specified round
      */
-    public int findNumMatches(int roundNum, int type){
+    private int findNumMatches(int roundNum, int type){
         int sum = 0;
         for (int i = 1; i <= tournament.getNumberOfMatchesInRound(roundNum); i++ ){
             if (tournament.getMatchBracket(roundNum, i) == type){
@@ -293,7 +293,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
      * @param box2 the right box
      * @param g the graphics object to draw the line
      */
-    public void drawLineBetweenMatch(MatchBox box1, MatchBox box2, Graphics g){
+    private void drawLineBetweenMatch(MatchBox box1, MatchBox box2, Graphics g){
         g.drawLine(box1.getRightX() + HORIZONTAL_SPACE / 2, box1.getMidY(), box2.getX() - HORIZONTAL_SPACE / 2, box2.getMidY());
     }
 
@@ -302,7 +302,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
      * @param g the graphics object to draw the lines
      * @param boxes the ArrayList or arrays of match boxes
      */
-    public void drawLines(Graphics g, ArrayList<MatchBox[]> boxes){
+    private void drawLines(Graphics g, ArrayList<MatchBox[]> boxes){
         g.setColor(new Color(86, 87, 87));
         for (int i = 0; i < boxes.size()-1; i++){
             for (int j = 0; j < boxes.get(i).length; j++) {
@@ -338,7 +338,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
      * @param teams the teams from the matchbox
      * @return array of length 2; first index will contain the round num, the second index will contain the match num
      */
-    public int[] findPreviousMatch (ArrayList<MatchBox[]> boxes, MatchBox box, String[] teams){
+    private int[] findPreviousMatch (ArrayList<MatchBox[]> boxes, MatchBox box, String[] teams){
         String team1; //previous match should have certain players already
         String team2;
         int[] array = new int[2];
@@ -371,7 +371,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
      * @param teamQuery array of Strings of the teams of the second (future round) box
      * @return true if the first box leads to the second, false if not
      */
-    public boolean contains(String[] teams, String[] teamQuery){
+    private boolean contains(String[] teams, String[] teamQuery){
         for (int i = 0; i < teams.length; i++){
             for (int j = 0; j < teamQuery.length; j++) {
                 if (teams[i].equals(teamQuery[j])) {
@@ -397,7 +397,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
      * @param size the desired size of the font to be made
      * @return the created Font
      */
-    public static Font getFont(String fileName, float size){
+    private static Font getFont(String fileName, float size){
         Font font;
         try {
             font = Font.createFont(Font.TRUETYPE_FONT, new File(fileName)).deriveFont(size);

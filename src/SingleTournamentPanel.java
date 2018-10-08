@@ -79,7 +79,7 @@ public class SingleTournamentPanel extends TournamentPanel {
             }
 
             if (numMatches>1) { //if it is more than one, calculates the space between each matchbox
-                verticalSpace = (maxY - (workingY*2) - (BORDER_SPACE*2) - (boxHeight * numMatches))/(numMatches - 1); //finds the amount of unused space and divides it
+                verticalSpace = (maxY - (workingY*2) - (boxHeight * numMatches))/(numMatches - 1); //finds the amount of unused space and divides it
             } else {
                 workingY = maxY/2 - boxHeight /2; //if there is only 1 match, sets the workingY to the middle to centre the finals match
             }
@@ -114,7 +114,7 @@ public class SingleTournamentPanel extends TournamentPanel {
      * @param roundNum The round number it is drawing
      * @param boxes ArrayList of arrays of the boxes in each round
      */
-    public void drawRound(Graphics g, int workingX, int workingY, int verticalSpace, int roundNum, ArrayList<MatchBox[]> boxes){
+    private void drawRound(Graphics g, int workingX, int workingY, int verticalSpace, int roundNum, ArrayList<MatchBox[]> boxes){
         String[][] teams; //stores teams who are playing in a certain match match
         MatchBox[] roundBoxes = new MatchBox[tournament.getNumberOfMatchesInRound(roundNum)]; //sets up a MatchBox array for as many matches there are in the round
         Graphics2D graphics2 = (Graphics2D) g;
@@ -199,7 +199,7 @@ public class SingleTournamentPanel extends TournamentPanel {
      * Determines the round with the most number of matches
      * @return returns the round number with the most number of matches
      */
-    public int findIndexMostMatches(){
+    private int findIndexMostMatches(){
         int mostRounds = 0; //the highest number of matches
         int recordIndex = 1; // the index of the round with the highest number of matches
         for (int i = 1; i <= tournament.getNumberOfRounds(); i++){
@@ -217,7 +217,7 @@ public class SingleTournamentPanel extends TournamentPanel {
      * @param box2 the right box
      * @param g the graphics object to draw the line
      */
-    public void drawLineBetweenMatch(MatchBox box1, MatchBox box2, Graphics g){
+    private void drawLineBetweenMatch(MatchBox box1, MatchBox box2, Graphics g){
         g.drawLine(box1.getRightX()+HORIZONTAL_SPACE/2, box1.getMidY(), box2.getX()-HORIZONTAL_SPACE/2, box2.getMidY());
     }
 
@@ -226,7 +226,7 @@ public class SingleTournamentPanel extends TournamentPanel {
      * @param g the graphics object to draw the lines
      * @param boxes the ArrayList or arrays of match boxes
      */
-    public void drawLines(Graphics g, ArrayList<MatchBox[]> boxes){
+    private void drawLines(Graphics g, ArrayList<MatchBox[]> boxes){
         g.setColor(new Color(86, 87, 87));
         for (int i = 0; i < boxes.size()-1; i++){
             for (int j = 0; j < boxes.get(i).length; j++) {
@@ -253,7 +253,7 @@ public class SingleTournamentPanel extends TournamentPanel {
      * @param teamQuery array of Strings of the teams of the second (future round) box
      * @return true if the first box leads to the second, false if not
      */
-    public boolean contains(String[] teams, String[] teamQuery){
+    private boolean contains(String[] teams, String[] teamQuery){
         for (int i = 0; i < teams.length; i++){
             for (int j = 0; j < teamQuery.length; j++) {
                 if (teams[i].equals(teamQuery[j])) {
@@ -279,7 +279,7 @@ public class SingleTournamentPanel extends TournamentPanel {
      * @param size the desired size of the font to be made
      * @return the created Font
      */
-    public static Font getFont(String fileName, float size){
+    private static Font getFont(String fileName, float size){
         Font font;
         try {
             font = Font.createFont(Font.TRUETYPE_FONT, new File(fileName)).deriveFont(size);
