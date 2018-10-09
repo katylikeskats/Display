@@ -160,7 +160,6 @@ public class SingleTournamentPanel extends TournamentPanel {
 
         //drawing all the team names
         for (int i = 0; i < roundBoxes.length; i++) {
-            boolean connected = false;
             teams = tournament.getTeamsInMatch(roundNum, i+1); //stores the teams which play in that match
             MatchBox currBox = roundBoxes[i];
 
@@ -174,7 +173,6 @@ public class SingleTournamentPanel extends TournamentPanel {
                 fontMetrics = g.getFontMetrics(font1);
             } else {
                 g.drawString("unknown", currBox.getMidX() - fontMetrics.stringWidth("unknown") / 2, currBox.getY() + boxHeight / 4 + fontMetrics.getMaxAscent()/4); // if not, leaves it unknown
-                connected = true;
             }
             if (teams[1].length == 1){ //checking if the team playing is already determined
                 if (((SingleBracket)tournament).getMatchWinner(roundNum, i+1) == teams[1][0]){ //if they're the winner, bolds the team name
@@ -186,14 +184,10 @@ public class SingleTournamentPanel extends TournamentPanel {
                 fontMetrics = g.getFontMetrics(font1);
             } else {
                 g.drawString("unknown", currBox.getMidX() - fontMetrics.stringWidth("unknown") / 2, currBox.getY() + (3* boxHeight) / 4 + fontMetrics.getMaxAscent()/4); // if not, leaves it unknown
-                connected = true;
             }
 
-            if ((roundNum != 1) && (connected)) { //ensuring extra lines won't be drawn, checks if it needs the left line (if it was connected to a previous match)
-                g.drawLine(currBox.getX(), currBox.getMidY(), currBox.getX() - HORIZONTAL_SPACE / 2, currBox.getMidY()); // the one that comes out of the left side
-            }
         }
-    }
+    } // :)
 
     /**
      * Determines the round with the most number of matches
@@ -239,6 +233,7 @@ public class SingleTournamentPanel extends TournamentPanel {
                         for (int teamNum = 0; teamNum < 2; teamNum++) {  //iterates twice through, since there are two arrays to be checked in the next matchbox
                             if (contains(nextTeams[teamNum], currTeams[set])) { //if they feed into each other, draw a line between them
                                 drawLineBetweenMatch(boxes.get(i)[j], boxes.get(i + 1)[matchNum-1], g);
+                                g.drawLine(boxes.get(i+1)[matchNum-1].getX(), boxes.get(i+1)[matchNum-1].getMidY(), boxes.get(i+1)[matchNum-1].getX() - HORIZONTAL_SPACE / 2, boxes.get(i+1)[matchNum-1].getMidY()); // the one that comes out of the left side
                             }
                         }
                     }
