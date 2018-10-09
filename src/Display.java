@@ -18,10 +18,10 @@ import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 
 public class Display extends JFrame{
-    private static final int BOX_HEIGHT = 100;
-    private static final int BOX_LENGTH = 240;
+    private static final int BOX_HEIGHT = 80;
+    private static final int BOX_LENGTH = 192;
     private static final int VERTICAL_SPACE = 30;
-    private static final int HORIZONTAL_SPACE = 100;
+    private static final int HORIZONTAL_SPACE = 80;
     private static final int BORDER_SPACE = 20;
     private JFrame frame;
     private TournamentPanel tournamentPanel;
@@ -44,11 +44,11 @@ public class Display extends JFrame{
         //creates tournament panel accordingly
         if (tournament.getClass().getSimpleName().equals("SingleBracket")) { //checks if it is a single or double bracket
             requiredHeight = findNumMostMatches() * (BOX_HEIGHT + VERTICAL_SPACE) + BORDER_SPACE * 2 + 30; //if single, finds the height by using the round with the highest number of matches
-            requiredLength = (tournament.getNumberOfRounds() * BOX_LENGTH) + ((tournament.getNumberOfRounds() - 1) * HORIZONTAL_SPACE) + BORDER_SPACE*2 + 200;
+            requiredLength = (tournament.getNumberOfRounds() * BOX_LENGTH) + ((tournament.getNumberOfRounds() - 1) * HORIZONTAL_SPACE) + BORDER_SPACE*2 + 180;
             tournamentPanel = new SingleTournamentPanel(tournament, requiredLength, requiredHeight, BOX_HEIGHT, BOX_LENGTH);
         } else {
             requiredHeight = (int) (findMostTypeMatches(1)+findMostTypeMatches(0)) * (BOX_HEIGHT + VERTICAL_SPACE) + BORDER_SPACE * 2 + 100; // if double, finds the height using the highest number of winner matches and highest number of loser matches
-            requiredLength = (tournament.getNumberOfRounds() * BOX_LENGTH) + ((tournament.getNumberOfRounds() - 1) * HORIZONTAL_SPACE) + BORDER_SPACE*2 + 250;
+            requiredLength = (tournament.getNumberOfRounds() * BOX_LENGTH) + ((tournament.getNumberOfRounds() - 1) * HORIZONTAL_SPACE) + BORDER_SPACE*2 + 210;
             tournamentPanel = new DoubleTournamentPanel(tournament, requiredLength, requiredHeight, BOX_HEIGHT, BOX_LENGTH, findMostTypeMatches(1)/(findMostTypeMatches(0)+findMostTypeMatches(1)));
         }
 

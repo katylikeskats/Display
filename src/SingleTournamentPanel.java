@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 public class SingleTournamentPanel extends TournamentPanel {
     private static final int BORDER_SPACE = 20;
-    private static final int HORIZONTAL_SPACE = 100; //space between each box horizontally
+    private static final int HORIZONTAL_SPACE = 80; //space between each box horizontally
     private Bracket tournament;
     private int maxX; //panel length
     private int maxY; //panel height
@@ -95,13 +95,13 @@ public class SingleTournamentPanel extends TournamentPanel {
         int x2 = maxX - 10; //Winner line right x coordinate
         g.drawLine(x1, maxY/2, x2, maxY/2); //draws the winner line to the right of the finals match
 
-        Font font1 = getFont("assets/Comfortaa-Light.ttf", 15f); //sets up the font
+        Font font1 = getFont("assets/Comfortaa-Light.ttf", 12f); //sets up the font
         FontMetrics fontMetrics = g.getFontMetrics(font1);
 
         if (tournament.getTournamentWinner()!=null) { //checks if the winner has been determined
             g.drawString(tournament.getTournamentWinner(), x1 + (x2-x1)/2 - fontMetrics.stringWidth(tournament.getTournamentWinner())/2, maxY / 2 - 10);
         }
-        g.drawString("Winner of Tournament", x1 + (x2-x1)/2 - fontMetrics.stringWidth("Winner of Tournament")/2, maxY/2 + 30);
+        g.drawString("Winner of Tournament", x1 + (x2-x1)/2 - fontMetrics.stringWidth("Winner of Tournament")/2, maxY/2 + 20);
 
     }
 
@@ -120,7 +120,7 @@ public class SingleTournamentPanel extends TournamentPanel {
         Graphics2D graphics2 = (Graphics2D) g;
 
         //Setting up the font
-        Font font1 = getFont("assets/Comfortaa-Light.ttf", 15f);
+        Font font1 = getFont("assets/Comfortaa-Light.ttf", 12f);
         FontMetrics fontMetrics = g.getFontMetrics(font1);
         g.setFont(font1);
 
@@ -156,7 +156,7 @@ public class SingleTournamentPanel extends TournamentPanel {
         }
         boxes.add(roundBoxes); //adds the current rounds boxes to the ArrayList of boxes
 
-        Font boldFont = getFont("assets/Comfortaa-Bold.ttf", 15f); //getting the bold font for winners
+        Font boldFont = getFont("assets/Comfortaa-Bold.ttf", 12f); //getting the bold font for winners
 
         //drawing all the team names
         for (int i = 0; i < roundBoxes.length; i++) {
@@ -187,7 +187,7 @@ public class SingleTournamentPanel extends TournamentPanel {
             }
 
         }
-    } // :)
+    }
 
     /**
      * Determines the round with the most number of matches

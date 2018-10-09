@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 public class DoubleTournamentPanel extends TournamentPanel {
     private static final int BORDER_SPACE = 20;
-    private static final int HORIZONTAL_SPACE = 100; //space between each box horizontally
+    private static final int HORIZONTAL_SPACE = 80; //space between each box horizontally
     private Bracket tournament;
     private int maxX; //length of panel
     private int maxY; //height of panel
@@ -132,7 +132,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
         int x2 = workingX - HORIZONTAL_SPACE + boxLength - 10;
         g.drawLine(x1, winningHeight/2 , x2, winningHeight/2);
 
-        Font font1 = getFont("assets/Comfortaa-Light.ttf", 15f);
+        Font font1 = getFont("assets/Comfortaa-Light.ttf", 12f);
         FontMetrics fontMetrics = g.getFontMetrics(font1);
         if (tournament.getTournamentWinner()!=null) {
             g.drawString(tournament.getTournamentWinner(), x1 + (x2-x1)/2 - fontMetrics.stringWidth(tournament.getTournamentWinner())/2, winningHeight / 2 - 10);
@@ -195,7 +195,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
         boolean changed = false; //indicates whether the iteration has reached the loser bracket matches yet (so it doesn't keep changing the workingY to the same initial workingLoseY
 
         //Setting up the font
-        Font font1 = getFont("assets/Comfortaa-Light.ttf", 15f);
+        Font font1 = getFont("assets/Comfortaa-Light.ttf", 12f);
         FontMetrics fontMetrics = g.getFontMetrics(font1);
         g.setFont(font1);
 
@@ -227,7 +227,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
 
         g.setColor(new Color(86, 87, 87)); //sets color to dark grey
         graphics2.setStroke(new BasicStroke(1)); //resets stroke thickness
-        Font boldFont = getFont("assets/Comfortaa-Bold.ttf", 15f); //creating the bolded font for winners
+        Font boldFont = getFont("assets/Comfortaa-Bold.ttf", 12f); //creating the bolded font for winners
 
         for (int i = 0; i < roundBoxes.length; i++) { //iterates through the round's matchboxes
             teams = tournament.getTeamsInMatch(roundNum, i+1); //stores the teams which play in that match
