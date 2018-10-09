@@ -80,6 +80,7 @@ public class Display extends JFrame{
         this.addKeyListener(keyListener);
 
         this.setVisible(true);
+        new NotificationFrame();
     }
 
     /**
