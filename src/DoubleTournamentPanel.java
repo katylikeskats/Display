@@ -362,6 +362,18 @@ public class DoubleTournamentPanel extends TournamentPanel {
                 }
             }
         }
+        if (box.getRound() >= 3) {
+            for (int i = 1; i <= tournament.getNumberOfMatchesInRound(box.getRound() - 2); i++) {
+                if (tournament.getTeamsInMatch(box.getRound() - 2, i)[0].length == 1) {
+                    team1 = tournament.getTeamsInMatch(box.getRound() - 2, i)[0][0]; //storing the previous match's teams
+                    team2 = tournament.getTeamsInMatch(box.getRound() - 2, i)[1][0];
+                    if ((teams[0].equals(team1) && teams[1].equals(team2)) || ((teams[0].equals(team2) && teams[1].equals(team1)))) { //determining if the teams match
+                        array[0] = box.getRound() - 2;
+                        array[1] = boxes.get(box.getRound() - 3)[i - 1].getRoundIndex();
+                    }
+                }
+            }
+        }
         return array;
     }
 
