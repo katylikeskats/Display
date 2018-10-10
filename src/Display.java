@@ -33,9 +33,10 @@ public class Display extends JFrame{
      */
     public Display(Bracket tournament){
         super("Kraft Dinner Display ©");
+        new NotificationFrame();
         this.frame = this;
         this.tournament = tournament;
-        new NotificationFrame();
+
         int maxX; //frame length
         int maxY; //frame height
         int requiredHeight; //the calculated height required

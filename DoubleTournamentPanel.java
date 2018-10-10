@@ -99,7 +99,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
             workingWinY = winningHeight/2 - boxHeight /2;
         }
 
-        drawRound(g, workingX, workingWinY, workingLoseY, verticalWinSpace, 0, 1, boxes); //draws the matchboxes
+        drawRound(g, workingX, workingWinY, workingLoseY, verticalWinSpace, verticalLoseSpace, 1, boxes); //draws the matchboxes
         workingX += boxLength + HORIZONTAL_SPACE;
 
         drawDashedLine(g, 0, maxX, winningHeight); //divides winner and loser bracket
