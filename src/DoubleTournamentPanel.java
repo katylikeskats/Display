@@ -247,7 +247,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
                 g.drawString(teams[0][0], currBox.getMidX() - fontMetrics.stringWidth(teams[0][0]) / 2, currBox.getY() + boxHeight / 4 + fontMetrics.getMaxAscent()/4); //if so, draws the team names
                 g.setFont(font1); //resets the font
                 fontMetrics = g.getFontMetrics(font1);
-            } else if ((teams[0].length == 2) && (teams[1].length == 2)&& (tournament.getMatchBracket(roundNum, i+1) == 1)){
+            } else if ((teams[0].length == 2) && (tournament.getMatchBracket(roundNum, i+1) == 1)){
                 int[] num = findPreviousMatch(boxes, currBox, teams[0]); //Finds the feeder match round number and match number
                 g.drawString("Loser Of Round #" + num[0] + "." + num[1], currBox.getMidX() - fontMetrics.stringWidth("Loser Of Round #" + num[0] + "." + num[1]) / 2, currBox.getY() + boxHeight / 4 + fontMetrics.getMaxAscent()/4);
             } else {
@@ -261,7 +261,7 @@ public class DoubleTournamentPanel extends TournamentPanel {
                 g.drawString(teams[1][0], currBox.getMidX() - fontMetrics.stringWidth(teams[1][0]) / 2, currBox.getY() + (3* boxHeight) / 4 + fontMetrics.getMaxAscent()/4); //if so, draws the team names
                 g.setFont(font1); //resets the font
                 fontMetrics = g.getFontMetrics(font1);
-            } else if ((teams[1].length == 2) && (teams[1].length == 2) && (tournament.getMatchBracket( roundNum, i + 1) == 1)){
+            } else if ((teams[1].length == 2) && (tournament.getMatchBracket( roundNum, i + 1) == 1)){
                 int[] num = findPreviousMatch(boxes, currBox, teams[1]); //Finds the feeder match round number and match number
                 g.drawString("Loser Of Round #" + num[0] + "." + num[1], currBox.getMidX() - fontMetrics.stringWidth("Loser Of Round #" + num[0] + "." + num[1]) / 2,currBox.getY() + (3* boxHeight) / 4 + fontMetrics.getMaxAscent()/4);
             } else {
@@ -342,16 +342,6 @@ public class DoubleTournamentPanel extends TournamentPanel {
         String team1; //previous match should have certain players already
         String team2;
         int[] array = new int[2];
-        for (int i = 1; i <= tournament.getNumberOfMatchesInRound(box.getRound()-1); i++) {
-            if (tournament.getTeamsInMatch(box.getRound() - 1, i)[0].length == 1) {
-                team1 = tournament.getTeamsInMatch(box.getRound() - 1, i)[0][0]; //storing the previous match's teams
-                team2 = tournament.getTeamsInMatch(box.getRound() - 1, i)[1][0];
-                if ((teams[0].equals(team1) && teams[1].equals(team2)) || ((teams[0].equals(team2) && teams[1].equals(team1)))) { //determining if the teams match
-                    array[0] = box.getRound() - 1;
-                    array[1] = boxes.get(box.getRound() - 2)[i - 1].getRoundIndex();
-                }
-            }
-        }
         for (int i = 1; i <= tournament.getNumberOfMatchesInRound(box.getRound()); i++){
             if (tournament.getTeamsInMatch(box.getRound(), i)[0].length == 1) {
                 team1 = tournament.getTeamsInMatch(box.getRound(), i)[0][0]; //storing the previous match's teams
@@ -359,6 +349,16 @@ public class DoubleTournamentPanel extends TournamentPanel {
                 if ((teams[0].equals(team1) && teams[1].equals(team2)) || ((teams[0].equals(team2) && teams[1].equals(team1)))) { //determining if the teams match
                     array[0] = box.getRound();
                     array[1] = boxes.get(box.getRound() - 1)[i - 1].getRoundIndex();
+                }
+            }
+        }
+        for (int i = 1; i <= tournament.getNumberOfMatchesInRound(box.getRound()-1); i++) {
+            if (tournament.getTeamsInMatch(box.getRound() - 1, i)[0].length == 1) {
+                team1 = tournament.getTeamsInMatch(box.getRound() - 1, i)[0][0]; //storing the previous match's teams
+                team2 = tournament.getTeamsInMatch(box.getRound() - 1, i)[1][0];
+                if ((teams[0].equals(team1) && teams[1].equals(team2)) || ((teams[0].equals(team2) && teams[1].equals(team1)))) { //determining if the teams match
+                    array[0] = box.getRound() - 1;
+                    array[1] = boxes.get(box.getRound() - 2)[i - 1].getRoundIndex();
                 }
             }
         }
