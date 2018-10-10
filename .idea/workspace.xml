@@ -18,8 +18,8 @@
       <file leaf-file-name="SingleTournamentPanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/SingleTournamentPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3944">
-              <caret line="239" column="17" lean-forward="true" selection-start-line="239" selection-start-column="17" selection-end-line="239" selection-end-column="17" />
+            <state relative-caret-position="-2323">
+              <caret line="67" lean-forward="true" selection-start-line="67" selection-end-line="67" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -30,8 +30,19 @@
       <file leaf-file-name="NotificationPanel.class" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/NotificationPanel.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1292">
-              <caret line="99" lean-forward="true" selection-start-line="99" selection-end-line="99" />
+            <state relative-caret-position="301">
+              <caret line="51" column="4" lean-forward="true" selection-start-line="51" selection-start-column="4" selection-end-line="51" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NotificationPanel.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/NotificationPanel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -41,15 +52,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
               <caret line="60" column="9" selection-start-line="60" selection-start-column="9" selection-end-line="60" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DoubleTournamentPanel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DoubleTournamentPanel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3">
-              <caret line="74" column="51" lean-forward="true" selection-start-line="74" selection-start-column="51" selection-end-line="74" selection-end-column="51" />
             </state>
           </provider>
         </entry>
@@ -94,11 +96,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DoubleTournamentPanel.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DoubleTournamentPanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DoubleTournamentPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-487">
-              <caret line="235" lean-forward="true" selection-start-line="235" selection-end-line="235" />
+            <state relative-caret-position="267">
+              <caret line="215" column="37" selection-start-line="215" selection-start-column="37" selection-end-line="215" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -145,10 +147,10 @@
         <option value="$PROJECT_DIR$/src/SingleTournamentPanel.java" />
         <option value="$PROJECT_DIR$/src/Rainbow.java" />
         <option value="$PROJECT_DIR$/src/NotificationFrame.java" />
-        <option value="$PROJECT_DIR$/src/NotificationPanel.java" />
         <option value="$PROJECT_DIR$/DoubleTournamentPanel.java" />
         <option value="$PROJECT_DIR$/src/Display.java" />
         <option value="$PROJECT_DIR$/src/DoubleTournamentPanel.java" />
+        <option value="$PROJECT_DIR$/src/NotificationPanel.java" />
       </list>
     </option>
   </component>
@@ -382,7 +384,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/BracketTest.java" />
     <entry file="file://$PROJECT_DIR$/lib/Team.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -459,9 +460,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
           <caret line="72" column="54" selection-start-line="72" selection-start-column="54" selection-end-line="72" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -503,12 +501,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/anime_assets/HeartIcon.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/anime_assets/Heart.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/anime_assets/HeartIcon.png" />
+    <entry file="file://$PROJECT_DIR$/src/anime_assets/Heart.png" />
     <entry file="file://$PROJECT_DIR$/lib/background.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -590,14 +584,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Rainbow.java" />
     <entry file="file://$PROJECT_DIR$/src/NotificationFrame.java" />
-    <entry file="file://$PROJECT_DIR$/src/NotificationPanel.java" />
-    <entry file="file://$PROJECT_DIR$/lib/NotificationPanel.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1292">
-          <caret line="99" lean-forward="true" selection-start-line="99" selection-end-line="99" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../CompSciFinalProject/src/StartingFrame.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -607,8 +593,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/SingleTournamentPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3944">
-          <caret line="239" column="17" lean-forward="true" selection-start-line="239" selection-start-column="17" selection-end-line="239" selection-end-column="17" />
+        <state relative-caret-position="-2323">
+          <caret line="67" lean-forward="true" selection-start-line="67" selection-end-line="67" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -645,8 +631,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/DoubleTournamentPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-487">
-          <caret line="235" lean-forward="true" selection-start-line="235" selection-end-line="235" />
+        <state relative-caret-position="267">
+          <caret line="215" column="37" selection-start-line="215" selection-start-column="37" selection-end-line="215" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/NotificationPanel.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="301">
+          <caret line="51" column="4" lean-forward="true" selection-start-line="51" selection-start-column="4" selection-end-line="51" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NotificationPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="48" column="9" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NotificationPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

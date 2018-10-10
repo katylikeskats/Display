@@ -41,9 +41,11 @@ public class NotificationPanel extends JPanel {
 
         Iterator rainbowItr = this.rainbows.iterator();
 
-        while(rainbowItr.hasNext()) {
-            Rainbow rainbow = (Rainbow)rainbowItr.next();
-            rainbow.draw(g, this);
+        synchronized(this){
+            while(rainbowItr.hasNext()) {
+                Rainbow rainbow = (Rainbow)rainbowItr.next();
+                rainbow.draw(g, this);
+            }
         }
 
         g.setColor(new Color(255, 255, 255, 220));
