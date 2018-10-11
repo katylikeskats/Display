@@ -249,7 +249,11 @@ public class DoubleTournamentPanel extends TournamentPanel {
                 fontMetrics = g.getFontMetrics(font1);
             } else if ((teams[0].length == 2) && (tournament.getMatchBracket(roundNum, i+1) == 1)){
                 int[] num = findPreviousMatch(boxes, currBox, teams[0]); //Finds the feeder match round number and match number
-                g.drawString("Loser Of Round #" + num[0] + "." + num[1], currBox.getMidX() - fontMetrics.stringWidth("Loser Of Round #" + num[0] + "." + num[1]) / 2, currBox.getY() + boxHeight / 4 + fontMetrics.getMaxAscent()/4);
+                if (tournament.getMatchBracket(num[0], num[1]) == 0) {
+                    g.drawString("Loser Of Round #" + num[0] + "." + num[1], currBox.getMidX() - fontMetrics.stringWidth("Loser Of Round #" + num[0] + "." + num[1]) / 2, currBox.getY() + boxHeight / 4 + fontMetrics.getMaxAscent() / 4);
+                } else {
+                    g.drawString("unknown", currBox.getMidX() - fontMetrics.stringWidth("unknown") / 2, currBox.getY() + boxHeight / 4 + fontMetrics.getMaxAscent()/4); // if not, leaves it unknown
+                }
             } else {
                 g.drawString("unknown", currBox.getMidX() - fontMetrics.stringWidth("unknown") / 2, currBox.getY() + boxHeight / 4 + fontMetrics.getMaxAscent()/4); // if not, leaves it unknown
             }
@@ -263,7 +267,11 @@ public class DoubleTournamentPanel extends TournamentPanel {
                 fontMetrics = g.getFontMetrics(font1);
             } else if ((teams[1].length == 2) && (tournament.getMatchBracket( roundNum, i + 1) == 1)){
                 int[] num = findPreviousMatch(boxes, currBox, teams[1]); //Finds the feeder match round number and match number
-                g.drawString("Loser Of Round #" + num[0] + "." + num[1], currBox.getMidX() - fontMetrics.stringWidth("Loser Of Round #" + num[0] + "." + num[1]) / 2,currBox.getY() + (3* boxHeight) / 4 + fontMetrics.getMaxAscent()/4);
+                if (tournament.getMatchBracket(num[0], num[1]) == 0) {
+                    g.drawString("Loser Of Round #" + num[0] + "." + num[1], currBox.getMidX() - fontMetrics.stringWidth("Loser Of Round #" + num[0] + "." + num[1]) / 2, currBox.getY() + (3 * boxHeight) / 4 + fontMetrics.getMaxAscent() / 4);
+                } else {
+                    g.drawString("unknown", currBox.getMidX() - fontMetrics.stringWidth("unknown") / 2, currBox.getY() + (3* boxHeight) / 4 + fontMetrics.getMaxAscent()/4); // if not, leaves it unknown
+                }
             } else {
                 g.drawString("unknown", currBox.getMidX() - fontMetrics.stringWidth("unknown") / 2, currBox.getY() + (3* boxHeight) / 4 + fontMetrics.getMaxAscent()/4); // if not, leaves it unknown
             }
