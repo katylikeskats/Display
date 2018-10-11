@@ -23,7 +23,8 @@
       <file leaf-file-name="SingleTournamentPanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/SingleTournamentPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="85">
+              <caret line="149" column="79" selection-start-line="149" selection-start-column="79" selection-end-line="149" selection-end-column="79" />
               <folding>
                 <element signature="e#0#14208#0" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -41,11 +42,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Display.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Display.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Display.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="7" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
+            <state relative-caret-position="340">
+              <caret line="20" column="46" selection-start-line="20" selection-start-column="46" selection-end-line="20" selection-end-column="46" />
               <folding>
                 <element signature="e#0#6479#0" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -63,7 +64,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DoubleTournamentPanel.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DoubleTournamentPanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DoubleTournamentPanel.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="459">
@@ -118,10 +119,10 @@
         <option value="$PROJECT_DIR$/src/Rainbow.java" />
         <option value="$PROJECT_DIR$/src/NotificationFrame.java" />
         <option value="$PROJECT_DIR$/DoubleTournamentPanel.java" />
-        <option value="$PROJECT_DIR$/src/Display.java" />
         <option value="$PROJECT_DIR$/src/NotificationPanel.java" />
         <option value="$PROJECT_DIR$/src/SingleTournamentPanel.java" />
         <option value="$PROJECT_DIR$/src/DoubleTournamentPanel.java" />
+        <option value="$PROJECT_DIR$/src/Display.java" />
       </list>
     </option>
   </component>
@@ -583,17 +584,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Display.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="7" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
-          <folding>
-            <element signature="e#0#6479#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/NotificationFrame.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
@@ -617,16 +607,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SingleTournamentPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#14208#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../TournamentBracketDisplay/src/Display.java">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -636,6 +616,28 @@
           <caret line="267" column="46" selection-start-line="267" selection-start-column="46" selection-end-line="267" selection-end-column="46" />
           <folding>
             <element signature="e#0#24231#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SingleTournamentPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="149" column="79" selection-start-line="149" selection-start-column="79" selection-end-line="149" selection-end-column="79" />
+          <folding>
+            <element signature="e#0#14208#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Display.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="46" selection-start-line="20" selection-start-column="46" selection-end-line="20" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#6479#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
