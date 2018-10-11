@@ -281,7 +281,7 @@ public class SingleTournamentPanel extends TournamentPanel {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(Font.createFont(Font.PLAIN,new File(fileName)));
         } catch (IOException | FontFormatException e){
-            font = new Font(Font.SANS_SERIF, Font.PLAIN, 18);
+            font = new Font(Font.SANS_SERIF, Font.PLAIN, 12);
         }
         return font;
     }
