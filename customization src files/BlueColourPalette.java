@@ -1,8 +1,7 @@
 /**
- * [RainbowColourPalette.java]
- * A rainbow colour palette
- *
- * @author Katelyn Wang
+ * [BlueColourPalette.java]
+ * A blue colour palette
+ * @author Dora Su
  * September 19 2018
  */
 
@@ -29,7 +28,7 @@ public class BlueColourPalette extends ColourPalette {
             if (i % matches < 2) {
                 changeGreen += CHANGE;
             } else if (green == LOWER_LIMIT) {
-                if (colors.get(i - 2).getGreen() == green + CHANGE || colors.get(i - 1).getRed() > 0) { //decreasing green or increasing red
+                if ((colors.get(i - 2).getGreen() == green + CHANGE) || (colors.get(i - 1).getRed() > 0)) { //decreasing green or increasing red
                     if (red == RED_LIMIT) {
                         changeRed -= CHANGE;
                     } else if (red < RED_LIMIT) {
@@ -54,13 +53,12 @@ public class BlueColourPalette extends ColourPalette {
             red += changeRed;
             green += changeGreen;
 
-            colors.add(new Color(red, green, blue));
+            colors.add(new Color(red, green, blue,235));
         }
     }
 
     public ArrayList<Color> getColors() {
         return colors;
     }
-
 
 }

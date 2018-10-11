@@ -1,8 +1,8 @@
 /**
- * [RainbowColourPalette.java]
- * A rainbow colour palette
+ * [PinkBlueColourPalette.java]
+ * A pink, purple, and blue colour palette
  * @author Dora Su
- * September 29 2018
+ * October 2 2018
  */
 
 import java.awt.Color;
@@ -73,6 +73,5 @@ public class PinkBlueColourPalette extends ColourPalette{
     public ArrayList<Color> getColors() {
         return colors;
     }
-
 
 }

@@ -1,8 +1,8 @@
 /**
- * [RainbowColourPalette.java]
- * A rainbow colour palette
+ * [InstagramColourPalette.java]
+ * An Instagram themed colour palette
  * @author Dora Su
- * September 29 2018
+ * September 30 2018
  */
 
 import java.awt.Color;
@@ -72,6 +72,5 @@ public class InstagramColourPalette extends ColourPalette{
     public ArrayList<Color> getColors() {
         return colors;
     }
-
 
 }

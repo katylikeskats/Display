@@ -11,12 +11,12 @@ import javax.swing.JPanel;
 //graphics imports
 import java.awt.Color;
 
-abstract public class PolkaDotPanel extends JPanel {
+abstract public class TournamentPanel extends JPanel {
     /**
      * Constructor
      * Sets background white
      */
-    PolkaDotPanel(){
+    TournamentPanel(){
         this.setBackground(new Color(255,249,253));
     }
 

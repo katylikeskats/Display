@@ -1,6 +1,6 @@
 /**
- * [RainbowColourPalette.java]
- * A rainbow colour palette
+ * [GreenColourPalette.java]
+ * A green colour palette
  *
  * @author Dora Su
  * September 28 2018
@@ -29,7 +29,7 @@ public class GreenColourPalette extends ColourPalette {
             if (i % matches < 2) {
                 changeBlue += CHANGE;
             } else if (blue == LOWER_LIMIT) {
-                if (colors.get(i - 2).getBlue() == blue + CHANGE || colors.get(i - 1).getRed() > 0) { //decreasing blue or increasing red
+                if ((colors.get(i - 2).getBlue() == blue + CHANGE) || (colors.get(i - 1).getRed() > 0)) { //decreasing blue or increasing red
                     if (red == RED_LIMIT) {
                         changeRed -= CHANGE;
                     } else if (red < RED_LIMIT) {
