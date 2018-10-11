@@ -1,0 +1,25 @@
+2018-10-11 00:00:23
+Round 1, Match 1
+Winner: Sheep
+Loser: Cow
+
+2018-10-11 00:00:23
+Round 1, Match 2
+Winner: Unicorn
+Loser: Panda
+
+2018-10-11 00:00:23
+Round 1, Match 3
+Winner: Wolf
+Loser: Horse
+
+2018-10-11 00:00:23
+Round 1, Match 4
+Winner: Monkey
+Loser: Mouse
+
+2018-10-11 00:00:23
+Round 2, Match 1
+Winner: Dog
+Loser: Sheep
+
