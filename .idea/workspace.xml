@@ -66,8 +66,8 @@
       <file leaf-file-name="DoubleTournamentPanel.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/DoubleTournamentPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="383" column="9" selection-start-line="383" selection-start-column="9" selection-end-line="383" selection-end-column="9" />
+            <state relative-caret-position="459">
+              <caret line="267" column="46" selection-start-line="267" selection-start-column="46" selection-end-line="267" selection-end-column="46" />
               <folding>
                 <element signature="e#0#24231#0" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -202,7 +202,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$/DoubleTournamentPanel.java" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.21334791" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
@@ -632,8 +632,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/DoubleTournamentPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="383" column="9" selection-start-line="383" selection-start-column="9" selection-end-line="383" selection-end-column="9" />
+        <state relative-caret-position="459">
+          <caret line="267" column="46" selection-start-line="267" selection-start-column="46" selection-end-line="267" selection-end-column="46" />
           <folding>
             <element signature="e#0#24231#0" expanded="true" />
             <element signature="imports" expanded="true" />
@@ -647,10 +647,12 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
+          <last-edited>TournamentBracketDisplay:jar</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>
